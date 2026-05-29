@@ -267,10 +267,9 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-      padding-top: 48px;
+      max-width: 680px;
+      margin: 0;
+      padding: 48px 24px 0 7vw;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -501,7 +500,8 @@
       color: var(--ink);
     }
 
-    .section--wine .dining-features li { color: rgba(255,255,255,0.85); }
+    .section--wine .dining-features li,
+    .split-content.bg-wine .dining-features li { color: rgba(255,255,255,0.92); }
 
     .dining-features li::before {
       content: '';
@@ -518,9 +518,12 @@
       margin-top: 2px;
     }
 
-    .section--wine .dining-features li::before {
+    .section--wine .dining-features li::before,
+    .split-content.bg-wine .dining-features li::before {
       background-color: var(--gold);
     }
+
+    .split-content .btn { align-self: flex-start; }
 
     /* =============================================
        PAINT & SIP FEATURE
