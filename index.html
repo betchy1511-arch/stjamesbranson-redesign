@@ -245,14 +245,35 @@
       background: var(--charcoal);
     }
 
-    .hero-bg {
+    .hero-slide {
       position: absolute;
       inset: 0;
-      background-image: url('6716b7_dc1031d03eb947feb82d32691f816aab~mv2.avif');
       background-size: cover;
       background-position: center;
-      opacity: 0.45;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
     }
+    .hero-slide.active { opacity: 0.5; }
+
+    .hero-dots {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      gap: 10px;
+    }
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      border: 2px solid rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero-dot.active { background: var(--gold); border-color: var(--gold); }
 
     .hero-overlay {
       position: absolute;
@@ -1065,8 +1086,17 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-slide active" style="background-image:url('6716b7_dc1031d03eb947feb82d32691f816aab~mv2.avif')"></div>
+    <div class="hero-slide" style="background-image:url('SJW%20exterior%202.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('St.%20James-24.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('ABH01915.jpg')"></div>
     <div class="hero-overlay"></div>
+    <div class="hero-dots">
+      <div class="hero-dot active" onclick="goToSlide(0)"></div>
+      <div class="hero-dot" onclick="goToSlide(1)"></div>
+      <div class="hero-dot" onclick="goToSlide(2)"></div>
+      <div class="hero-dot" onclick="goToSlide(3)"></div>
+    </div>
 
     <div class="hero-content">
       <div class="hero-badge">
@@ -1458,6 +1488,24 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+
+    function goToSlide(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    setInterval(() => {
+      goToSlide((current + 1) % slides.length);
+    }, 5000);
+  </script>
 
 </body>
 </html>
