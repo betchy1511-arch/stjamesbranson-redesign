@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St. James — Hero Sample 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --wine: #9c2426;
+      --gold: #c9973a;
+      --cream: #faf6f2;
+      --charcoal: #1e1212;
+    }
+
+    body { font-family: 'Inter', sans-serif; background: #111; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .nav-brand span { display: block; font-size: 0.6rem; font-weight: 400; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-cta { background: var(--wine); color: white; padding: 9px 20px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 80px;
+    }
+
+    /* Wave bottom tint */
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: radial-gradient(ellipse 120% 80% at 50% 110%, rgba(156,36,38,0.08) 0%, transparent 70%);
+    }
+
+    /* FLOATING ITEMS */
+    @keyframes dropIn {
+      0%   { transform: translateY(-200px) rotate(var(--rot)) scale(0.6); opacity: 0; }
+      65%  { transform: translateY(15px) rotate(var(--rot)) scale(1.04); opacity: 1; }
+      100% { transform: translateY(0) rotate(var(--rot)) scale(1); opacity: 1; }
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0px) rotate(var(--rot)); }
+      50%       { transform: translateY(-18px) rotate(var(--rot)); }
+    }
+
+    .floaters {
+      position: absolute;
+      inset: 0;
+      top: 64px;
+      pointer-events: none;
+    }
+
+    .item {
+      position: absolute;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      opacity: 0;
+      animation: dropIn 1s cubic-bezier(0.22,1,0.36,1) forwards,
+                 bob var(--bobspeed, 4s) ease-in-out var(--bobdelay, 1s) infinite;
+    }
+    .item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* positions — spread edge to edge, different sizes */
+    .i1 { width:220px; height:260px; top:4%;  left:-20px;   --rot:-6deg;  animation-delay:0.1s, 1.1s; --bobspeed:4.2s; }
+    .i2 { width:160px; height:190px; top:12%; left:16%;     --rot:4deg;   animation-delay:0.35s,1.35s; --bobspeed:3.8s; }
+    .i3 { width:280px; height:220px; top:2%;  left:33%;     --rot:-3deg;  animation-delay:0.6s, 1.6s;  --bobspeed:5s;   }
+    .i4 { width:180px; height:220px; top:8%;  right:22%;    --rot:6deg;   animation-delay:0.85s,1.85s; --bobspeed:4.5s; }
+    .i5 { width:240px; height:200px; top:3%;  right:4%;     --rot:-5deg;  animation-delay:1.1s, 2.1s;  --bobspeed:3.6s; }
+    .i6 { width:140px; height:160px; top:30%; left:10%;     --rot:8deg;   animation-delay:1.35s,2.35s; --bobspeed:4.8s; }
+    .i7 { width:160px; height:140px; top:32%; right:10%;    --rot:-4deg;  animation-delay:1.6s, 2.6s;  --bobspeed:4.1s; }
+
+    /* HERO TEXT */
+    .hero-text {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    @keyframes textFadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      animation: textFadeUp 0.7s ease 1.8s both;
+    }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: var(--charcoal);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      animation: textFadeUp 0.7s ease 2s both;
+    }
+    .hero-h1 em { color: var(--wine); font-style: italic; }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(30,18,18,0.65);
+      max-width: 480px;
+      line-height: 1.7;
+      margin: 0 auto 28px;
+      animation: textFadeUp 0.7s ease 2.2s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      animation: textFadeUp 0.7s ease 2.4s both;
+    }
+    .btn-primary { background: var(--wine); color: white; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+    .btn-secondary { background: transparent; color: var(--charcoal); padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 2px solid rgba(30,18,18,0.3); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">
+      St. James Winery
+      <span>Branson, Missouri</span>
+    </div>
+    <a href="#" class="nav-cta">View Menu</a>
+  </nav>
+
+  <section class="hero">
+
+    <div class="floaters">
+      <div class="item i1"><img src="Wine%20tasting.avif" alt="Wine tasting" /></div>
+      <div class="item i2"><img src="paint%20and%20sip.avif" alt="Paint and Sip" /></div>
+      <div class="item i3"><img src="FOod.avif" alt="Bistro food" /></div>
+      <div class="item i4"><img src="signature%20drinks.avif" alt="Signature drinks" /></div>
+      <div class="item i5"><img src="SJW%20exterior%202.jpg" alt="St. James exterior" /></div>
+      <div class="item i6"><img src="crafts%20beer.jpg" alt="Craft beers" /></div>
+      <div class="item i7"><img src="dining.jpg" alt="Dining" /></div>
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-label">Award-Winning Missouri Wines</p>
+      <h1 class="hero-h1"><em>Wines &amp; Bistro Dining</em><br>in the Heart of Branson</h1>
+      <p class="hero-sub">Wine tastings, brick-oven pizza, craft cocktails, and seasonal outdoor dining, all just off the Branson Strip.</p>
+      <div class="hero-btns">
+        <a href="tel:+14175448283" class="btn-primary">Call Us</a>
+        <a href="https://www.stjamesbranson.com/menu" target="_blank" class="btn-secondary">View Menu</a>
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>
