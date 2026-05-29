@@ -560,11 +560,15 @@
       object-fit: cover;
       position: absolute;
       inset: 0;
+      z-index: 1;
+      position: absolute;
+      inset: 0;
     }
 
     .event-feature-img-placeholder {
       width: 100%;
       height: 100%;
+      z-index: 0;
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, #4a1a1c 0%, #1a0a0b 100%);
@@ -1042,7 +1046,7 @@
           alt="St. James Winery Branson logo"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
         />
-        <span class="nav-logo-text" style="display:none">
+        <span class="nav-logo-text">
           St. James Winery
           <span>Branson, Missouri</span>
         </span>
