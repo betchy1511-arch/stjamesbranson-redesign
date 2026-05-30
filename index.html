@@ -666,29 +666,42 @@
     }
 
     .award-row {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
       margin-top: 48px;
-      padding-top: 36px;
       border-top: 1px solid var(--taupe);
+      border-radius: var(--radius-md);
+      overflow: hidden;
     }
 
     .award-item {
       text-align: center;
+      padding: 28px 16px 24px;
+      background: var(--white);
+      border-right: 1px solid var(--taupe);
+      transition: background 0.2s;
     }
+    .award-item:last-child { border-right: none; }
+    .award-item:hover { background: var(--wine-wash); }
 
     .award-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      background: var(--wine-wash);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .award-icon svg { width: 22px; height: 22px; color: var(--wine); }
 
     .award-name {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--wine);
-      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--wine-deep);
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
@@ -1299,19 +1312,27 @@
 
         <div class="award-row">
           <div class="award-item">
-            <div class="award-icon">🥇</div>
+            <div class="award-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7"/><path d="M9 17h6"/></svg>
+            </div>
             <div class="award-name">Award-Winning Reds</div>
           </div>
           <div class="award-item">
-            <div class="award-icon">🏅</div>
+            <div class="award-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
             <div class="award-name">Missouri's Most Celebrated</div>
           </div>
           <div class="award-item">
-            <div class="award-icon">⭐</div>
+            <div class="award-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
             <div class="award-name">TripAdvisor Reviewed</div>
           </div>
           <div class="award-item">
-            <div class="award-icon">🍇</div>
+            <div class="award-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19a4 4 0 0 1-4-4 7 7 0 0 1 7-7 7 7 0 0 1 7 7 4 4 0 0 1-4 4"/><path d="M12 8V2"/><path d="M9 5l3-3 3 3"/></svg>
+            </div>
             <div class="award-name">Midwest Winery Pioneer</div>
           </div>
         </div>
