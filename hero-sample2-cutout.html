@@ -110,20 +110,21 @@
     .item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;          /* swap to contain when PNGs with transparency are used */
+      object-fit: cover;
       display: block;
-      border-radius: 12px;        /* remove this line when using transparent PNGs */
+      border-radius: 12px;
       filter: drop-shadow(0 14px 32px rgba(30,18,18,0.22));
     }
 
-    /*
-     * CUTOUT PNG UPGRADE NOTE:
-     * Remove the border-radius line above and change object-fit to contain.
-     * Use remove.bg, Canva Background Remover, or Photoshop Remove Background
-     * on each photo to get transparent PNGs. The drop-shadow will then follow
-     * the object shape exactly — wine glasses, bottles, plates — instead of
-     * the rectangle. That's how Bahama Buck's gets the floating-object look.
-     */
+    /* Cutout PNGs — no card shape, shadow traces the object edge */
+    .item.cutout {
+      background: transparent;
+    }
+    .item.cutout img {
+      object-fit: contain;
+      border-radius: 0;
+      filter: drop-shadow(0 18px 40px rgba(30,18,18,0.30));
+    }
 
     /* ─── ITEM POSITIONS ───────────────────────────────
      *
@@ -310,17 +311,18 @@
       <div class="item i2"><img src="paint%20and%20sip.avif"   alt="Paint and Sip" /></div>
       <div class="item i3"><img src="crafts%20beer.jpg"        alt="Craft beers" /></div>
       <div class="item i4"><img src="signature%20drinks.avif"  alt="Signature drinks" /></div>
-      <!-- CENTER hero item (largest) -->
-      <div class="item i5"><img src="FOod.avif"                alt="Bistro food" /></div>
+      <!-- CENTER hero item — cutout food platter PNG -->
+      <div class="item i5 cutout"><img src="ABH07090-removebg-preview.png"        alt="Bistro food platter" /></div>
       <!-- Right cluster -->
-      <div class="item i6"><img src="dining.jpg"               alt="Dining" /></div>
-      <div class="item i7"><img src="ABH02132.jpg"             alt="Wine glass" /></div>
-      <div class="item i8"><img src="ABH01915.jpg"             alt="St. James experience" /></div>
-      <!-- Far-right bleed -->
-      <div class="item i9"><img src="SJW%20exterior%202.jpg"   alt="St. James exterior" /></div>
-      <!-- Lower accent items -->
-      <div class="item i10"><img src="ABH02317.jpg"            alt="Pizza with salad" /></div>
-      <div class="item i11"><img src="ABH02208.jpg"            alt="Wood-fired pizza" /></div>
+      <div class="item i6"><img src="dining.jpg"                                  alt="Dining" /></div>
+      <!-- Wine can cutout — right accent -->
+      <div class="item i7 cutout"><img src="St._James-20-removebg-preview.png"    alt="St. James peach wine can" /></div>
+      <div class="item i8"><img src="ABH01915.jpg"                                alt="St. James experience" /></div>
+      <!-- Far-right bleed — exterior cutout -->
+      <div class="item i9 cutout"><img src="SJW_exterior_2__1_-removebg-preview.png" alt="St. James exterior" /></div>
+      <!-- Lower accent items — pizza cutout -->
+      <div class="item i10 cutout"><img src="pizza-removebg.png"                  alt="Wood-fired pizza" /></div>
+      <div class="item i11"><img src="ABH02208.jpg"                               alt="Pizza on board" /></div>
     </div>
 
     <div class="hero-text">
