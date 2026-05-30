@@ -613,18 +613,30 @@
 
     .event-pills {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
       margin: 20px 0 28px;
     }
 
     .pill {
-      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
       font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.01em;
+    }
+
+    .pill::before {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 1px;
+      transform: rotate(45deg);
+      flex-shrink: 0;
     }
 
     /* =============================================
