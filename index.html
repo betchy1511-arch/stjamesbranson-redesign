@@ -642,35 +642,27 @@
     /* =============================================
        HERITAGE SECTION
     ============================================= */
-    #heritage {
-      position: relative;
-      overflow: hidden;
-    }
-    .heritage-side-img {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 240px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(30,18,18,0.18);
-    }
-    .heritage-side-img.left  { left: 32px; }
-    .heritage-side-img.right { right: 32px; }
-    .heritage-side-img img {
-      width: 100%;
-      height: 360px;
-      object-fit: cover;
-      display: block;
-    }
-    @media (max-width: 1100px) {
-      .heritage-side-img { display: none; }
-    }
     .heritage {
       text-align: center;
       max-width: 680px;
       margin: 0 auto;
     }
+    .heritage-photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .heritage-photo-strip img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      border-radius: var(--radius-md);
+    }
+    .heritage-photo-strip img:first-child { object-position: center 30%; }
+    .heritage-photo-strip img:nth-child(2) { object-position: center 40%; }
+    .heritage-photo-strip img:last-child  { object-position: center 60%; }
 
     .heritage-year {
       font-family: 'Playfair Display', serif;
@@ -1337,12 +1329,6 @@
 
   <!-- HERITAGE -->
   <section class="section" id="heritage">
-    <div class="heritage-side-img left">
-      <img src="ABH01915.jpg" alt="Guests enjoying wine tasting at St. James Winery Branson" />
-    </div>
-    <div class="heritage-side-img right">
-      <img src="FOod.avif" alt="Bistro dining at St. James Winery Branson" />
-    </div>
     <div class="container">
       <div class="heritage">
         <div class="heritage-year">50+</div>
@@ -1351,6 +1337,12 @@
           St. James Winery was founded in the Missouri Ozarks and has grown to become one of the most decorated wineries in the Midwest. The Branson location brings that same commitment to quality, with award-winning varietals, knowledgeable staff, and a warm, welcoming atmosphere that keeps guests coming back every visit.
         </p>
         <a href="#wine" class="btn btn-outline-wine">Explore Our Wines</a>
+      </div>
+
+      <div class="heritage-photo-strip">
+        <img src="ABH01915.jpg" alt="Guests enjoying wine tasting at St. James Winery Branson" />
+        <img src="Wine tasting.avif" alt="Wine tasting at St. James Winery Branson" />
+        <img src="FOod.avif" alt="Bistro dining at St. James Winery Branson" />
       </div>
 
       <div class="award-row">
