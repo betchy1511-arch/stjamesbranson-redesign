@@ -642,10 +642,34 @@
     /* =============================================
        HERITAGE SECTION
     ============================================= */
+    .heritage-wrap {
+      display: grid;
+      grid-template-columns: 260px 1fr 200px;
+      gap: 48px;
+      align-items: center;
+    }
+    .heritage-side-img {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .heritage-side-img img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+    .heritage-side-img.right img {
+      height: 320px;
+    }
+    @media (max-width: 960px) {
+      .heritage-wrap {
+        grid-template-columns: 1fr;
+      }
+      .heritage-side-img { display: none; }
+    }
     .heritage {
       text-align: center;
-      max-width: 760px;
-      margin: 0 auto;
     }
 
     .heritage-year {
@@ -1314,15 +1338,24 @@
   <!-- HERITAGE -->
   <section class="section" id="heritage">
     <div class="container">
-      <div class="heritage">
-        <div class="heritage-year">50+</div>
-        <h2 class="heritage-title">Years of St. James Winemaking</h2>
-        <p class="heritage-body">
-          St. James Winery was founded in the Missouri Ozarks and has grown to become one of the most decorated wineries in the Midwest. The Branson location brings that same commitment to quality, with award-winning varietals, knowledgeable staff, and a warm, welcoming atmosphere that keeps guests coming back every visit.
-        </p>
-        <a href="#wine" class="btn btn-outline-wine">Explore Our Wines</a>
+      <div class="heritage-wrap">
+        <div class="heritage-side-img">
+          <img src="ABH01915.jpg" alt="Guests enjoying wine tasting at St. James Winery Branson" />
+        </div>
+        <div class="heritage">
+          <div class="heritage-year">50+</div>
+          <h2 class="heritage-title">Years of St. James Winemaking</h2>
+          <p class="heritage-body">
+            St. James Winery was founded in the Missouri Ozarks and has grown to become one of the most decorated wineries in the Midwest. The Branson location brings that same commitment to quality, with award-winning varietals, knowledgeable staff, and a warm, welcoming atmosphere that keeps guests coming back every visit.
+          </p>
+          <a href="#wine" class="btn btn-outline-wine">Explore Our Wines</a>
+        </div>
+        <div class="heritage-side-img right">
+          <img src="FOod.avif" alt="Bistro dining at St. James Winery Branson" />
+        </div>
+      </div>
 
-        <div class="award-row">
+      <div class="award-row">
           <div class="award-item">
             <div class="award-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7"/><path d="M9 17h6"/></svg>
@@ -1348,7 +1381,6 @@
             <div class="award-name">Midwest Winery Pioneer</div>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
