@@ -1107,6 +1107,22 @@
       .hero-trust-inner { flex-wrap: wrap; }
       .trust-stat { flex: 0 0 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
     }
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+    .fade-in.delay-4 { transition-delay: 0.4s; }
   </style>
 </head>
 <body>
@@ -1194,14 +1210,14 @@
   <!-- OFFERINGS -->
   <section class="section section--cream" id="wine">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="label">What We Offer</span>
         <h2 class="section-title">Something for Every Palate</h2>
         <p class="section-sub">From sweet reds to dry whites, cold-poured craft beers to handcrafted cocktails. St. James Branson brings the full experience to one destination.</p>
       </div>
       <div class="offerings-grid">
 
-        <div class="offering-card">
+        <div class="offering-card fade-in delay-1">
           <img class="offering-img" src="Wine%20tasting.avif" alt="Wine tasting at St. James Winery Branson" />
           <div class="offering-body">
             <span class="offering-tag">Featured</span>
@@ -1210,7 +1226,7 @@
           </div>
         </div>
 
-        <div class="offering-card">
+        <div class="offering-card fade-in delay-2">
           <img class="offering-img" src="crafts%20beer.jpg" alt="Craft beers on tap at St. James Winery Branson" />
           <div class="offering-body">
             <span class="offering-tag">On Tap</span>
@@ -1219,7 +1235,7 @@
           </div>
         </div>
 
-        <div class="offering-card">
+        <div class="offering-card fade-in delay-3">
           <img class="offering-img" src="signature%20drinks.avif" alt="Signature drinks at St. James Winery Branson" />
           <div class="offering-body">
             <span class="offering-tag">Full Bar</span>
@@ -1228,7 +1244,7 @@
           </div>
         </div>
 
-        <div class="offering-card">
+        <div class="offering-card fade-in delay-4">
           <img class="offering-img" src="dining.jpg" alt="Bistro dining at St. James Winery Branson" />
           <div class="offering-body">
             <span class="offering-tag">Bistro</span>
@@ -1245,7 +1261,7 @@
   <section id="dining">
     <div class="split">
 
-      <div class="split-img">
+      <div class="split-img fade-in">
         <img
           src="FOod.avif"
           alt="Dining at St. James Winery Branson"
@@ -1285,7 +1301,7 @@
         <a href="#visit" class="btn btn-gold">Get Directions</a>
       </div>
 
-      <div class="split-img">
+      <div class="split-img fade-in">
         <img
           src="Centrally%20located.avif"
           alt="St. James Winery Branson exterior location"
@@ -1302,7 +1318,7 @@
   <!-- PAINT & SIP -->
   <section class="section section--cream" id="events">
     <div class="container">
-      <div class="event-feature">
+      <div class="event-feature fade-in">
         <div class="event-feature-content">
           <span class="label" style="color:var(--gold)">Events</span>
           <h2 class="section-title" style="color:white;font-size:2.2rem">Paint &amp; Sip Nights</h2>
@@ -1339,13 +1355,13 @@
         <a href="#wine" class="btn btn-outline-wine">Explore Our Wines</a>
       </div>
 
-      <div class="heritage-photo-strip">
+      <div class="heritage-photo-strip fade-in">
         <img src="ABH01915.jpg" alt="Guests enjoying wine tasting at St. James Winery Branson" />
         <img src="DSCF0059.jpg" alt="Signature drinks at St. James Winery Branson" />
         <img src="St. James-29.jpg" alt="Pizza and wine at St. James Winery Branson" />
       </div>
 
-      <div class="award-row">
+      <div class="award-row fade-in">
           <div class="award-item">
             <div class="award-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7"/><path d="M9 17h6"/></svg>
@@ -1378,7 +1394,7 @@
   <section class="section section--wash" id="gifts" style="background-image: url('6716b7_8bc6102080434cfabc35156052b0cfba~mv2.avif'); background-size: cover; background-position: center; position: relative;">
   <div style="position:absolute;inset:0;background:rgba(250,246,242,0.88);z-index:0;"></div>
     <div class="container" style="position:relative;z-index:1;">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="label">Gift Shop &amp; Retail</span>
         <h2 class="section-title">Shopping for Memorable Gifts?</h2>
         <p class="section-sub">Take a piece of Branson home or send it to someone who couldn't make the trip. Our shop carries specialty wines, gourmet bites, and exclusive Branson keepsakes.</p>
@@ -1421,12 +1437,12 @@
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--white);margin-top:10px;">Real Experiences. Real Reviews.</h2>
     </div>
     <div class="reviews-inner">
-      <div class="reviews-summary">
+      <div class="reviews-summary fade-in">
         <div class="reviews-score">4.4</div>
         <div class="reviews-stars">⭐⭐⭐⭐⭐</div>
         <div class="reviews-count">TripAdvisor &amp; Yelp</div>
       </div>
-      <div class="reviews-cards">
+      <div class="reviews-cards fade-in">
         <div class="review-card">
           <div class="review-stars">⭐⭐⭐⭐⭐</div>
           <p class="review-text">"Great stop on our Branson vacation. The wine tasting was fantastic and the staff was incredibly knowledgeable. Picked up two cases to take home."</p>
@@ -1452,7 +1468,7 @@
   <!-- VISIT / HOURS -->
   <section class="section" id="visit">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="label">Plan Your Visit</span>
         <h2 class="section-title">Come See Us in Branson</h2>
         <p class="section-sub">Centrally located just off the Branson Strip. Wine tastings, dining, and the gift shop are all open daily during season. Hours may vary, so check Google before you come.</p>
@@ -1493,7 +1509,7 @@
           </div>
         </div>
 
-        <div class="visit-map">
+        <div class="visit-map fade-in">
           <iframe
             src="https://maps.google.com/maps?q=St+James+Winery+Branson+Missouri&t=&z=17&ie=UTF8&iwloc=&output=embed"
             allowfullscreen=""
@@ -1571,6 +1587,36 @@
     setInterval(() => {
       goToSlide((current + 1) % slides.length);
     }, 5000);
+
+    // Scroll fade-in
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // 50+ counter animation
+    const counterEl = document.querySelector('.heritage-year');
+    if (counterEl) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let count = 0;
+            const timer = setInterval(() => {
+              count++;
+              counterEl.textContent = count + '+';
+              if (count >= 50) clearInterval(timer);
+            }, 30);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      counterObserver.observe(counterEl);
+    }
   </script>
 
 </body>
