@@ -4,36 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>St. James Winery &amp; Restaurant Branson | Wine Tasting, Bistro &amp; More</title>
-  <meta name="description" content="Award-winning wines, brick-oven pizza, craft beers, and bistro dining just off the Branson Strip. Wine tastings daily. Paint &amp; Sip events. 50+ years of St. James Winemaking." />
+  <meta name="description" content="Award-winning Missouri fruit wines, brick-oven pizza, craft beers, and bistro dining just off the Branson Strip. Wine tastings daily. Paint &amp; Sip events. Est. 1970." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* =============================================
-       DESIGN SYSTEM: St. James Branson
-       Primary: wine red | Accent: gold | Neutral: cream
+       DESIGN SYSTEM — St. James Branson v2
+       Palette: wine | gold | cream | charcoal
     ============================================= */
     :root {
-      --wine:          #9c2426;
-      --wine-deep:     #6e1517;
-      --wine-light:    #c73538;
-      --wine-wash:     #fdf1ec;
-      --gold:          #c9973a;
-      --gold-light:    #f9e8c5;
-      --charcoal:      #1e1212;
-      --ink:           #3b2222;
-      --mid:           #7a5c5c;
-      --taupe:         #d5c8c0;
-      --cream:         #faf6f2;
-      --white:         #ffffff;
-      --blue-accent:   #5a48f5;
-      --shadow-sm:     0 2px 12px rgba(156,36,38,0.10);
-      --shadow-md:     0 6px 28px rgba(156,36,38,0.15);
-      --shadow-lg:     0 12px 48px rgba(156,36,38,0.20);
-      --radius-sm:     6px;
-      --radius-md:     12px;
-      --radius-lg:     20px;
-      --max-w:         1200px;
+      --wine:        #9c2426;
+      --wine-deep:   #6e1517;
+      --wine-mid:    #b02e30;
+      --wine-wash:   #fdf2ee;
+      --gold:        #c9973a;
+      --gold-light:  #e8c97a;
+      --gold-pale:   #fdf3e0;
+      --charcoal:    #1e1212;
+      --ink:         #2e1a1a;
+      --mid:         #7a5a5a;
+      --taupe:       #d5c6bc;
+      --cream:       #faf6f2;
+      --warm-white:  #ffffff;
+      --shadow-sm:   0 2px 12px rgba(30,18,18,.08);
+      --shadow-md:   0 6px 28px rgba(30,18,18,.12);
+      --shadow-lg:   0 16px 56px rgba(30,18,18,.18);
+      --r-sm:        6px;
+      --r-md:        12px;
+      --r-lg:        20px;
+      --max-w:       1240px;
+      --ease:        cubic-bezier(.4,0,.2,1);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,934 +44,966 @@
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
       color: var(--ink);
-      background: var(--white);
-      line-height: 1.65;
+      background: var(--warm-white);
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
-    img { display: block; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
 
     .container {
+      width: 100%;
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 40px;
     }
 
-    .section { padding: 80px 0; }
-    .section--cream { background: var(--cream); }
-    .section--wine  { background: var(--wine-deep); color: var(--white); }
-    .section--wash  { background: var(--wine-wash); }
-
-    .label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
     }
-
-    .section-title {
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      color: var(--wine-deep);
-      margin-bottom: 14px;
-    }
-
-    .section--wine .section-title { color: var(--white); }
-    .section--wine .label { color: var(--gold); }
-
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--mid);
-      max-width: 580px;
-      line-height: 1.7;
-    }
-
-    .section--wine .section-sub { color: rgba(255,255,255,0.75); }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-header .section-sub { margin: 0 auto; }
-
-    /* =============================================
-       BUTTONS
-    ============================================= */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 30px;
-      border-radius: var(--radius-sm);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-    }
-
-    .btn-wine {
-      background: var(--wine);
-      color: var(--white);
-    }
-    .btn-wine:hover {
-      background: var(--wine-deep);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: var(--white);
-    }
-    .btn-gold:hover {
-      background: #a97e2e;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(201,151,58,0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(255,255,255,0.6);
-    }
-    .btn-outline:hover {
-      border-color: var(--white);
-      background: rgba(255,255,255,0.1);
-    }
-
-    .btn-outline-wine {
-      background: transparent;
-      color: var(--wine);
-      border: 2px solid var(--wine);
-    }
-    .btn-outline-wine:hover {
-      background: var(--wine);
-      color: var(--white);
-    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
 
     /* =============================================
        NAV
     ============================================= */
     .nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: var(--charcoal);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(250,246,242,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(156,36,38,.10);
+      transition: box-shadow .3s var(--ease);
     }
+    .nav.scrolled { box-shadow: var(--shadow-md); }
 
     .nav-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 68px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      height: 72px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
     }
 
     .nav-logo img {
-      height: 54px;
+      height: 44px;
       width: auto;
-      filter: brightness(0) invert(1);
-    }
-
-    .nav-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.2;
-    }
-
-    .nav-logo-text span {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 400;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 2rem;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 0.88rem;
+      font-size: .875rem;
       font-weight: 500;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.2s;
+      letter-spacing: .04em;
+      color: var(--ink);
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 2px;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--wine);
+      transition: width .3s var(--ease);
+    }
+    .nav-links a:hover::after { width: 100%; }
 
     .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
       background: var(--wine);
-      color: var(--white);
-      padding: 9px 20px;
-      border-radius: var(--radius-sm);
-      font-size: 0.88rem;
+      color: #fff;
+      font-size: .8125rem;
       font-weight: 600;
-      transition: background 0.2s;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .6rem 1.4rem;
+      border-radius: var(--r-sm);
+      transition: background .25s var(--ease), transform .2s;
     }
-    .nav-cta:hover { background: var(--wine-light); color: var(--white) !important; }
+    .nav-cta:hover { background: var(--wine-deep); transform: translateY(-1px); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 24px; height: 2px;
+      background: var(--ink);
+      transition: .3s;
+    }
 
     /* =============================================
        HERO
     ============================================= */
     .hero {
       position: relative;
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 92vh;
+      min-height: 620px;
       overflow: hidden;
-      background: var(--charcoal);
     }
 
-    .hero-slide {
+    .hero-img {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.2s ease-in-out;
-    }
-    .hero-slide.active { opacity: 0.5; }
-
-    .hero-dots {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      display: flex;
-      gap: 10px;
-    }
-    .hero-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      border: 2px solid rgba(255,255,255,0.7);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .hero-dot.active { background: var(--gold); border-color: var(--gold); }
-
-    /* FLOATING PHOTO BUBBLES */
-    @keyframes dropIn {
-      0%   { transform: translateY(-160px) rotate(var(--rot)) scale(0.7); opacity: 0; }
-      65%  { transform: translateY(12px) rotate(var(--rot)) scale(1.05); opacity: 1; }
-      100% { transform: translateY(0) rotate(var(--rot)) scale(1); opacity: 1; }
-    }
-    @keyframes bob {
-      0%, 100% { transform: translateY(0) rotate(var(--rot)); }
-      50%       { transform: translateY(-14px) rotate(var(--rot)); }
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
     }
 
+    /* Gradient: left-heavy dark overlay, fades right */
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        135deg,
-        rgba(110,21,23,0.75) 0%,
-        rgba(30,18,18,0.55) 60%,
-        rgba(30,18,18,0.30) 100%
+        100deg,
+        rgba(30,18,18,.72) 0%,
+        rgba(30,18,18,.45) 45%,
+        rgba(30,18,18,.08) 100%
       );
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      width: 100%;
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 48px 24px 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      padding-bottom: 9vh;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
     }
 
-    .hero-badge {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(201,151,58,0.18);
-      border: 1px solid rgba(201,151,58,0.4);
-      color: var(--gold);
-      font-size: 0.75rem;
+      gap: .6rem;
+      color: var(--gold-light);
+      font-size: .8125rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
+      margin-bottom: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--gold-light);
     }
 
-    .hero h1 {
-      font-size: clamp(1.8rem, 3.8vw, 3rem);
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
       font-weight: 700;
-      color: var(--white);
-      max-width: none;
-      white-space: nowrap;
-      margin-bottom: 20px;
+      color: #fff;
       line-height: 1.12;
+      max-width: 700px;
+      margin-bottom: 1.25rem;
     }
 
-    .hero h1 em {
+    .hero-title em {
       font-style: italic;
-      color: var(--gold);
+      color: var(--gold-light);
     }
 
     .hero-sub {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,0.82);
-      max-width: 520px;
-      margin-bottom: 36px;
-      line-height: 1.7;
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.82);
+      max-width: 500px;
+      margin-bottom: 2rem;
+      font-weight: 300;
     }
 
     .hero-actions {
       display: flex;
-      gap: 14px;
+      gap: 1rem;
       flex-wrap: wrap;
-      justify-content: center;
     }
 
-    .hero-trust {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      background: rgba(30,18,18,0.65);
-      backdrop-filter: blur(8px);
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-trust-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
+    .btn-primary {
+      display: inline-flex;
       align-items: center;
-      gap: 0;
-    }
-
-    .trust-stat {
-      flex: 1;
-      padding: 20px 0;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-    .trust-stat:last-child { border-right: none; }
-
-    .trust-stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .trust-stat-label {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    /* =============================================
-       OFFERINGS GRID
-    ============================================= */
-    .offerings-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .offering-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .offering-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .offering-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: var(--wine-wash);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .offering-img-placeholder {
-      width: 100%;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
-
-    .offering-img-placeholder.wine-bg   { background: #2d0a0b; }
-    .offering-img-placeholder.beer-bg   { background: #1a1200; }
-    .offering-img-placeholder.drinks-bg { background: #0d1a2d; }
-    .offering-img-placeholder.dining-bg { background: #1a0f05; }
-
-    .offering-body {
-      padding: 24px;
-    }
-
-    .offering-body h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--wine-deep);
-      margin-bottom: 8px;
-    }
-
-    .offering-body p {
-      font-size: 0.9rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    .offering-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--gold-light);
-      padding: 4px 10px;
-      border-radius: 100px;
-      margin-bottom: 10px;
-    }
-
-    /* =============================================
-       DINING SPLIT
-    ============================================= */
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      align-items: stretch;
-    }
-
-    .split-img {
-      position: relative;
-      min-height: 480px;
-      overflow: hidden;
-    }
-
-    .split-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    .split-img-placeholder {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background: linear-gradient(135deg, #1a0a0b 0%, #3d1517 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6rem;
-    }
-
-    .split-content {
-      padding: 72px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .split-content.bg-cream { background: var(--cream); }
-    .split-content.bg-wine  { background: var(--wine-deep); }
-
-    .dining-features {
-      list-style: none;
-      margin: 28px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .dining-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.95rem;
-      color: var(--ink);
-    }
-
-    .section--wine .dining-features li,
-    .split-content.bg-wine .dining-features li { color: rgba(255,255,255,0.92); }
-
-    .dining-features li::before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 20px;
-      min-width: 20px;
       background: var(--wine);
-      border-radius: 50%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 12px;
-      margin-top: 2px;
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      transition: background .25s var(--ease), transform .2s;
     }
+    .btn-primary:hover { background: var(--wine-deep); transform: translateY(-2px); }
 
-    .section--wine .dining-features li::before,
-    .split-content.bg-wine .dining-features li::before {
-      background-color: var(--gold);
+    .btn-outline-light {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid rgba(255,255,255,.6);
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      transition: border-color .25s, background .25s, transform .2s;
     }
-
-    .split-content .btn { align-self: flex-start; }
+    .btn-outline-light:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,.1);
+      transform: translateY(-2px);
+    }
 
     /* =============================================
-       PAINT & SIP FEATURE
+       MARQUEE STRIP
     ============================================= */
-    .event-feature {
-      background: linear-gradient(135deg, var(--wine-deep) 0%, #3d1517 100%);
-      border-radius: var(--radius-lg);
+    .marquee-strip {
+      background: var(--wine);
+      color: #fff;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      padding: .85rem 0;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
       align-items: center;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .event-feature-content {
-      padding: 64px 56px;
-    }
-
-    .event-feature-img {
-      min-height: 420px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .event-feature-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      position: absolute;
-      inset: 0;
-    }
-
-    .event-feature-img-placeholder {
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, #4a1a1c 0%, #1a0a0b 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-    }
-
-    .event-pills {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0 28px;
-    }
-
-    .pill {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
+      gap: 1.8rem;
+      font-size: .8125rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.88);
-      letter-spacing: 0.01em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding-right: 1.8rem;
     }
 
-    .pill::before {
-      content: '';
-      display: block;
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
-      border-radius: 1px;
-      transform: rotate(45deg);
+    .marquee-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold-light);
       flex-shrink: 0;
     }
 
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     /* =============================================
-       HERITAGE SECTION
+       SECTION LABELS + HEADINGS
     ============================================= */
-    .heritage {
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto;
+    .section-eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: .75rem;
     }
-    .heritage-photo-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 48px;
-    }
-    .heritage-photo-strip img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      display: block;
-      border-radius: var(--radius-md);
-    }
-    .heritage-photo-strip img:first-child { object-position: center 30%; }
-    .heritage-photo-strip img:nth-child(2) { object-position: center 40%; }
-    .heritage-photo-strip img:last-child  { object-position: center 30%; }
 
-    .heritage-year {
+    .section-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(4rem, 10vw, 8rem);
+      font-size: clamp(1.9rem, 3.5vw, 2.75rem);
       font-weight: 700;
-      color: var(--wine-wash);
-      line-height: 1;
-      margin-bottom: -20px;
-      position: relative;
-      z-index: 0;
-      -webkit-text-stroke: 2px var(--taupe);
-      color: transparent;
+      line-height: 1.2;
+      color: var(--charcoal);
     }
 
-    .heritage-title {
-      position: relative;
-      z-index: 1;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      color: var(--wine-deep);
-      margin-bottom: 20px;
+    .section-title em {
+      font-style: italic;
+      color: var(--wine);
     }
 
-    .heritage-body {
-      font-size: 1.05rem;
+    .section-body {
+      font-size: 1.0625rem;
       color: var(--mid);
-      line-height: 1.8;
-      margin-bottom: 36px;
+      line-height: 1.75;
+      max-width: 520px;
     }
 
-    .award-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 48px;
-      border-top: 1px solid var(--taupe);
-      border-radius: var(--radius-md);
+    .gold-rule {
+      display: block;
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.25rem 0;
+    }
+
+    /* =============================================
+       STORY SECTION
+    ============================================= */
+    .story {
+      padding: 96px 0;
+      background: var(--cream);
       overflow: hidden;
     }
 
-    .award-item {
-      text-align: center;
-      padding: 28px 16px 24px;
-      background: var(--white);
-      border-right: 1px solid var(--taupe);
-      transition: background 0.2s;
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
     }
-    .award-item:last-child { border-right: none; }
-    .award-item:hover { background: var(--wine-wash); }
 
-    .award-icon {
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 12px;
-      background: var(--wine-wash);
+    .story-text { }
+
+    .story-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .story-stat { }
+    .story-stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--wine);
+      line-height: 1;
+    }
+    .story-stat span {
+      font-size: .8125rem;
+      color: var(--mid);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .story-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--wine);
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      margin-top: 2rem;
+      transition: background .25s var(--ease), transform .2s;
+    }
+    .story-btn:hover { background: var(--wine-deep); transform: translateY(-2px); }
+
+    .story-image-wrap {
+      position: relative;
+    }
+    .story-image-wrap img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    .story-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--wine);
+      color: #fff;
+      padding: 1.5rem 1.75rem;
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .story-badge strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .story-badge span {
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    /* =============================================
+       FOOD GALLERY — MASONRY STYLE
+    ============================================= */
+    .food {
+      padding: 96px 0;
+      background: var(--warm-white);
+    }
+
+    .food-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .food-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--r-md);
+      cursor: default;
+    }
+    .food-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s var(--ease);
+    }
+    .food-card:hover img { transform: scale(1.04); }
+
+    .food-card-large {
+      grid-row: 1 / 3;
+    }
+    .food-card-large img { height: 560px; }
+    .food-card-sm img { height: 268px; }
+
+    .food-card-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(30,18,18,.7) 0%, transparent 100%);
+      padding: 2rem 1.5rem 1.25rem;
+      color: #fff;
+    }
+    .food-card-label h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .food-card-label p {
+      font-size: .8125rem;
+      opacity: .8;
+      margin-top: .2rem;
+    }
+
+    /* Right column stacks 3 */
+    .food-right-col {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .food-right-col .food-card img { height: 100%; min-height: 172px; }
+
+    /* =============================================
+       DRINKS SPLIT
+    ============================================= */
+    .drinks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+
+    .drinks-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .drinks-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .drinks-text {
+      background: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+    }
+
+    .drinks-text .section-eyebrow { color: var(--gold); }
+    .drinks-text .section-title { color: #fff; }
+    .drinks-text .section-title em { color: var(--gold-light); }
+    .drinks-text .section-body { color: rgba(255,255,255,.65); max-width: 420px; }
+    .drinks-text .gold-rule { background: var(--gold); }
+
+    .drinks-menu-items {
+      list-style: none;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .drinks-menu-items li {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .9375rem;
+      color: rgba(255,255,255,.75);
+    }
+    .drinks-menu-items li::before {
+      content: '';
+      width: 6px; height: 6px;
       border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      background: var(--gold);
+      color: var(--charcoal);
+      font-size: .875rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      align-self: flex-start;
+      transition: background .25s var(--ease), transform .2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* =============================================
+       WINE SHOWCASE — dark section
+    ============================================= */
+    .wines {
+      background: #160e0e;
+      padding: 96px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wines::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(156,36,38,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .wines-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .wines-header .section-eyebrow { color: var(--gold); }
+    .wines-header .section-title { color: #fff; }
+    .wines-header .section-title em { color: var(--gold-light); }
+    .wines-header .section-body {
+      color: rgba(255,255,255,.55);
+      margin: 1rem auto 0;
+      text-align: center;
+      max-width: 560px;
+    }
+    .wines-header .gold-rule { margin: 1.25rem auto; }
+
+    .wines-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .wine-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: transform .3s var(--ease), border-color .3s;
+    }
+    .wine-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,151,58,.3);
+    }
+
+    .wine-card-img {
+      height: 340px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+    }
+    .wine-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .6s var(--ease);
+    }
+    .wine-card:hover .wine-card-img img { transform: scale(1.05); }
+
+    .wine-card-body {
+      padding: 1.5rem;
+    }
+    .wine-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .wine-card-body p {
+      font-size: .875rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.6;
+    }
+    .wine-card-tag {
+      display: inline-block;
+      background: rgba(201,151,58,.15);
+      color: var(--gold-light);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .75rem;
+      border-radius: 20px;
+      margin-top: .75rem;
+    }
+
+    .wines-cta {
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+
+    /* =============================================
+       PATIO FULL-BLEED CTA
+    ============================================= */
+    .patio-cta {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .award-icon svg { width: 22px; height: 22px; color: var(--wine); }
 
-    .award-name {
-      font-size: 0.72rem;
+    .patio-cta-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .patio-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30,18,18,.55);
+    }
+
+    .patio-cta-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 0 40px;
+    }
+
+    .patio-cta-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
       font-weight: 700;
-      color: var(--wine-deep);
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .patio-cta-content h2 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .patio-cta-content p {
+      font-size: 1.0625rem;
+      opacity: .8;
+      max-width: 480px;
+      margin: 0 auto 2rem;
     }
 
     /* =============================================
-       GIFT SHOP
+       LIFESTYLE 3-COL
     ============================================= */
-    .gift-grid {
+    .lifestyle {
+      padding: 96px 0;
+      background: var(--cream);
+    }
+
+    .lifestyle-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .lifestyle-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 1.5rem;
     }
 
-    .gift-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 28px;
-      border: 1px solid var(--taupe);
-      transition: border-color 0.2s, box-shadow 0.2s;
+    .lifestyle-card {
+      position: relative;
+      border-radius: var(--r-md);
+      overflow: hidden;
     }
-    .gift-card:hover {
-      border-color: var(--wine);
-      box-shadow: var(--shadow-sm);
+    .lifestyle-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      transition: transform .6s var(--ease);
     }
-
-    .gift-icon {
-      font-size: 2.2rem;
-      margin-bottom: 14px;
-    }
-
-    .gift-card h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--wine-deep);
-      margin-bottom: 8px;
-    }
-
-    .gift-card p {
-      font-size: 0.88rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    .case-special-banner {
-      background: linear-gradient(90deg, var(--wine) 0%, var(--wine-deep) 100%);
-      border-radius: var(--radius-md);
-      padding: 32px 40px;
+    .lifestyle-card:hover img { transform: scale(1.04); }
+    .lifestyle-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(30,18,18,.65) 0%, transparent 55%);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      margin-top: 28px;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.75rem 1.5rem;
     }
-
-    .case-special-banner h3 {
-      font-size: 1.5rem;
-      color: var(--white);
-      font-weight: 700;
-      margin-bottom: 6px;
+    .lifestyle-card-overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: .3rem;
     }
-
-    .case-special-banner p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.75);
+    .lifestyle-card-overlay p {
+      font-size: .875rem;
+      color: rgba(255,255,255,.75);
     }
 
     /* =============================================
-       VISIT / CTA
+       GIFT SHOP — FULL WIDTH WITH OVERLAY
     ============================================= */
-    .visit-grid {
+    .giftshop {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .giftshop-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .giftshop-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(30,18,18,.82) 0%,
+        rgba(30,18,18,.5) 55%,
+        rgba(30,18,18,.1) 100%
+      );
+    }
+
+    .giftshop-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 40px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .giftshop-content .section-eyebrow { color: var(--gold); }
+    .giftshop-content .section-title { color: #fff; max-width: 480px; }
+    .giftshop-content .section-body { color: rgba(255,255,255,.7); margin-top: 1rem; }
+    .giftshop-content .gold-rule { background: var(--gold); }
+
+    /* =============================================
+       VISIT + HOURS
+    ============================================= */
+    .visit {
+      padding: 96px 0;
+      background: var(--warm-white);
+    }
+
+    .visit-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 64px;
       align-items: start;
     }
 
-    .visit-info h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--wine-deep);
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--wine-wash);
+    .visit-img-wrap {
+      position: relative;
     }
+    .visit-img-wrap img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .visit-text { padding-top: 8px; }
 
     .hours-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
-      margin-bottom: 24px;
+      margin: 1.5rem 0 2rem;
     }
-
     .hours-table td {
-      padding: 7px 0;
-      color: var(--ink);
+      padding: .65rem 0;
+      font-size: .9375rem;
       border-bottom: 1px solid var(--taupe);
-    }
-    .hours-table td:last-child { text-align: right; color: var(--mid); }
-
-    .visit-address {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.95rem;
       color: var(--ink);
-      margin-bottom: 16px;
-      line-height: 1.6;
     }
-
-    .visit-address svg { min-width: 18px; margin-top: 3px; color: var(--wine); }
-
-    .visit-phone {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.1rem;
+    .hours-table td:first-child {
       font-weight: 600;
-      color: var(--wine);
-      margin-bottom: 24px;
+      width: 48%;
+      color: var(--charcoal);
     }
+    .hours-table tr:last-child td { border-bottom: none; }
 
-    .visit-map {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      height: 320px;
-      background: var(--taupe);
-      position: relative;
-    }
-
-    .visit-map iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .map-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #e8d8d0 0%, #d5c0b8 100%);
+    .visit-details {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--wine-deep);
+      gap: .6rem;
+      margin-bottom: 2rem;
+    }
+    .visit-detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9375rem;
+      color: var(--mid);
+    }
+    .visit-detail-icon {
+      width: 18px;
+      color: var(--wine);
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
-    .map-placeholder-icon { font-size: 3rem; }
-    .map-placeholder-text { font-size: 0.9rem; font-weight: 600; }
-
-    .social-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .social-btn {
-      display: flex;
+    .visit-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-wine-outline {
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 9px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--taupe);
-      font-size: 0.82rem;
+      border: 1.5px solid var(--wine);
+      color: var(--wine);
+      font-size: .875rem;
       font-weight: 600;
-      color: var(--ink);
-      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      transition: background .25s var(--ease), color .25s, transform .2s;
     }
-    .social-btn:hover { border-color: var(--wine); color: var(--wine); }
+    .btn-wine-outline:hover {
+      background: var(--wine);
+      color: #fff;
+      transform: translateY(-2px);
+    }
 
     /* =============================================
-       REVIEWS STRIP
+       REVIEWS
     ============================================= */
-    .reviews-strip {
-      background: var(--wine-deep);
-      padding: 48px 0;
+    .reviews {
+      background: var(--wine-wash);
+      padding: 80px 0;
     }
 
-    .reviews-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 48px;
-      align-items: center;
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 3rem;
     }
 
-    .reviews-summary { text-align: center; }
-
-    .reviews-score {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.5rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .reviews-stars { font-size: 1.4rem; margin: 6px 0; }
-
-    .reviews-count {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.6);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .reviews-cards {
+    .reviews-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 1.5rem;
     }
 
     .review-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius-md);
-      padding: 22px;
+      background: #fff;
+      border-radius: var(--r-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
     }
 
-    .review-stars { font-size: 0.9rem; margin-bottom: 10px; }
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+    .review-stars span {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
 
     .review-text {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.65;
-      margin-bottom: 14px;
+      font-size: .9375rem;
+      color: var(--mid);
+      line-height: 1.7;
       font-style: italic;
+      margin-bottom: 1.25rem;
     }
 
     .review-author {
-      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .review-initials {
+      width: 38px; height: 38px;
+      background: var(--wine-wash);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .875rem;
+      color: var(--wine);
+    }
+    .review-author-info strong {
+      display: block;
+      font-size: .875rem;
       font-weight: 600;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--charcoal);
+    }
+    .review-author-info span {
+      font-size: .75rem;
+      color: var(--mid);
     }
 
-    .review-source {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.4);
-      margin-top: 2px;
+    /* =============================================
+       MAP
+    ============================================= */
+    .map-section { line-height: 0; }
+    .map-section iframe {
+      width: 100%;
+      height: 380px;
+      border: none;
+      display: block;
     }
 
     /* =============================================
@@ -978,632 +1011,646 @@
     ============================================= */
     .footer {
       background: var(--charcoal);
-      padding: 56px 0 32px;
+      color: rgba(255,255,255,.65);
+      padding: 64px 0 32px;
     }
 
-    .footer-grid {
+    .footer-inner {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
     }
 
-    .footer-brand h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-
-    .footer-brand-sub {
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .footer-brand p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.7;
-      max-width: 280px;
-    }
+    .footer-brand img { height: 40px; margin-bottom: 1.25rem; filter: brightness(0) invert(1); opacity: .85; }
+    .footer-brand p { font-size: .875rem; line-height: 1.7; max-width: 260px; }
 
     .footer-col h4 {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,.9);
+      margin-bottom: 1.25rem;
     }
 
-    .footer-col ul {
+    .footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: .6rem;
     }
-
-    .footer-col ul li a {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.55);
-      transition: color 0.2s;
+    .footer-links a {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      transition: color .2s;
     }
-    .footer-col ul li a:hover { color: var(--white); }
-
-    .footer-bottom {
-      padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .footer-bottom p {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.35);
-    }
+    .footer-links a:hover { color: var(--gold-light); }
 
     .footer-social {
       display: flex;
-      gap: 12px;
+      gap: .75rem;
+      margin-top: 1.25rem;
     }
-
     .footer-social a {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.5);
-      transition: all 0.2s;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.55);
+      transition: border-color .2s, color .2s;
     }
-    .footer-social a:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* =============================================
-       DIVIDER
-    ============================================= */
-    .wine-divider {
-      height: 4px;
-      background: linear-gradient(90deg, var(--wine-deep), var(--gold), var(--wine-deep));
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
     }
 
     /* =============================================
        RESPONSIVE
     ============================================= */
     @media (max-width: 1024px) {
-      .offerings-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .container { padding: 0 28px; }
+      .nav-inner { padding: 0 28px; }
+      .story-inner { grid-template-columns: 1fr; gap: 48px; }
+      .story-image-wrap img { height: 420px; }
+      .story-badge { display: none; }
+      .drinks { grid-template-columns: 1fr; }
+      .drinks-image { height: 380px; }
+      .drinks-text { padding: 56px 40px; }
+      .wines-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+      .lifestyle-grid { grid-template-columns: 1fr 1fr; }
+      .lifestyle-grid .lifestyle-card:last-child { display: none; }
+      .visit-inner { grid-template-columns: 1fr; gap: 48px; }
+      .visit-img-wrap img { height: 360px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
     @media (max-width: 768px) {
-      .section { padding: 56px 0; }
-      .nav-links { display: none; }
-      .hero { min-height: 100svh; }
-      .split { grid-template-columns: 1fr; }
-      .split-content { padding: 48px 28px; }
-      .event-feature { grid-template-columns: 1fr; }
-      .event-feature-img { min-height: 280px; }
-      .gift-grid { grid-template-columns: 1fr 1fr; }
-      .case-special-banner { flex-direction: column; text-align: center; }
-      .visit-grid { grid-template-columns: 1fr; }
-      .reviews-inner { grid-template-columns: 1fr; }
-      .reviews-cards { grid-template-columns: 1fr; }
-      .reviews-summary { text-align: left; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .offerings-grid { grid-template-columns: 1fr; }
-      .hero-trust-inner { flex-wrap: wrap; }
-      .trust-stat { flex: 0 0 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { height: 80vh; }
+      .hero-content { padding-bottom: 60px; }
+      .hero-title { font-size: 2rem; }
+      .story, .food, .wines, .lifestyle, .visit, .reviews { padding: 64px 0; }
+      .food-grid { grid-template-columns: 1fr; }
+      .food-card-large { grid-row: auto; }
+      .food-card-large img { height: 320px; }
+      .food-right-col { grid-template-rows: auto; gap: 12px; }
+      .food-right-col .food-card img { height: 200px; }
+      .wines-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+      .lifestyle-grid { grid-template-columns: 1fr; }
+      .lifestyle-grid .lifestyle-card:last-child { display: block; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: .5rem; text-align: center; }
+      .container { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; }
+      .patio-cta { height: 400px; }
+      .giftshop-content { padding: 60px 20px; }
     }
-    /* =============================================
-       ANIMATIONS
-    ============================================= */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .fade-in.delay-1 { transition-delay: 0.1s; }
-    .fade-in.delay-2 { transition-delay: 0.2s; }
-    .fade-in.delay-3 { transition-delay: 0.3s; }
-    .fade-in.delay-4 { transition-delay: 0.4s; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img
-          src="StJamesWineryMainLogo-web.avif"
-          alt="St. James Winery Branson logo"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
-        />
+        <img src="StJamesWineryMainLogo-web.avif" alt="St. James Winery Branson" />
       </a>
       <ul class="nav-links">
-        <li><a href="#wine">Wine Tasting</a></li>
-        <li><a href="#dining">Dining</a></li>
-        <li><a href="#events">Paint &amp; Sip</a></li>
-        <li><a href="#gifts">Gift Shop</a></li>
-        <li><a href="#visit">Visit Us</a></li>
-        <li><a href="https://www.stjamesbranson.com/menu" target="_blank" class="nav-cta">View Menu</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#wines">Wines</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#giftshop">Gift Shop</a></li>
+        <li><a href="#visit">Visit</a></li>
       </ul>
+      <a href="tel:+14175448283" class="nav-cta">Call Us: (417) 544-8283</a>
+      <div class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ===================== HERO ===================== -->
   <section class="hero">
-    <div class="hero-slide active" style="background-image:url('6716b7_dc1031d03eb947feb82d32691f816aab~mv2.avif')"></div>
-    <div class="hero-slide" style="background-image:url('SJW%20exterior%202.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('St.%20James-24.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('ABH01915.jpg')"></div>
+    <img
+      class="hero-img"
+      src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02397.jpg"
+      alt="Guests enjoying wine and pizza on the outdoor patio at St. James Winery Branson"
+    />
     <div class="hero-overlay"></div>
-    <div class="hero-dots">
-      <div class="hero-dot active" onclick="goToSlide(0)"></div>
-      <div class="hero-dot" onclick="goToSlide(1)"></div>
-      <div class="hero-dot" onclick="goToSlide(2)"></div>
-      <div class="hero-dot" onclick="goToSlide(3)"></div>
-    </div>
-
     <div class="hero-content">
-      <div class="hero-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-        Award-Winning Missouri Wines
-      </div>
-      <h1>
-        <em>Wines &amp; Bistro Dining</em> in the Heart of Branson
+      <span class="hero-eyebrow reveal">Est. 1970 — Branson, Missouri</span>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Award-Winning Wines.<br>
+        <em>Branson's Best Patio.</em>
       </h1>
-      <p class="hero-sub">
-        Wine tastings, brick-oven pizza, craft cocktails, and seasonal outdoor dining, all just off the Branson Strip. Fifty years of St. James winemaking, one great stop.
+      <p class="hero-sub reveal reveal-delay-2">
+        Missouri fruit wines, brick-oven pizza, craft beer, and live experiences just off the Branson Strip.
       </p>
-      <div class="hero-actions">
-        <a href="tel:+14175448283" class="btn btn-wine">Call Us</a>
-        <a href="https://www.stjamesbranson.com/menu" target="_blank" class="btn btn-outline">View Menu</a>
-      </div>
-    </div>
-
-    <div class="hero-trust">
-      <div class="hero-trust-inner">
-        <div class="trust-stat">
-          <div class="trust-stat-num">50+</div>
-          <div class="trust-stat-label">Years of Winemaking</div>
-        </div>
-        <div class="trust-stat">
-          <div class="trust-stat-num">4.4★</div>
-          <div class="trust-stat-label">TripAdvisor Rating</div>
-        </div>
-        <div class="trust-stat">
-          <div class="trust-stat-num">Daily</div>
-          <div class="trust-stat-label">Wine Tastings</div>
-        </div>
-        <div class="trust-stat">
-          <div class="trust-stat-num">10+</div>
-          <div class="trust-stat-label">Varieties Available</div>
-        </div>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#visit" class="btn-primary">Plan Your Visit</a>
+        <a href="#menu" class="btn-outline-light">View Our Menu</a>
       </div>
     </div>
   </section>
 
-  <div class="wine-divider"></div>
-
-  <!-- OFFERINGS -->
-  <section class="section section--cream" id="wine">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="label">What We Offer</span>
-        <h2 class="section-title">Something for Every Palate</h2>
-        <p class="section-sub">From sweet reds to dry whites, cold-poured craft beers to handcrafted cocktails. St. James Branson brings the full experience to one destination.</p>
-      </div>
-      <div class="offerings-grid">
-
-        <div class="offering-card fade-in delay-1">
-          <img class="offering-img" src="Wine%20tasting.avif" alt="Wine tasting at St. James Winery Branson" />
-          <div class="offering-body">
-            <span class="offering-tag">Featured</span>
-            <h3>Wine Tasting</h3>
-            <p>Sample Missouri's most celebrated wines: award-winning reds, crisp whites, and seasonal varietals, guided by our staff daily.</p>
-          </div>
-        </div>
-
-        <div class="offering-card fade-in delay-2">
-          <img class="offering-img" src="crafts%20beer.jpg" alt="Craft beers on tap at St. James Winery Branson" />
-          <div class="offering-body">
-            <span class="offering-tag">On Tap</span>
-            <h3>Craft Beers</h3>
-            <p>A rotating selection of regional and national craft beers on draft, the perfect companion to a long afternoon on the patio.</p>
-          </div>
-        </div>
-
-        <div class="offering-card fade-in delay-3">
-          <img class="offering-img" src="signature%20drinks.avif" alt="Signature drinks at St. James Winery Branson" />
-          <div class="offering-body">
-            <span class="offering-tag">Full Bar</span>
-            <h3>Signature Drinks</h3>
-            <p>Wine-forward cocktails, sangrias, and house-crafted mixed drinks. Our full bar menu pairs perfectly with every dish on the menu.</p>
-          </div>
-        </div>
-
-        <div class="offering-card fade-in delay-4">
-          <img class="offering-img" src="dining.jpg" alt="Bistro dining at St. James Winery Branson" />
-          <div class="offering-body">
-            <span class="offering-tag">Bistro</span>
-            <h3>Bistro Dining</h3>
-            <p>Brick-oven pizza, fresh salads, appetizers, and tempting desserts. Indoor seating and seasonal outdoor dining available.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- DINING SPLIT -->
-  <section id="dining">
-    <div class="split">
-
-      <div class="split-img fade-in">
-        <img
-          src="FOod.avif"
-          alt="Dining at St. James Winery Branson"
-          onerror="this.style.display='none'"
-        />
-        <div class="split-img-placeholder">🍕</div>
-      </div>
-
-      <div class="split-content bg-cream">
-        <span class="label">The Bistro</span>
-        <h2 class="section-title">Real Food, Real Wine, Real Branson</h2>
-        <p class="section-sub">Our bistro menu is built around one idea: food that makes Missouri wine taste even better. From stone-fired pizza to fresh-made salads, every dish is crafted to pair.</p>
-        <ul class="dining-features">
-          <li>Brick-oven pizza with house-made sauce and fresh toppings</li>
-          <li>Full menu of appetizers, salads, and desserts</li>
-          <li>Indoor dining room with full-service bar</li>
-          <li>Seasonal outdoor patio, perfect for Ozark evenings</li>
-          <li>Hours may vary. Check Google for current schedule</li>
-        </ul>
-        <a href="https://www.stjamesbranson.com/menu" target="_blank" class="btn btn-wine">See the Full Menu</a>
-      </div>
-
-    </div>
-
-    <div class="split">
-
-      <div class="split-content bg-wine" style="color:white">
-        <span class="label">Located Right Off the Strip</span>
-        <h2 class="section-title" style="color:white">Centrally Located in Branson</h2>
-        <p class="section-sub">Just minutes from Silver Dollar City, the Branson Landing, and the major shows on Highway 76. St. James Winery Branson is the easiest wine stop on your itinerary.</p>
-        <ul class="dining-features" style="margin-bottom:28px">
-          <li>Easy access from Hwy 76 and the Branson Strip</li>
-          <li>Free on-site parking</li>
-          <li>Family-friendly atmosphere</li>
-          <li>Wine to-go and case selections available</li>
-        </ul>
-        <a href="#visit" class="btn btn-gold">Get Directions</a>
-      </div>
-
-      <div class="split-img fade-in">
-        <img
-          src="Centrally%20located.avif"
-          alt="St. James Winery Branson exterior location"
-          onerror="this.style.display='none'"
-        />
-        <div class="split-img-placeholder">📍</div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="wine-divider"></div>
-
-  <!-- PAINT & SIP -->
-  <section class="section section--cream" id="events">
-    <div class="container">
-      <div class="event-feature fade-in">
-        <div class="event-feature-content">
-          <span class="label" style="color:var(--gold)">Events</span>
-          <h2 class="section-title" style="color:white;font-size:2.2rem">Paint &amp; Sip Nights</h2>
-          <p style="color:rgba(255,255,255,0.78);line-height:1.7;font-size:1rem;margin-bottom:8px">
-            Bring a friend, grab a glass, and unleash your inner artist. Our Paint &amp; Sip events combine guided step-by-step painting with your choice from our full wine and cocktail menu.
-          </p>
-          <div class="event-pills">
-            <span class="pill">All Skill Levels Welcome</span>
-            <span class="pill">Wine &amp; Beer Included</span>
-            <span class="pill">Branson's Favorite Date Night</span>
-          </div>
-          <a href="https://www.stjamesbranson.com/paint-n-sip" target="_blank" class="btn btn-gold">View Upcoming Events</a>
-        </div>
-        <div class="event-feature-img">
-          <img
-            src="paint%20and%20sip.avif"
-            alt="Paint and Sip event at St. James Winery Branson"
-          />
-          <div class="event-feature-img-placeholder"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HERITAGE -->
-  <section class="section" id="heritage">
-    <div class="container">
-      <div class="heritage">
-        <div class="heritage-year">50+</div>
-        <h2 class="heritage-title">Years of St. James Winemaking</h2>
-        <p class="heritage-body">
-          St. James Winery was founded in the Missouri Ozarks and has grown to become one of the most decorated wineries in the Midwest. The Branson location brings that same commitment to quality, with award-winning varietals, knowledgeable staff, and a warm, welcoming atmosphere that keeps guests coming back every visit.
-        </p>
-        <a href="#wine" class="btn btn-outline-wine">Explore Our Wines</a>
-      </div>
-
-      <div class="heritage-photo-strip fade-in">
-        <img src="ABH01915.jpg" alt="Guests enjoying wine tasting at St. James Winery Branson" />
-        <img src="DSCF0059.jpg" alt="Signature drinks at St. James Winery Branson" />
-        <img src="St. James-29.jpg" alt="Pizza and wine at St. James Winery Branson" />
-      </div>
-
-      <div class="award-row fade-in">
-          <div class="award-item">
-            <div class="award-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M12 14v7"/><path d="M9 17h6"/></svg>
-            </div>
-            <div class="award-name">Award-Winning Reds</div>
-          </div>
-          <div class="award-item">
-            <div class="award-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <div class="award-name">Missouri's Most Celebrated</div>
-          </div>
-          <div class="award-item">
-            <div class="award-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="award-name">TripAdvisor Reviewed</div>
-          </div>
-          <div class="award-item">
-            <div class="award-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19a4 4 0 0 1-4-4 7 7 0 0 1 7-7 7 7 0 0 1 7 7 4 4 0 0 1-4 4"/><path d="M12 8V2"/><path d="M9 5l3-3 3 3"/></svg>
-            </div>
-            <div class="award-name">Midwest Winery Pioneer</div>
-          </div>
-        </div>
-    </div>
-  </section>
-
-  <!-- GIFT SHOP -->
-  <section class="section section--wash" id="gifts" style="background-image: url('6716b7_8bc6102080434cfabc35156052b0cfba~mv2.avif'); background-size: cover; background-position: center; position: relative;">
-  <div style="position:absolute;inset:0;background:rgba(250,246,242,0.88);z-index:0;"></div>
-    <div class="container" style="position:relative;z-index:1;">
-      <div class="section-header fade-in">
-        <span class="label">Gift Shop &amp; Retail</span>
-        <h2 class="section-title">Shopping for Memorable Gifts?</h2>
-        <p class="section-sub">Take a piece of Branson home or send it to someone who couldn't make the trip. Our shop carries specialty wines, gourmet bites, and exclusive Branson keepsakes.</p>
-      </div>
-
-      <div class="gift-grid">
-        <div class="gift-card">
-          <div class="gift-icon">🍷</div>
-          <h3>Specialty Wines &amp; Gift Boxes</h3>
-          <p>Curated selections from St. James Winery: single bottles, duo packs, and premium gift boxes ready to wrap and give.</p>
-        </div>
-        <div class="gift-card">
-          <div class="gift-icon">🧀</div>
-          <h3>Gourmet Snacks &amp; Bites</h3>
-          <p>Artisan crackers, locally sourced preserves, nuts, and gourmet pairings perfect alongside your favorite bottle.</p>
-        </div>
-        <div class="gift-card">
-          <div class="gift-icon">🎁</div>
-          <h3>Branson Items &amp; Decor</h3>
-          <p>Unique Branson-themed gifts, home decor, and souvenirs you won't find at the strip mall. Something for everyone.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <div class="reviews-strip">
-    <div style="text-align:center;padding-bottom:32px;">
-      <span style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">What Our Guests Say</span>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--white);margin-top:10px;">Real Experiences. Real Reviews.</h2>
-    </div>
-    <div class="reviews-inner">
-      <div class="reviews-summary fade-in">
-        <div class="reviews-score">4.4</div>
-        <div class="reviews-stars">⭐⭐⭐⭐⭐</div>
-        <div class="reviews-count">TripAdvisor &amp; Yelp</div>
-      </div>
-      <div class="reviews-cards fade-in">
-        <div class="review-card">
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">"Great stop on our Branson vacation. The wine tasting was fantastic and the staff was incredibly knowledgeable. Picked up two cases to take home."</p>
-          <div class="review-author">Margaret T.</div>
-          <div class="review-source">TripAdvisor</div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">⭐⭐⭐⭐⭐</div>
-          <p class="review-text">"We did the Paint &amp; Sip and had an absolute blast. Wine was flowing, the instructor was patient and funny. Will be back next time we're in Branson."</p>
-          <div class="review-author">Carrie &amp; Dan R.</div>
-          <div class="review-source">Yelp</div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">⭐⭐⭐⭐</div>
-          <p class="review-text">"Brick-oven pizza was a surprise hit. The outdoor patio is gorgeous in the evening. We ended up staying two hours longer than we planned."</p>
-          <div class="review-author">LoriA_MO</div>
-          <div class="review-source">TripAdvisor</div>
-        </div>
-      </div>
+  <!-- ===================== MARQUEE ===================== -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Repeated twice for seamless loop -->
+      <span class="marquee-item">Wine Tastings Daily<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Brick-Oven Pizza<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Award-Winning Fruit Wines<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Craft Beer &amp; Cocktails<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Paint &amp; Sip Events<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Wine &amp; Cheese Pairings<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Est. 1970 &mdash; 50+ Years<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Open Daily<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Wine Tastings Daily<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Brick-Oven Pizza<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Award-Winning Fruit Wines<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Craft Beer &amp; Cocktails<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Paint &amp; Sip Events<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Wine &amp; Cheese Pairings<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Est. 1970 &mdash; 50+ Years<span class="marquee-dot"></span></span>
+      <span class="marquee-item">Open Daily<span class="marquee-dot"></span></span>
     </div>
   </div>
 
-  <!-- VISIT / HOURS -->
-  <section class="section" id="visit">
+  <!-- ===================== STORY ===================== -->
+  <section class="story">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="label">Plan Your Visit</span>
-        <h2 class="section-title">Come See Us in Branson</h2>
-        <p class="section-sub">Centrally located just off the Branson Strip. Wine tastings, dining, and the gift shop are all open daily during season. Hours may vary, so check Google before you come.</p>
-      </div>
-
-      <div class="visit-grid">
-        <div>
-          <div class="visit-info">
-            <h3>Hours of Operation</h3>
-            <table class="hours-table">
-              <tr><td>Monday – Thursday</td><td>Check Google Listing</td></tr>
-              <tr><td>Friday – Saturday</td><td>Check Google Listing</td></tr>
-              <tr><td>Sunday</td><td>Check Google Listing</td></tr>
-            </table>
-            <p style="font-size:0.82rem;color:var(--mid);margin-bottom:20px">Hours may vary during season and holidays. Always confirm on our Google listing before visiting.</p>
-
-            <div class="visit-address">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span>Located centrally just off the Branson Strip<br />Branson, Missouri 65616</span>
+      <div class="story-inner">
+        <div class="story-text reveal">
+          <span class="section-eyebrow">Our Story</span>
+          <h2 class="section-title">A Winery Like No<br><em>Other in Branson</em></h2>
+          <span class="gold-rule"></span>
+          <p class="section-body">
+            St. James Winery brought its award-winning Missouri fruit wines to the heart of Branson,
+            pairing them with a full bistro menu, craft beers, and signature cocktails. From relaxed
+            outdoor patio afternoons to Paint &amp; Sip evenings, every visit is something to remember.
+          </p>
+          <div class="story-stats">
+            <div class="story-stat">
+              <strong>50+</strong>
+              <span>Years of winemaking</span>
             </div>
-
-            <a href="tel:+14175448283" class="visit-phone">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.58 4.28 2 2 0 0 1 3.55 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.05z"></path></svg>
-              (417) 544-8283
-            </a>
-
-            <div class="social-row">
-              <a href="https://www.instagram.com/stjameswinerybranson/" target="_blank" class="social-btn">
-                📸 Instagram
-              </a>
-              <a href="https://www.facebook.com/stjameswinerybranson" target="_blank" class="social-btn">
-                👍 Facebook
-              </a>
-              <a href="https://www.yelp.com/biz/st-james-winery-branson" target="_blank" class="social-btn">
-                ⭐ Yelp
-              </a>
+            <div class="story-stat">
+              <strong>100+</strong>
+              <span>Wine awards earned</span>
+            </div>
+            <div class="story-stat">
+              <strong>Open</strong>
+              <span>Daily in Branson</span>
             </div>
           </div>
+          <a href="#visit" class="story-btn">Find Us on the Strip</a>
         </div>
-
-        <div class="visit-map fade-in">
-          <iframe
-            src="https://maps.google.com/maps?q=St+James+Winery+Branson+Missouri&t=&z=17&ie=UTF8&iwloc=&output=embed"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="St. James Winery Branson map"
-          ></iframe>
+        <div class="story-image-wrap reveal reveal-delay-2">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/_39A9813.jpg"
+            alt="Friends toasting with St. James wines indoors"
+          />
+          <div class="story-badge">
+            <span>Est.</span>
+            <strong>1970</strong>
+            <span>Missouri</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ===================== FOOD GALLERY ===================== -->
+  <section class="food" id="menu">
+    <div class="container">
+      <div class="food-header reveal">
+        <span class="section-eyebrow">Bistro &amp; Bar</span>
+        <h2 class="section-title">More Than Wine</h2>
+        <span class="gold-rule" style="margin: 1.25rem auto;"></span>
+        <p class="section-body" style="margin: 0 auto; text-align: center;">
+          Stone-fired pizzas, handcrafted boards, fresh salads, and housemade desserts, all
+          made to pair perfectly with your glass.
+        </p>
+      </div>
+      <div class="food-grid">
+        <!-- Large left card -->
+        <div class="food-card food-card-large reveal reveal-delay-1">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02333.jpg"
+            alt="Margherita brick-oven pizza at St. James Winery Branson"
+          />
+          <div class="food-card-label">
+            <h3>Brick-Oven Pizza</h3>
+            <p>Stone-fired with fresh ingredients</p>
+          </div>
+        </div>
+        <!-- Right column: 3 stacked -->
+        <div class="food-right-col">
+          <div class="food-card reveal reveal-delay-2">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH07091.jpg"
+              alt="Charcuterie board with cured meats, cheese, and crackers"
+            />
+            <div class="food-card-label">
+              <h3>Charcuterie Board</h3>
+              <p>Cured meats, artisan cheese &amp; more</p>
+            </div>
+          </div>
+          <div class="food-card reveal reveal-delay-3">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02241.jpg"
+              alt="Meatball appetizer plate"
+            />
+            <div class="food-card-label">
+              <h3>Appetizers</h3>
+              <p>Shareable starters to start the evening</p>
+            </div>
+          </div>
+          <div class="food-card reveal reveal-delay-4">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02550.jpg"
+              alt="Vanilla ice cream and lava cake dessert with rose wine"
+            />
+            <div class="food-card-label">
+              <h3>Housemade Desserts</h3>
+              <p>The perfect sweet finish</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DRINKS SPLIT ===================== -->
+  <section class="drinks">
+    <div class="drinks-image reveal">
+      <img
+        src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02502.jpg"
+        alt="Signature peach cocktail on marble stand with fresh fruit"
+      />
+    </div>
+    <div class="drinks-text reveal reveal-delay-1">
+      <span class="section-eyebrow">Bar Program</span>
+      <h2 class="section-title">Handcrafted <em>Sips</em></h2>
+      <span class="gold-rule"></span>
+      <p class="section-body">
+        Our full bar goes far beyond the bottle. Signature cocktails, craft beers on tap, and
+        seasonal non-alcoholic creations, all made to complement our bistro menu.
+      </p>
+      <ul class="drinks-menu-items">
+        <li>Missouri Fruit Wine Tastings</li>
+        <li>Signature Cocktails &amp; Wine Slushies</li>
+        <li>Craft Beer Selection</li>
+        <li>Wine by the Glass or Bottle</li>
+        <li>Non-Alcoholic Options Available</li>
+      </ul>
+      <a href="#visit" class="btn-gold">See the Full Menu</a>
+    </div>
+  </section>
+
+  <!-- ===================== WINE SHOWCASE ===================== -->
+  <section class="wines" id="wines">
+    <div class="container">
+      <div class="wines-header reveal">
+        <span class="section-eyebrow">The Wines</span>
+        <h2 class="section-title">Missouri's Most <em>Awarded</em> Fruit Wines</h2>
+        <span class="gold-rule"></span>
+        <p class="section-body">
+          Over 50 years of winemaking craftsmanship in every bottle. Sweet, semi-sweet,
+          and dry fruit wines made from Missouri-grown produce.
+        </p>
+      </div>
+      <div class="wines-grid">
+        <div class="wine-card reveal reveal-delay-1">
+          <div class="wine-card-img">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH01998.jpg"
+              alt="St. James Winery Raspberry Sweet Wine bottle"
+            />
+          </div>
+          <div class="wine-card-body">
+            <h3>Raspberry Sweet Wine</h3>
+            <p>Bright raspberry on the nose with a smooth, luscious finish. Perfectly chilled.</p>
+            <span class="wine-card-tag">Sweet</span>
+          </div>
+        </div>
+        <div class="wine-card reveal reveal-delay-2">
+          <div class="wine-card-img">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/St.%20James-3.jpg"
+              alt="St. James Winery Blueberry Sweet Wine bottle on patio"
+            />
+          </div>
+          <div class="wine-card-body">
+            <h3>Blueberry Sweet Wine</h3>
+            <p>Deep blueberry richness with a velvety texture. A crowd-pleasing classic.</p>
+            <span class="wine-card-tag">Sweet</span>
+          </div>
+        </div>
+        <div class="wine-card reveal reveal-delay-3">
+          <div class="wine-card-img">
+            <img
+              src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH01894.jpg"
+              alt="Woman holding St. James Blackberry Blueberry wine glass"
+            />
+          </div>
+          <div class="wine-card-body">
+            <h3>Blackberry Blueberry</h3>
+            <p>A bold blend of Missouri blackberry and blueberry with layered berry character.</p>
+            <span class="wine-card-tag">Semi-Sweet</span>
+          </div>
+        </div>
+      </div>
+      <div class="wines-cta reveal">
+        <a href="#visit" class="btn-gold">Taste Our Full Collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PATIO CTA ===================== -->
+  <section class="patio-cta">
+    <img
+      class="patio-cta-img"
+      src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02382.jpg"
+      alt="Aerial view of friends sharing pizza and wine on the outdoor patio"
+    />
+    <div class="patio-cta-overlay"></div>
+    <div class="patio-cta-content reveal">
+      <h2>Sun. Wine. <em>Pizza.</em> Patio.</h2>
+      <p>
+        Branson's most relaxed outdoor dining experience is waiting for you. No reservation
+        needed, just good company and great wine.
+      </p>
+      <a href="tel:+14175448283" class="btn-gold">Call (417) 544-8283</a>
+    </div>
+  </section>
+
+  <!-- ===================== LIFESTYLE 3-COL ===================== -->
+  <section class="lifestyle" id="events">
+    <div class="container">
+      <div class="lifestyle-header reveal">
+        <span class="section-eyebrow">Every Occasion</span>
+        <h2 class="section-title">Come for One Thing,<br><em>Stay for Everything</em></h2>
+        <span class="gold-rule" style="margin: 1.25rem auto;"></span>
+      </div>
+      <div class="lifestyle-grid">
+        <div class="lifestyle-card reveal reveal-delay-1">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02072.jpg"
+            alt="Group toasting St. James wines with a charcuterie board"
+          />
+          <div class="lifestyle-card-overlay">
+            <h3>Wine Tastings</h3>
+            <p>Daily guided tastings of our full lineup</p>
+          </div>
+        </div>
+        <div class="lifestyle-card reveal reveal-delay-2">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02153.jpg"
+            alt="Friends toasting with St. James Friendship School White wine"
+          />
+          <div class="lifestyle-card-overlay">
+            <h3>Outdoor Patio</h3>
+            <p>Relax with wine, pizza, and good company</p>
+          </div>
+        </div>
+        <div class="lifestyle-card reveal reveal-delay-3">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH02016.jpg"
+            alt="Friends on the patio with St. James Blackberry cans"
+          />
+          <div class="lifestyle-card-overlay">
+            <h3>Paint &amp; Sip</h3>
+            <p>Creative evenings with wine and guided art</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GIFT SHOP ===================== -->
+  <section class="giftshop" id="giftshop">
+    <img
+      class="giftshop-img"
+      src="../../Downloads/01_Client-Work/st%20James%20Branson/ABH07026.jpg"
+      alt="St. James Winery gift shop with colorful wine bottles and gifts"
+    />
+    <div class="giftshop-overlay"></div>
+    <div class="giftshop-content">
+      <div class="reveal">
+        <span class="section-eyebrow">Before You Leave</span>
+        <h2 class="section-title">The Gift Shop</h2>
+        <span class="gold-rule"></span>
+        <p class="section-body">
+          Take a piece of St. James home. Bottles, gift sets, wine accessories, and
+          local Missouri keepsakes, all in one stop before you head out.
+        </p>
+        <a href="#visit" class="btn-gold" style="margin-top: 2rem; display: inline-flex;">Browse the Shop</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VISIT + HOURS ===================== -->
+  <section class="visit" id="visit">
+    <div class="container">
+      <div class="visit-inner">
+        <div class="visit-img-wrap reveal">
+          <img
+            src="../../Downloads/01_Client-Work/st%20James%20Branson/SJW%20exterior%202.jpg"
+            alt="St. James Winery Branson exterior building on the Branson Strip"
+          />
+        </div>
+        <div class="visit-text reveal reveal-delay-1">
+          <span class="section-eyebrow">Find Us</span>
+          <h2 class="section-title">Plan Your <em>Visit</em></h2>
+          <span class="gold-rule"></span>
+
+          <div class="visit-details">
+            <div class="visit-detail-row">
+              <svg class="visit-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span>2905 W Hwy 76, Branson, MO 65616</span>
+            </div>
+            <div class="visit-detail-row">
+              <svg class="visit-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 0116.83 2.18 2 2 0 0119 4.36v3.09"/></svg>
+              <a href="tel:+14175448283" style="color: var(--wine); font-weight: 600;">(417) 544-8283</a>
+            </div>
+          </div>
+
+          <table class="hours-table">
+            <tr><td>Monday &amp; Tuesday</td><td>11:00 AM &mdash; 8:00 PM</td></tr>
+            <tr><td>Wednesday &amp; Thursday</td><td>11:00 AM &mdash; 9:00 PM</td></tr>
+            <tr><td>Friday &amp; Saturday</td><td>11:00 AM &mdash; 10:00 PM</td></tr>
+            <tr><td>Sunday</td><td>12:00 PM &mdash; 8:00 PM</td></tr>
+          </table>
+
+          <p style="font-size:.875rem; color: var(--mid); margin-bottom: 1.75rem;">
+            Hours may vary seasonally. Call ahead to confirm.
+          </p>
+
+          <div class="visit-actions">
+            <a href="tel:+14175448283" class="btn-primary">Call Now</a>
+            <a href="https://maps.google.com/?cid=7489978298976482840" target="_blank" rel="noopener" class="btn-wine-outline">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MAP ===================== -->
+  <div class="map-section">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.4325!2d-93.3168!3d36.6421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87cf620a3b2d1f1f%3A0x67c40b5e52fa5fd8!2sSt.%20James%20Winery%20Branson!5e0!3m2!1sen!2sus!4v1700000000000"
+      allowfullscreen=""
+      loading="lazy"
+      title="St. James Winery Branson location map"
+    ></iframe>
+  </div>
+
+  <!-- ===================== REVIEWS ===================== -->
+  <section class="reviews">
+    <div class="container">
+      <div class="reviews-header reveal">
+        <span class="section-eyebrow">What Guests Say</span>
+        <h2 class="section-title">Loved by Branson Visitors</h2>
+        <span class="gold-rule" style="margin: 1.25rem auto;"></span>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">
+            "The outdoor patio is stunning. We had pizza, a charcuterie board, and worked our
+            way through a tasting. Easily the highlight of our Branson trip."
+          </p>
+          <div class="review-author">
+            <div class="review-initials">JM</div>
+            <div class="review-author-info">
+              <strong>Jennifer M.</strong>
+              <span>Google Review</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">
+            "The Blackberry Blueberry wine is something else. We did the tasting and ended up
+            buying six bottles to take home. Staff was incredibly knowledgeable and friendly."
+          </p>
+          <div class="review-author">
+            <div class="review-initials">TR</div>
+            <div class="review-author-info">
+              <strong>Thomas R.</strong>
+              <span>TripAdvisor</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal reveal-delay-3">
+          <div class="review-stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="review-text">
+            "We did the Paint and Sip and it was so much fun. Great instructor, great wine,
+            and we both left with paintings we were actually proud of. Will be back!"
+          </p>
+          <div class="review-author">
+            <div class="review-initials">SK</div>
+            <div class="review-author-info">
+              <strong>Sarah K.</strong>
+              <span>Google Review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-inner">
         <div class="footer-brand">
-          <img src="StJamesWineryMainLogo-web.avif" alt="St. James Winery Branson" style="height:64px;width:auto;filter:brightness(0) invert(1);opacity:0.9;margin-bottom:16px;display:block;" />
-          <p>Award-winning wines, bistro dining, craft beers, and Paint &amp; Sip events, just off the Branson Strip. Fifty years of St. James winemaking, one unforgettable stop.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="#wine">Wine Tasting</a></li>
-            <li><a href="#dining">Bistro Dining</a></li>
-            <li><a href="#events">Paint &amp; Sip</a></li>
-            <li><a href="#gifts">Gift Shop</a></li>
-          </ul>
+          <img src="StJamesWineryMainLogo-web.avif" alt="St. James Winery Branson" />
+          <p>
+            Award-winning Missouri fruit wines, brick-oven pizza, craft beers, and
+            unforgettable experiences on the Branson Strip.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/stjamesbranson" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/stjameswinerybranson" target="_blank" rel="noopener" aria-label="Instagram">in</a>
+            <a href="https://www.yelp.com/biz/st-james-winery-branson" target="_blank" rel="noopener" aria-label="Yelp">y</a>
+            <a href="https://www.tripadvisor.com/Restaurant_Review-g44535-d3220695-Reviews-St_James_Winery_Branson-Branson_Missouri.html" target="_blank" rel="noopener" aria-label="TripAdvisor">t</a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Visit</h4>
-          <ul>
+          <ul class="footer-links">
             <li><a href="#visit">Hours &amp; Location</a></li>
-            <li><a href="https://www.stjamesbranson.com/menu" target="_blank">Full Menu</a></li>
-            <li><a href="https://www.stjamesbranson.com/paint-n-sip" target="_blank">Events Calendar</a></li>
+            <li><a href="https://maps.google.com/?cid=7489978298976482840" target="_blank" rel="noopener">Directions</a></li>
             <li><a href="tel:+14175448283">(417) 544-8283</a></li>
           </ul>
         </div>
         <div class="footer-col">
+          <h4>Experience</h4>
+          <ul class="footer-links">
+            <li><a href="#menu">Bistro Menu</a></li>
+            <li><a href="#wines">Our Wines</a></li>
+            <li><a href="#events">Paint &amp; Sip</a></li>
+            <li><a href="#giftshop">Gift Shop</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
           <h4>Connect</h4>
-          <ul>
-            <li><a href="https://www.instagram.com/stjameswinerybranson/" target="_blank">Instagram</a></li>
-            <li><a href="https://www.facebook.com/stjameswinerybranson" target="_blank">Facebook</a></li>
-            <li><a href="https://www.yelp.com/biz/st-james-winery-branson" target="_blank">Yelp</a></li>
-            <li><a href="https://www.tripadvisor.com/Restaurant_Review-g44160-d12706398-Reviews-St_James_Winery_Restaurant-Branson_Missouri.html" target="_blank">TripAdvisor</a></li>
+          <ul class="footer-links">
+            <li><a href="https://www.stjameswinery.com" target="_blank" rel="noopener">St. James Winery</a></li>
+            <li><a href="https://www.stjamesbranson.com" target="_blank" rel="noopener">stjamesbranson.com</a></li>
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
-        <p>&copy; 2024 St. James Winery Branson. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/stjameswinerybranson/" target="_blank" title="Instagram">📸</a>
-          <a href="https://www.facebook.com/stjameswinerybranson" target="_blank" title="Facebook">👍</a>
-          <a href="https://www.yelp.com/biz/st-james-winery-branson" target="_blank" title="Yelp">⭐</a>
-        </div>
+        <span>&copy; 2026 St. James Winery Branson. All rights reserved.</span>
+        <span>2905 W Hwy 76, Branson, MO 65616</span>
       </div>
     </div>
   </footer>
 
   <script>
-    let current = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.hero-dot');
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
 
-    function goToSlide(n) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = n;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-    }
-
-    setInterval(() => {
-      goToSlide((current + 1) % slides.length);
-    }, 5000);
-
-    // Scroll fade-in
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          fadeObserver.unobserve(entry.target);
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
 
-    // 50+ counter animation
-    const counterEl = document.querySelector('.heritage-year');
-    if (counterEl) {
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            let count = 0;
-            const timer = setInterval(() => {
-              count++;
-              counterEl.textContent = count + '+';
-              if (count >= 50) clearInterval(timer);
-            }, 30);
-            counterObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      counterObserver.observe(counterEl);
-    }
+    // Trigger visible for above-fold hero elements immediately
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   </script>
-
 </body>
 </html>
