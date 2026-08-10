@@ -295,12 +295,19 @@ button { font: inherit; }
   font-size: 14px; font-weight: 600; transition: background 180ms ease-out, transform 180ms var(--ease);
 }
 .v-patio .btn-wine:hover { background: var(--wine-mid); transform: translateY(-2px); }
+/* Secondary button: solid dark, never white-on-cream, so it reads as clickable. */
 .v-patio .btn-line {
-  border: 1px solid var(--taupe); color: var(--ink); padding: 15px 30px; border-radius: 999px;
-  font-size: 14px; font-weight: 500; transition: border-color 180ms ease-out, transform 180ms var(--ease);
+  background: var(--ink); border: 1px solid var(--ink); color: var(--cream);
+  padding: 15px 30px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(46,26,26,.16);
+  transition: background 180ms ease-out, border-color 180ms ease-out, transform 180ms var(--ease);
 }
-.v-patio .btn-line:hover { border-color: var(--wine); transform: translateY(-2px); }
-.v-patio .hero-media { position: relative; border-radius: 260px 260px 8px 8px; overflow: hidden; }
+.v-patio .btn-line:hover { background: #45292a; border-color: #45292a; transform: translateY(-2px); }
+.v-patio .btn-wine:active, .v-patio .btn-line:active { transform: translateY(0); }
+
+/* Frame carries the arch clip so the badge can overhang without being cut off. */
+.v-patio .hero-media { position: relative; }
+.v-patio .hero-frame { border-radius: 260px 260px 8px 8px; overflow: hidden; }
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
   position: absolute; left: -34px; bottom: 54px; background: var(--cream);
@@ -346,13 +353,16 @@ button { font: inherit; }
   padding: 8px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 500; color: var(--ink);
 }
 
-.v-patio .drinks { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; border-radius: 10px; overflow: hidden; }
+.v-patio .drinks { display: grid; grid-template-columns: .88fr 1.12fr; align-items: stretch; border-radius: 10px; overflow: hidden; }
 .v-patio .drinks img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; }
 .v-patio .drinks-body { background: #fff; padding: 60px 54px; display: flex; flex-direction: column; justify-content: center; }
 .v-patio .drinks-body h2 { font-size: 40px; margin-top: 14px; }
 .v-patio .drinks-body p { color: var(--mid); line-height: 1.8; margin: 18px 0 0; }
-.v-patio .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.v-patio .chip { border: 1px solid var(--taupe); border-radius: 999px; padding: 9px 17px; font-size: 13px; color: var(--ink); }
+.v-patio .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 26px; }
+.v-patio .chip {
+  border: 1px solid var(--taupe); border-radius: 999px; padding: 8px 15px;
+  font-size: 12.5px; color: var(--ink); white-space: nowrap;
+}
 
 .v-patio .gift { position: relative; height: 460px; border-radius: 10px; overflow: hidden; }
 .v-patio .gift img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
@@ -376,6 +386,9 @@ button { font: inherit; }
 .v-patio .hours li { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--taupe); font-size: 15px; }
 .v-patio .hours li span:first-child { color: var(--mid); }
 .v-patio .addr { margin: 26px 0 0; line-height: 1.85; font-size: 16px; }
+/* Address sits directly under the heading, above the day rows. */
+.v-patio .addr-lead { margin: 16px 0 22px; }
+.v-patio .addr-lead a { display: inline-block; margin-top: 2px; }
 .v-patio .addr a { color: var(--wine); font-weight: 600; border-bottom: 1px solid rgba(156,36,38,.3); }
 .v-patio .note { margin-top: 14px; font-size: 12px; color: var(--mid); font-style: italic; }
 .v-patio iframe { width: 100%; height: 340px; border: 0; border-radius: 10px; margin-top: 40px; }
@@ -394,7 +407,7 @@ button { font: inherit; }
   .v-patio .nav-links { display: none; }
   .v-patio .hero-grid, .v-patio .story, .v-patio .drinks, .v-patio .visit { grid-template-columns: 1fr; gap: 34px; }
   .v-patio .hero-copy { padding-right: 0; }
-  .v-patio .hero-media { border-radius: 8px; }
+  .v-patio .hero-frame { border-radius: 8px; }
   .v-patio .hero-media img { height: 380px; }
   .v-patio .hero-badge { left: 16px; bottom: 16px; }
   .v-patio .cards, .v-patio .revs { grid-template-columns: 1fr; }
@@ -799,7 +812,7 @@ function patio() {
       '</div>' +
     '</div>' +
     '<div class="hero-media rise" style="--d:120ms">' +
-      '<img class="kb" src="img/abh02397.jpg" alt="Two guests laughing over glasses of wine at a shaded patio table" />' +
+      '<div class="hero-frame"><img class="kb" src="img/abh02397.jpg" alt="Two guests laughing over glasses of wine at a shaded patio table" /></div>' +
       '<span class="hero-badge">Tastings &nbsp;&middot;&nbsp; Pizza &nbsp;&middot;&nbsp; Patio</span>' +
     '</div>' +
   '</div></div></section>' +
@@ -843,7 +856,7 @@ function patio() {
       '<h2>Not everyone wants wine</h2>' +
       '<p>The full bar covers signature cocktails, craft beer and canned sparkling fruit wines, so nobody in the group is stuck with a compromise.</p>' +
       '<div class="chips">' +
-        '<span class="chip">Signature cocktails</span>' +
+        '<span class="chip">Cocktails</span>' +
         '<span class="chip">Craft beer</span>' +
         '<span class="chip">Sparkling cans</span>' +
         '<span class="chip">Non alcoholic</span>' +
@@ -874,8 +887,8 @@ function patio() {
     '<div class="reveal">' +
       '<p class="eyebrow">Visit us</p>' +
       '<h2 style="font-size:clamp(28px,3.2vw,42px);margin-top:14px">Hours and directions</h2>' +
+      '<p class="addr addr-lead">' + ADDRESS + '<br /><a href="' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a></p>' +
       hoursList('hours', false) +
-      '<p class="addr">' + ADDRESS + '<br /><a href="' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a></p>' +
       '<p class="note">Seasonal hours vary. Confirm with the winery before you travel.</p>' +
     '</div>' +
   '</div>' +
