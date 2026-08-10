@@ -232,6 +232,30 @@ button { font: inherit; }
 .v-cellar .addr a { color: var(--gold-light); border-bottom: 1px solid rgba(232,201,122,.35); }
 .v-cellar .note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,.4); font-style: italic; }
 
+/* REVIEWS — design A: editorial pull-quote, one hero quote + two supporting */
+.v-cellar .g-badge { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,.62); }
+.v-cellar .g-badge b { color: #fff; font-weight: 600; }
+.v-cellar .stars { color: var(--gold); letter-spacing: 2px; }
+.v-cellar .rev-hero { display: grid; grid-template-columns: 1fr .62fr; gap: 54px; align-items: center; }
+.v-cellar .rev-hero blockquote { margin: 0; }
+.v-cellar .rev-hero q {
+  display: block; quotes: none; font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(23px, 2.5vw, 33px); line-height: 1.42; color: #f6ece7;
+}
+.v-cellar .rev-by { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+.v-cellar .rev-by img, .v-cellar .rev-ini {
+  width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex: 0 0 46px;
+  background: var(--wine); color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 17px;
+}
+.v-cellar .rev-by b { display: block; font-size: 15px; font-weight: 600; }
+.v-cellar .rev-by span { display: block; font-size: 12.5px; color: rgba(255,255,255,.48); margin-top: 3px; }
+.v-cellar .rev-shot { border-radius: 3px; overflow: hidden; }
+.v-cellar .rev-shot img { width: 100%; height: 420px; object-fit: cover; }
+.v-cellar .rev-shot figcaption { font-size: 11.5px; color: rgba(255,255,255,.42); padding: 12px 2px 0; }
+.v-cellar .rev-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 60px; padding-top: 46px; border-top: 1px solid rgba(201,151,58,.2); }
+.v-cellar .rev-sm q { display: block; quotes: none; font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,.76); font-weight: 300; margin-top: 12px; }
+
 .v-cellar .foot { background: #120a0a; border-top: 1px solid rgba(201,151,58,.18); padding: 62px 0 34px; }
 .v-cellar .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
 .v-cellar .foot img { width: 150px; margin-bottom: 20px; }
@@ -247,6 +271,8 @@ button { font: inherit; }
   .v-cellar .stats-inner { grid-template-columns: 1fr 1fr; }
   .v-cellar .stat:nth-child(2) { border-right: 0; }
   .v-cellar .sec-head { grid-template-columns: 1fr; gap: 18px; align-items: start; }
+  .v-cellar .rev-hero, .v-cellar .rev-pair { grid-template-columns: 1fr; gap: 30px; }
+  .v-cellar .rev-shot img { height: 300px; }
   .v-cellar .split, .v-cellar .edit-grid, .v-cellar .ps, .v-cellar .visit { grid-template-columns: 1fr; gap: 30px; }
   .v-cellar .ps-body h2 { white-space: normal; }
   .v-cellar .split img { height: 340px; }
@@ -374,11 +400,39 @@ button { font: inherit; }
 .v-patio .btn-cream { background: var(--cream); color: var(--ink); padding: 14px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; align-self: flex-start; transition: transform 180ms var(--ease); }
 .v-patio .btn-cream:hover { transform: translateY(-2px); }
 
-.v-patio .revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.v-patio .rev { background: #fff; border-radius: 10px; padding: 34px 30px; box-shadow: 0 2px 14px rgba(46,26,26,.06); }
-.v-patio .rev .stars { color: var(--gold); letter-spacing: 3px; font-size: 14px; }
-.v-patio .rev p { font-family: 'Playfair Display', serif; font-size: 18px; line-height: 1.6; margin: 16px 0 18px; }
-.v-patio .rev cite { font-style: normal; font-size: 13px; color: var(--mid); }
+/* REVIEWS — design B: photo cards with the guest's own shot and an overlapping avatar */
+.v-patio .revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: start; }
+.v-patio .rev {
+  background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(46,26,26,.07);
+  overflow: hidden; transition: transform 240ms var(--ease), box-shadow 240ms ease-out;
+}
+.v-patio .rev:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(46,26,26,.13); }
+.v-patio .rev-photo { height: 190px; overflow: hidden; background: var(--taupe); }
+.v-patio .rev-photo img { width: 100%; height: 100%; object-fit: cover; }
+/* Reviewers without a photo get a tinted panel so the row keeps one height. */
+.v-patio .rev-photo-alt {
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.v-patio .rev-photo-alt span {
+  font-family: 'Playfair Display', serif; font-size: 92px; line-height: 1;
+  color: rgba(255,255,255,.28); margin-top: 26px;
+}
+.v-patio .rev-inner { padding: 0 28px 30px; position: relative; }
+.v-patio .rev-face {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  border: 3px solid #fff; margin-top: -28px; position: relative; z-index: 2;
+  background: var(--wine); color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 20px;
+}
+.v-patio .rev-noPhoto { padding-top: 30px; }
+.v-patio .rev-name { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.v-patio .rev-name b { font-size: 15.5px; font-weight: 600; }
+.v-patio .rev .stars { color: var(--gold); letter-spacing: 2px; font-size: 14px; display: block; margin-top: 10px; }
+.v-patio .rev q { display: block; quotes: none; font-family: 'Playfair Display', serif; font-size: 17.5px; line-height: 1.58; margin: 14px 0 0; color: var(--ink); }
+.v-patio .rev cite { display: block; font-style: normal; font-size: 12.5px; color: var(--mid); margin-top: 16px; }
+.v-patio .g-badge { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; color: var(--mid); margin-top: 14px; }
+.v-patio .g-badge b { color: var(--ink); font-weight: 700; }
 
 .v-patio .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .v-patio .visit img { width: 100%; height: 420px; object-fit: cover; border-radius: 10px; }
@@ -533,17 +587,26 @@ button { font: inherit; }
 }
 .v-marquee .btn-cta:hover { background: var(--wine-deep); transform: translateY(-2px); }
 
-/* Reviews */
-.v-marquee .revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.v-marquee .rev { border: 1px solid #eae1db; border-radius: 8px; padding: 26px 24px 24px; background: #fff; }
-.v-marquee .rev .stars { color: var(--gold); letter-spacing: 3px; font-size: 14px; }
-.v-marquee .rev p { font-size: 15.5px; line-height: 1.65; margin: 14px 0 16px; color: #2b1f1d; }
-.v-marquee .rev cite { font-style: normal; font-size: 12.5px; color: #8a7a76; }
-.v-marquee .rev-score {
-  display: flex; align-items: baseline; gap: 10px; margin-bottom: 26px;
-  font-size: 14px; color: #7a6a66;
-}
-.v-marquee .rev-score b { font-size: 30px; font-weight: 800; letter-spacing: -.03em; color: #17100f; }
+/* REVIEWS — design C: score panel with a rating breakdown beside a dense list */
+.v-marquee .rev-wrap { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 46px; align-items: start; }
+.v-marquee .rev-panel { border: 1px solid #eae1db; border-radius: 10px; padding: 26px 24px; background: var(--cream); }
+.v-marquee .rev-score { display: flex; align-items: baseline; gap: 10px; }
+.v-marquee .rev-score b { font-size: 46px; font-weight: 800; letter-spacing: -.04em; color: #17100f; line-height: 1; }
+.v-marquee .rev-score .stars { color: var(--gold); font-size: 15px; letter-spacing: 1px; }
+.v-marquee .rev-count { font-size: 13px; color: #7a6a66; margin: 10px 0 20px; }
+.v-marquee .bar-row { display: grid; grid-template-columns: 12px 1fr 32px; gap: 9px; align-items: center; font-size: 12px; color: #8a7a76; margin-bottom: 7px; }
+.v-marquee .bar { height: 6px; border-radius: 999px; background: #e7ddd6; overflow: hidden; }
+.v-marquee .bar i { display: block; height: 100%; background: var(--gold); border-radius: 999px; }
+.v-marquee .rev-src { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #7a6a66; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e7ddd6; }
+.v-marquee .revs { display: grid; gap: 0; }
+.v-marquee .rev { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; gap: 16px; padding: 22px 0; border-bottom: 1px solid #eae1db; align-items: start; }
+.v-marquee .rev:first-child { padding-top: 0; }
+.v-marquee .rev-face { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: var(--wine); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px; }
+.v-marquee .rev b { font-size: 14.5px; font-weight: 700; }
+.v-marquee .rev .stars { color: var(--gold); letter-spacing: 1px; font-size: 13px; margin-left: 9px; }
+.v-marquee .rev p { font-size: 14.5px; line-height: 1.62; margin: 7px 0 0; color: #4a3b38; }
+.v-marquee .rev time { font-size: 12px; color: #a09490; white-space: nowrap; }
+.v-marquee .rev-thumb { width: 84px; height: 84px; border-radius: 6px; object-fit: cover; }
 
 .v-marquee .plan { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: start; }
 .v-marquee .plan img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
@@ -587,10 +650,12 @@ button { font: inherit; }
   .v-marquee .acts { grid-template-columns: 1fr 1fr; }
   .v-marquee .sec-head { grid-template-columns: 1fr; gap: 14px; align-items: start; }
   .v-marquee .see-all { justify-self: start; }
-  .v-marquee .revs { grid-template-columns: 1fr; }
+  .v-marquee .rev-wrap { grid-template-columns: 1fr; gap: 26px; }
 }
 @media (max-width: 820px) {
   .v-marquee .nav-links { display: none; }
+  .v-marquee .rev { grid-template-columns: 40px minmax(0,1fr); }
+  .v-marquee .rev-thumb, .v-marquee .rev time { display: none; }
   .v-marquee .hero { grid-template-columns: 1fr; }
   .v-marquee .hero-media { height: 300px; }
   .v-marquee .hero-panel { padding: 44px 26px; }
@@ -631,6 +696,110 @@ var HOURS = [
   ['Saturday',  '11:00 am - 8:00 pm'],
   ['Sunday',    '11:00 am - 6:00 pm']
 ];
+
+/* Real Google reviews pulled from the St. James Winery | Branson listing.
+   Aggregate at time of capture: 4.7 from 911 reviews. */
+var REVIEWS = {
+  cellar: [
+    {
+      name: 'Nicholas Neil',
+      stars: 5,
+      date: '7 months ago',
+      text: 'This wine tasting experience was very nice. The wine expert was super friendly and knowledgeable. The cost is $20 a person for a selection of 7 different wines from their offering. Generous pours. Worth a visit for sure.',
+      avatar: 'img/reviews/av-nicholas-neil.jpg',
+      photo: 'img/reviews/ph-nicholas-neil.jpg'
+    },
+    {
+      name: 'Tammy Reif',
+      stars: 5,
+      date: '2 months ago',
+      text: 'We visited St James Winery on our last trip to Table Rock Lake. Honestly, we weren\'t expecting much because the location is so close to the main drag of Branson and not an actual winery. Boy were we wrong!! Our tasting was the best winery experience we\'ve ever had!!',
+      avatar: 'img/reviews/av-tammy-reif.jpg',
+      photo: null
+    },
+    {
+      name: 'Deborah Leyden',
+      stars: 5,
+      date: '11 months ago',
+      text: 'The wine tasting was fabulous. Max, the bartender &ldquo;wine expert&rdquo; was funny and knowledgeable. We then had their brick oven pizza. We are from the Chicagoland area and know pizza. The pizza was great tasting with a fabulous sauce (tomato basil). We bought 4 wines to take home.',
+      avatar: 'img/reviews/av-deborah-leyden.jpg',
+      photo: 'img/reviews/ph-deborah-leyden.jpg'
+    },
+  ],
+  patio: [
+    {
+      name: 'Tasha Pope',
+      stars: 5,
+      date: '4 months ago',
+      text: 'Beautiful courtyard that feels secluded and peaceful. Fun games to play like Cornhole or Bocce ball. The wine is so good! Something for everyone! Their gluten free pizza was delicious!',
+      avatar: 'img/reviews/av-tasha-pope.jpg',
+      photo: 'img/reviews/ph-tasha-pope.jpg'
+    },
+    {
+      name: 'Rachelle Wallace',
+      stars: 5,
+      date: 'a month ago',
+      text: 'My family and I visited Branson for my sister\'s birthday. We found this winery I\'m so glad we stopped in. We got there a little late but it was the best time ever. They didn\'t rush us, we were able to do a wine tasting.',
+      avatar: 'img/reviews/av-rachelle-wallace.jpg',
+      photo: null
+    },
+    {
+      name: 'Christian Whitley',
+      stars: 5,
+      date: 'Edited 10 months ago',
+      text: 'Came here for a wine tasting and pizza lunch and we had a fantastic experience. Started off with the wine tasting and Max was fantastic. Very informative and gave us a few challenges to test our palletes a bit, and I even let him choose three of the&hellip;',
+      avatar: 'img/reviews/av-christian-whitley.jpg',
+      photo: 'img/reviews/ph-christian-whitley.jpg'
+    },
+  ],
+  marquee: [
+    {
+      name: 'Courtney Schuller',
+      stars: 5,
+      date: '2 months ago',
+      text: 'The wine tasting here was such a fun experience on our weekend trip! Max, the wine tender, is what helped make this such an incredible experience. The front desk gal who checked us out was also so very kind!!',
+      avatar: 'img/reviews/av-courtney-schuller.jpg',
+      photo: null
+    },
+    {
+      name: 'Darlene Kemp',
+      stars: 5,
+      date: 'Edited a month ago',
+      text: 'This winery has some exceptional wines. I prefer the semi dry, but all of their wines were very good. In the tasting room, there are great employees that tell you about the wines and offer suggestions on what&hellip;',
+      avatar: 'img/reviews/av-darlene-kemp.jpg',
+      photo: 'img/reviews/ph-darlene-kemp.jpg'
+    },
+    {
+      name: 'Mark Clark',
+      stars: 5,
+      date: '2 months ago',
+      text: 'I haven\'t had the pleasure of dining in or frequenting this winery but I have ordered a few pizzas from this place and I love it.',
+      avatar: 'img/reviews/av-mark-clark.jpg',
+      photo: null
+    },
+  ],
+};
+
+var GOOGLE_RATING = '4.7';
+var GOOGLE_COUNT = '911';
+/* [stars, review count] read off the listing; sums to 911. */
+var GOOGLE_HISTOGRAM = [[5, 793], [4, 49], [3, 19], [2, 19], [1, 31]];
+
+/* Official Google "G", used to attribute the review source. */
+function googleG(size) {
+  return '<svg class="g-mark" width="' + size + '" height="' + size + '" viewBox="0 0 48 48" aria-hidden="true" focusable="false">' +
+    '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
+    '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
+    '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
+    '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>' +
+    '</svg>';
+}
+function stars(n) {
+  var s = '';
+  for (var i = 0; i < 5; i++) s += (i < n ? '★' : '☆');
+  return '<span class="stars" aria-label="' + n + ' out of 5 stars">' + s + '</span>';
+}
+function initial(name) { return name.trim().charAt(0).toUpperCase(); }
 
 function bransonNow() {
   return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
@@ -808,6 +977,13 @@ function cellar() {
     '</div>' +
   '</div></div></section>' +
 
+  '<section class="sec"><div class="wrap"><div class="sec-head reveal">' +
+    '<div><p class="eyebrow">Guest reviews</p>' +
+    '<h2>Ask for Max, apparently</h2></div>' +
+    '<p class="g-badge">' + googleG(18) + '<span><b>' + GOOGLE_RATING + '</b> from ' +
+      GOOGLE_COUNT + ' Google reviews</span></p>' +
+  '</div>' + cellarReviews() + '</div></section>' +
+
   '<section class="sec" id="visit"><div class="wrap"><div class="visit">' +
     '<div class="reveal">' +
       '<p class="eyebrow">Visit</p>' +
@@ -821,6 +997,34 @@ function cellar() {
 
   footer('logo-white.png') +
   '</div>';
+}
+
+/* Review design A — Cellar: one hero pull-quote beside the guest's own photo,
+   two supporting quotes underneath. */
+function cellarReviews() {
+  var r = REVIEWS.cellar;
+  var hero = r[0], rest = r.slice(1);
+  return '<div class="rev-hero reveal">' +
+    '<blockquote>' + stars(hero.stars) +
+      '<q>' + hero.text + '</q>' + revBy(hero) +
+    '</blockquote>' +
+    (hero.photo
+      ? '<figure class="rev-shot" style="margin:0"><img src="' + hero.photo +
+        '" alt="Guest photo from a review of St. James Winery Branson" />' +
+        '<figcaption>Photo by ' + hero.name + ', via Google</figcaption></figure>'
+      : '') +
+  '</div>' +
+  '<div class="rev-pair">' + rest.map(function (x) {
+    return '<blockquote class="rev-sm reveal" style="margin:0">' + stars(x.stars) +
+      '<q>' + x.text + '</q>' + revBy(x) + '</blockquote>';
+  }).join('') + '</div>';
+}
+function revBy(x) {
+  var face = x.avatar
+    ? '<img src="' + x.avatar + '" alt="" />'
+    : '<span class="rev-ini">' + initial(x.name) + '</span>';
+  return '<div class="rev-by">' + face + '<span><b>' + x.name + '</b>' +
+    '<span>' + x.date + '</span></span></div>';
 }
 
 function wineCard(src, name, kind) {
@@ -922,10 +1126,10 @@ function patio() {
 
   '<section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head reveal">' +
     '<p class="eyebrow">Guest notes</p><h2>What people say after they visit</h2>' +
+    '<p class="g-badge">' + googleG(17) + '<span><b>' + GOOGLE_RATING + '</b> average from ' +
+      GOOGLE_COUNT + ' Google reviews</span></p>' +
   '</div><div class="revs">' +
-    patioReview('The patio is the whole point. We came for one tasting and stayed three hours.', 'Sample review copy, replace before launch') +
-    patioReview('Pizza out of the brick oven was better than it had any right to be next to a wine flight.', 'Sample review copy, replace before launch') +
-    patioReview('Staff walked us through every sweet wine until we found the one. Left with a case.', 'Sample review copy, replace before launch') +
+    REVIEWS.patio.map(patioReview).join('') +
   '</div></div></section>' +
 
   '<section class="sec" id="visit" style="padding-top:0"><div class="wrap"><div class="visit">' +
@@ -950,9 +1154,22 @@ function patioCard(img, alt, title, body, link) {
     '<div class="card-body"><h3>' + title + '</h3><p>' + body + '</p>' +
     '<span class="card-link">' + link + '</span></div></article>';
 }
-function patioReview(quote, who) {
-  return '<blockquote class="rev reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-    '<p>&ldquo;' + quote + '&rdquo;</p><cite>' + who + '</cite></blockquote>';
+/* Review design B — Patio: photo card, avatar overlapping the image edge. */
+function patioReview(x) {
+  var face = x.avatar
+    ? '<img class="rev-face" src="' + x.avatar + '" alt="" />'
+    : '<span class="rev-face">' + initial(x.name) + '</span>';
+  return '<blockquote class="rev reveal" style="margin:0">' +
+    (x.photo
+      ? '<div class="rev-photo"><img src="' + x.photo +
+        '" alt="Guest photo from a review of St. James Winery Branson" /></div>'
+      : '<div class="rev-photo rev-photo-alt"><span aria-hidden="true">&rdquo;</span></div>') +
+    '<div class="rev-inner">' + face +
+      '<div class="rev-name"><b>' + x.name + '</b>' + googleG(16) + '</div>' +
+      stars(x.stars) +
+      '<q>' + x.text + '</q>' +
+      '<cite>' + x.date + ' on Google' + (x.photo ? ' &middot; photo by ' + x.name : '') + '</cite>' +
+    '</div></blockquote>';
 }
 
 /* ============================================================
@@ -1048,14 +1265,17 @@ function marquee() {
 
   '<section class="sec-tight"><div class="wrap"><div class="sec-head reveal">' +
     '<div><h2>What guests say</h2></div>' +
-    '<p>Rated across Google, TripAdvisor and Yelp by visitors to the Branson tasting room and restaurant.</p>' +
+    '<p>What visitors to the Branson tasting room and restaurant have posted on Google, pulled straight from the business profile.</p>' +
     '<a class="see-all" href="#social">Read all reviews &#8594;</a>' +
   '</div>' +
-  '<div class="rev-score reveal"><b>4.7</b><span>average from 911 Google reviews</span></div>' +
-  '<div class="revs">' +
-    mrev('The patio is the whole point. We came for one tasting and stayed three hours.') +
-    mrev('Pizza out of the brick oven was better than it had any right to be next to a wine flight.') +
-    mrev('Staff walked us through every sweet wine until we found the one. Left with a case.') +
+  '<div class="rev-wrap">' +
+    '<div class="rev-panel reveal">' +
+      '<div class="rev-score"><b>' + GOOGLE_RATING + '</b>' + stars(5) + '</div>' +
+      '<p class="rev-count">' + GOOGLE_COUNT + ' Google reviews</p>' +
+      GOOGLE_HISTOGRAM.map(function (h) { return bar(h[0], h[1]); }).join('') +
+      '<p class="rev-src">' + googleG(16) + 'Source: Google Business Profile</p>' +
+    '</div>' +
+    '<div class="revs">' + REVIEWS.marquee.map(mrev).join('') + '</div>' +
   '</div></div></section>' +
 
   '<section class="sec-tight" id="menu"><div class="wrap"><div class="sec-head reveal">' +
@@ -1090,10 +1310,27 @@ function wine(img, name, kind) {
 function faq(q, a) {
   return '<details><summary>' + q + '</summary><p>' + a + '</p></details>';
 }
-function mrev(quote) {
-  return '<blockquote class="rev reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-    '<p>&ldquo;' + quote + '&rdquo;</p>' +
-    '<cite>Sample review copy, replace before launch</cite></blockquote>';
+/* Review design C — Marquee: dense list row, avatar + quote + optional thumbnail. */
+function mrev(x) {
+  var face = x.avatar
+    ? '<img class="rev-face" src="' + x.avatar + '" alt="" />'
+    : '<span class="rev-face">' + initial(x.name) + '</span>';
+  return '<blockquote class="rev reveal" style="margin:0">' + face +
+    '<div><b>' + x.name + '</b>' + stars(x.stars) +
+      '<p>' + x.text + '</p></div>' +
+    (x.photo
+      ? '<img class="rev-thumb" src="' + x.photo +
+        '" alt="Guest photo from a review of St. James Winery Branson" />'
+      : '<time>' + x.date + '</time>') +
+  '</blockquote>';
+}
+/* Real rating distribution read off the Google listing; counts sum to GOOGLE_COUNT. */
+function bar(nStars, count) {
+  var total = GOOGLE_HISTOGRAM.reduce(function (a, h) { return a + h[1]; }, 0);
+  var pct = Math.round(count / total * 1000) / 10;
+  return '<div class="bar-row"><span>' + nStars + '</span>' +
+    '<span class="bar"><i style="width:' + pct + '%"></i></span>' +
+    '<span>' + Math.round(pct) + '%</span></div>';
 }
 
 /* ============================================================

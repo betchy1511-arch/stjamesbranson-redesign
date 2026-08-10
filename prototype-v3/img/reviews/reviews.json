@@ -1,0 +1,80 @@
+{
+ "cellar": [
+  {
+   "author": "Nicholas Neil",
+   "stars": 5,
+   "date": "7 months ago",
+   "text": "This wine tasting experience was very nice. The wine expert was super friendly and knowledgeable. The cost is $20 a person for a selection of 7 different wines from their offering. Generous pours. Worth a visit for sure.",
+   "avatar": "img/reviews/av-nicholas-neil.jpg",
+   "photo": "img/reviews/ph-nicholas-neil.jpg"
+  },
+  {
+   "author": "Tammy Reif",
+   "stars": 5,
+   "date": "2 months ago",
+   "text": "We visited St James Winery on our last trip to Table Rock Lake. Honestly, we weren't expecting much because the location is so close to the main drag of Branson and not an actual winery. Boy were we wrong!! Our tasting was the best winery experience we've ever had!! And after our tasting, we had a fantastic lunch! Our server was awesome. Their special Velvet Oak wine is incredible. If you enjoy wine tasting, St James Winery in Branson is a must!!!",
+   "avatar": "img/reviews/av-tammy-reif.jpg",
+   "photo": null
+  },
+  {
+   "author": "Deborah Leyden",
+   "stars": 5,
+   "date": "11 months ago",
+   "text": "The wine tasting was fabulous. Max, the bartender “wine expert” was funny and knowledgeable. We then had their brick oven pizza. We are from the Chicagoland area and know pizza. The pizza was great tasting with a fabulous sauce (tomato basil). We bought 4 wines to take home. We tried this place on a whim after passing by it on our way to the resort, and glad we did. We would recommend St. James Winery to anyone who loves wine and pizza and definitely give it five stars!!!!",
+   "avatar": "img/reviews/av-deborah-leyden.jpg",
+   "photo": "img/reviews/ph-deborah-leyden.jpg"
+  }
+ ],
+ "patio": [
+  {
+   "author": "Tasha Pope",
+   "stars": 5,
+   "date": "4 months ago",
+   "text": "Beautiful courtyard that feels secluded and peaceful. Fun games to play like Cornhole or Bocce ball. The wine is so good! Something for everyone! Their gluten free pizza was delicious!",
+   "avatar": "img/reviews/av-tasha-pope.jpg",
+   "photo": "img/reviews/ph-tasha-pope.jpg"
+  },
+  {
+   "author": "Rachelle Wallace",
+   "stars": 5,
+   "date": "a month ago",
+   "text": "My family and I visited Branson for my sister's birthday. We found this winery I'm so glad we stopped in. We got there a little late but it was the best time ever. They didn't rush us, we were able to do a wine tasting. It was a large group of us but Charlie Joe did an amazing job!!! A huge thank you to Charlie Jo and Shannon for a great experience. We will definitely visit again!!",
+   "avatar": "img/reviews/av-rachelle-wallace.jpg",
+   "photo": null
+  },
+  {
+   "author": "Christian Whitley",
+   "stars": 5,
+   "date": "Edited 10 months ago",
+   "text": "Came here for a wine tasting and pizza lunch and we had a fantastic experience.  Started off with the wine tasting and Max was fantastic.  Very informative and gave us a few challenges to test our palletes a bit, and I even let him choose three of the wines for my tasting.  My wife and I both lean toward sweet wines so he brought the fire and opened us up to a couple we didn't expect.  We thoroughly enjoyed the tasting because of his contributions.  The pizza was delicious as well, but the wine is definitely the highlight (and Max).  Definitely worth a stop on your trip to Branson!",
+   "avatar": "img/reviews/av-christian-whitley.jpg",
+   "photo": "img/reviews/ph-christian-whitley.jpg"
+  }
+ ],
+ "marquee": [
+  {
+   "author": "Courtney Schuller",
+   "stars": 5,
+   "date": "2 months ago",
+   "text": "The wine tasting here was such a fun experience on our weekend trip! Max, the wine tender, is what helped make this such an incredible experience. The front desk gal who checked us out was also so very kind!! Walked in thinking we would just do a quick tasting- left with a few bottles of delicious wine! It truly is delicious, and the incredible staff really did make it WORTH it ❤️ put this stop on your list to see Max!",
+   "avatar": "img/reviews/av-courtney-schuller.jpg",
+   "photo": null
+  },
+  {
+   "author": "Darlene Kemp",
+   "stars": 5,
+   "date": "Edited a month ago",
+   "text": "This winery has some exceptional wines. I prefer the semi dry, but all of their wines were very good. In the tasting room, there are great employees that tell you about the wines and offer suggestions on what to pair with each wine. The shop is very nice with lots of things to choose from. The wine tasting offers many rich and flavorable wines, from very sweet to very dry. Max was our server in the wine tasting, He's great! The restaurant and outside patio are a joy to enjoy. Our waitress was super good. The food was delicious!",
+   "avatar": "img/reviews/av-darlene-kemp.jpg",
+   "photo": "img/reviews/ph-darlene-kemp.jpg"
+  },
+  {
+   "author": "Mark Clark",
+   "stars": 5,
+   "date": "2 months ago",
+   "text": "I haven't had the pleasure of dining in or frequenting this winery but I have ordered a few pizzas from this place and I love it. I've been inside and it immediately turns any bad mood into a warm, cozy blanket as soon as you walk in. Very informative employment to ensure you'll get a taste of the Ozarks like you imagined it would be. Prices aren't as steep as I thought they would be and I would be willing to bet that this winery is one of Branson's hidden gems. Just make sure you tell them that Mark sent you. Drink responsibly folks and make sure you bring the whole family.",
+   "avatar": "img/reviews/av-mark-clark.jpg",
+   "photo": null
+  }
+ ]
+}
