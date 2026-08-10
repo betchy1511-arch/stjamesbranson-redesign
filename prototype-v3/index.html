@@ -156,10 +156,14 @@ button { font: inherit; }
 .v-cellar .stat b { display: block; font-family: 'Playfair Display', serif; font-size: 40px; color: var(--gold-light); font-weight: 400; }
 .v-cellar .stat span { display: block; margin-top: 8px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); }
 
-.v-cellar .sec { padding: 110px 0; }
-.v-cellar .sec-head { max-width: 620px; margin-bottom: 54px; }
-.v-cellar .sec-head h2 { font-size: clamp(32px, 3.6vw, 50px); line-height: 1.12; margin-top: 16px; }
-.v-cellar .sec-head p { color: rgba(255,255,255,.6); font-size: 16px; line-height: 1.75; margin: 18px 0 0; font-weight: 300; }
+.v-cellar .sec { padding: 80px 0; }
+/* Two-column head so the right half is never dead space. */
+.v-cellar .sec-head {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: end;
+  margin-bottom: 50px; padding-bottom: 28px; border-bottom: 1px solid rgba(201,151,58,.2);
+}
+.v-cellar .sec-head h2 { font-size: clamp(30px, 3.3vw, 46px); line-height: 1.12; margin-top: 16px; }
+.v-cellar .sec-head p { color: rgba(255,255,255,.62); font-size: 15.5px; line-height: 1.8; margin: 0 0 5px; font-weight: 300; }
 
 .v-cellar .rail { display: flex; gap: 22px; overflow-x: auto; padding: 4px 34px 26px; scroll-snap-type: x mandatory; }
 .v-cellar .rail::-webkit-scrollbar { height: 3px; }
@@ -204,8 +208,9 @@ button { font: inherit; }
 
 .v-cellar .ps { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; background: #160d0d; }
 .v-cellar .ps img { width: 100%; height: 100%; min-height: 340px; object-fit: cover; }
-.v-cellar .ps-body { padding: 64px 56px; display: flex; flex-direction: column; justify-content: center; }
-.v-cellar .ps-body h2 { font-size: 42px; margin-top: 14px; }
+.v-cellar .ps { grid-template-columns: .92fr 1.08fr; }
+.v-cellar .ps-body { padding: 64px 54px; display: flex; flex-direction: column; justify-content: center; }
+.v-cellar .ps-body h2 { font-size: clamp(28px, 2.7vw, 39px); margin-top: 14px; white-space: nowrap; }
 .v-cellar .ps-body p { color: rgba(255,255,255,.62); line-height: 1.75; margin: 18px 0 30px; font-weight: 300; }
 
 .v-cellar .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -241,7 +246,9 @@ button { font: inherit; }
   .v-cellar .nav-links { display: none; }
   .v-cellar .stats-inner { grid-template-columns: 1fr 1fr; }
   .v-cellar .stat:nth-child(2) { border-right: 0; }
+  .v-cellar .sec-head { grid-template-columns: 1fr; gap: 18px; align-items: start; }
   .v-cellar .split, .v-cellar .edit-grid, .v-cellar .ps, .v-cellar .visit { grid-template-columns: 1fr; gap: 30px; }
+  .v-cellar .ps-body h2 { white-space: normal; }
   .v-cellar .split img { height: 340px; }
   .v-cellar .fig-tall img { height: 380px; }
   .v-cellar .ps-body { padding: 44px 30px; }
@@ -655,7 +662,7 @@ function cellar() {
     '</nav>' +
     '<div class="hero-body">' +
       '<p class="eyebrow rise" style="--d:60ms">Est. 1970 &nbsp;&middot;&nbsp; Branson, Missouri</p>' +
-      '<h1 class="rise" style="--d:150ms">Award-winning wine, <em>poured beside the oven.</em></h1>' +
+      '<h1 class="rise" style="--d:150ms">Award-winning wine, <em>poured beside the oven</em></h1>' +
       '<p class="hero-sub rise" style="--d:250ms">Five decades of Missouri winemaking, a wood-fired kitchen and a shaded patio, all on State Highway 165.</p>' +
       '<div class="hero-actions rise" style="--d:340ms">' +
         '<a class="btn-gold" href="#wine">Explore the wine</a>' +
@@ -672,9 +679,9 @@ function cellar() {
   '</div></div></section>' +
 
   '<section class="sec" id="wine"><div class="wrap"><div class="sec-head reveal">' +
-    '<p class="eyebrow">The Pour List</p>' +
-    '<h2>Sweet, sparkling and dry, all made in Missouri.</h2>' +
-    '<p>Taste your way through the range at the bar, then take a bottle or a four pack home from the shop.</p>' +
+    '<div><p class="eyebrow">The Pour List</p>' +
+    '<h2>Sweet, sparkling and dry, all made in Missouri</h2></div>' +
+    '<p>Taste your way through the range at the bar, then take a bottle or a four pack home from the shop. Every label on this list is poured by the glass.</p>' +
   '</div></div>' +
   '<div class="rail">' +
     wineCard('img/abh01998.jpg', 'Raspberry', 'Sweet Wine') +
@@ -688,7 +695,7 @@ function cellar() {
   '<section class="sec" id="story" style="padding-top:20px"><div class="wrap"><div class="split">' +
     '<div class="reveal">' +
       '<p class="eyebrow">The Tasting Room</p>' +
-      '<h2 style="font-size:clamp(30px,3.6vw,48px);line-height:1.12;margin-top:16px">Start at the bar. Decide nothing in advance.</h2>' +
+      '<h2 style="font-size:clamp(30px,3.6vw,48px);line-height:1.12;margin-top:16px">Start at the bar, decide nothing in advance</h2>' +
       '<p style="color:rgba(255,255,255,.62);line-height:1.8;margin:20px 0 0;font-weight:300">A tasting flight is the fastest way through the range, and the staff will happily point you from the sweetest fruit wines to the drier reds. Racks of every label line the room, so whatever wins is already in reach.</p>' +
       '<ul class="mini">' +
         '<li>Flights at the bar, no reservation needed</li>' +
@@ -702,21 +709,22 @@ function cellar() {
   '</div></div></section>' +
 
   '<section class="sec" id="menu"><div class="wrap"><div class="sec-head reveal">' +
-    '<p class="eyebrow">The Kitchen</p>' +
-    '<h2>Brick oven pizza, boards and something sweet.</h2>' +
+    '<div><p class="eyebrow">The Kitchen</p>' +
+    '<h2>Brick oven pizza, boards and something sweet</h2></div>' +
+    '<p>The oven runs alongside charcuterie, salads and dessert, so a table can share one thing or order five. No reservation needed for the dining room or the patio.</p>' +
   '</div><div class="edit-grid">' +
     '<div class="fig fig-tall reveal">' +
       '<img src="img/st-james-24.jpg" alt="Two brick oven pizzas on a dark surface surrounded by ferns and grapes" />' +
-      '<div class="fig-cap"><h3>Brick Oven Pizza</h3><p>Hand stretched, fired to order.</p></div>' +
+      '<div class="fig-cap"><h3>Brick Oven Pizza</h3><p>Hand stretched, fired to order</p></div>' +
     '</div>' +
     '<div class="edit-col">' +
       '<div class="fig fig-short reveal">' +
         '<img src="img/abh07091.jpg" alt="Charcuterie board with cured meats, cheeses and preserves on a dark background" />' +
-        '<div class="fig-cap"><h3>Charcuterie</h3><p>Built for sharing across the table.</p></div>' +
+        '<div class="fig-cap"><h3>Charcuterie</h3><p>Built for sharing across the table</p></div>' +
       '</div>' +
       '<div class="fig fig-short reveal">' +
         '<img src="img/abh02550.jpg" alt="Warm chocolate dessert with vanilla ice cream beside a glass of rose wine" />' +
-        '<div class="fig-cap"><h3>Dessert</h3><p>Best with a sweet red.</p></div>' +
+        '<div class="fig-cap"><h3>Dessert</h3><p>Best with a sweet red</p></div>' +
       '</div>' +
     '</div>' +
   '</div></div></section>' +
@@ -725,7 +733,7 @@ function cellar() {
     '<img src="img/abh02382.jpg" alt="Overhead view of friends sharing pizza and wine at an outdoor patio table" />' +
     '<div class="band-body">' +
       '<p class="eyebrow reveal">The Patio</p>' +
-      '<h2 class="reveal">Long tables, longer afternoons.</h2>' +
+      '<h2 class="reveal">Long tables, longer afternoons</h2>' +
       '<p class="reveal">Shaded seating, full bar service and a kitchen that keeps going. Bring the group, no reservation needed.</p>' +
       '<a class="btn-gold reveal" href="#visit">Plan your visit</a>' +
     '</div>' +
@@ -735,7 +743,7 @@ function cellar() {
     '<img src="img/paint-and-sip.png" alt="A painted pumpkin canvas from a Paint n Sip session beside a bottle of wine" />' +
     '<div class="ps-body reveal">' +
       '<p class="eyebrow">Paint n Sip</p>' +
-      '<h2>An easel, a glass, two hours.</h2>' +
+      '<h2>An easel, a glass, two hours</h2>' +
       '<p>Guided painting sessions run on a rotating calendar. No experience required, and every seat comes with a drink from the bar.</p>' +
       '<div><a class="btn-gold" href="#paint">See the calendar</a></div>' +
     '</div>' +
@@ -744,7 +752,7 @@ function cellar() {
   '<section class="sec" id="visit"><div class="wrap"><div class="visit">' +
     '<div class="reveal">' +
       '<p class="eyebrow">Visit</p>' +
-      '<h2 style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">Find us on Highway 165.</h2>' +
+      '<h2 style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">Find us on Highway 165</h2>' +
       hoursList('hours', false) +
       '<p class="addr">' + ADDRESS + '<br /><a href="' + PHONE_TEL + '">' + PHONE_DISPLAY + '</a></p>' +
       '<p class="note">Seasonal hours vary. Confirm with the winery before you travel.</p>' +
@@ -783,7 +791,7 @@ function patio() {
   '<section class="hero"><div class="wrap"><div class="hero-grid">' +
     '<div class="hero-copy">' +
       '<p class="eyebrow rise" style="--d:60ms">Open daily on State Highway 165</p>' +
-      '<h1 class="rise" style="--d:150ms">Come for the wine. <em>Stay for the patio.</em></h1>' +
+      '<h1 class="rise" style="--d:150ms">Come for the wine, <em>stay for the patio</em></h1>' +
       '<p class="rise" style="--d:250ms">Wine tastings, brick oven pizza and shaded tables, from a family winery that has been making Missouri wine since 1970.</p>' +
       '<div class="hero-actions rise" style="--d:340ms">' +
         '<a class="btn-wine" href="#menu">See the menu</a>' +
@@ -802,7 +810,7 @@ function patio() {
     '<img class="reveal" src="img/abh01915.jpg" alt="Two guests raising glasses of white wine beside a St. James Winery peach wine bottle and fresh peaches" />' +
     '<div class="reveal">' +
       '<p class="eyebrow">Since 1970</p>' +
-      '<h2>Fifty years of Missouri winemaking, poured in Branson.</h2>' +
+      '<h2>Fifty years of Missouri winemaking, poured in Branson</h2>' +
       '<p>St. James Winery has been making wine in Missouri since 1970. The Branson tasting room brings the full range to the Ozarks, alongside a scratch kitchen and a patio built for lingering.</p>' +
       '<p>Walk in for a tasting flight, stay for a pizza, and leave with a bottle from the shop. No reservation, no dress code, no rush.</p>' +
       '<div class="hero-actions" style="margin-top:28px"><a class="btn-line" href="#visit">Plan a visit</a></div>' +
@@ -811,7 +819,7 @@ function patio() {
 
   '<section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head reveal">' +
     '<p class="eyebrow">What to do here</p>' +
-    '<h2>Three good reasons to pull in.</h2>' +
+    '<h2>Three good reasons to pull in</h2>' +
   '</div><div class="cards">' +
     patioCard('abh02072.jpg', 'Hands raising glasses of white wine above a charcuterie board', 'Wine Tastings', 'Work through the range with someone who knows it, from the sweetest fruit wines to the drier reds.', 'Taste the range') +
     patioCard('abh02208.jpg', 'Friends toasting over a large brick oven pizza and a fresh salad', 'Brick Oven Pizza', 'Hand stretched dough fired to order, with salads, charcuterie boards and desserts alongside.', 'View the menu') +
@@ -820,7 +828,7 @@ function patio() {
 
   '<section class="sec" id="menu" style="padding-top:0"><div class="wrap"><div class="sec-head reveal">' +
     '<p class="eyebrow">From the kitchen</p>' +
-    '<h2>Made to share, best outdoors.</h2>' +
+    '<h2>Made to share, best outdoors</h2>' +
   '</div><div class="mason">' +
     '<figure class="m-a reveal"><img src="img/abh02333.jpg" alt="Caprese brick oven pizza with fresh tomatoes and basil" /><figcaption>Brick oven pizza</figcaption></figure>' +
     '<figure class="reveal"><img src="img/abh02103.jpg" alt="A large charcuterie board with meats, cheeses, crackers and fruit" /><figcaption>Charcuterie boards</figcaption></figure>' +
@@ -832,7 +840,7 @@ function patio() {
     '<img class="reveal" src="img/dscf0059.jpg" alt="A guest holding a red sparkling cocktail beside a row of colorful mixed drinks" />' +
     '<div class="drinks-body reveal">' +
       '<p class="eyebrow">Beyond the bottle</p>' +
-      '<h2>Not everyone wants wine.</h2>' +
+      '<h2>Not everyone wants wine</h2>' +
       '<p>The full bar covers signature cocktails, craft beer and canned sparkling fruit wines, so nobody in the group is stuck with a compromise.</p>' +
       '<div class="chips">' +
         '<span class="chip">Signature cocktails</span>' +
@@ -847,14 +855,14 @@ function patio() {
     '<img src="img/abh07026.jpg" alt="Gift shop shelves stocked with St. James Winery bottles and gift items" />' +
     '<div class="gift-body">' +
       '<p class="eyebrow reveal">The Gift Shop</p>' +
-      '<h2 class="reveal">Take the afternoon home with you.</h2>' +
+      '<h2 class="reveal">Take the afternoon home with you</h2>' +
       '<p class="reveal">Bottles by the case, glassware, gift sets and Ozarks souvenirs, all under the same roof as the tasting bar.</p>' +
       '<a class="btn-cream reveal" href="#gifts">Browse the shop</a>' +
     '</div>' +
   '</div></div></section>' +
 
   '<section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head reveal">' +
-    '<p class="eyebrow">Guest notes</p><h2>What people say after they visit.</h2>' +
+    '<p class="eyebrow">Guest notes</p><h2>What people say after they visit</h2>' +
   '</div><div class="revs">' +
     patioReview('The patio is the whole point. We came for one tasting and stayed three hours.', 'Sample review copy, replace before launch') +
     patioReview('Pizza out of the brick oven was better than it had any right to be next to a wine flight.', 'Sample review copy, replace before launch') +
@@ -916,7 +924,7 @@ function marquee() {
     '<div class="hero-media"><img class="kb" src="img/abh02382.jpg" alt="Overhead view of friends sharing pizza and wine at an outdoor patio table" /></div>' +
     '<div class="hero-panel">' +
       '<p class="kicker rise" style="--d:60ms">Winery &nbsp;&middot;&nbsp; Restaurant &nbsp;&middot;&nbsp; Gift Shop</p>' +
-      '<h1 class="rise" style="--d:140ms">Wine, wood fired pizza and Paint n Sip, all on Highway 165.</h1>' +
+      '<h1 class="rise" style="--d:140ms">Wine, wood fired pizza and Paint n Sip, all on Highway 165</h1>' +
       '<p class="rise" style="--d:230ms">Walk in for a tasting, sit down for lunch, leave with a bottle. Here is everything you need to plan it.</p>' +
       '<div class="hero-btns rise" style="--d:320ms">' +
         '<a class="hb hb-solid" href="#menu">See the menu<small>Pizza, boards, salads</small></a>' +
