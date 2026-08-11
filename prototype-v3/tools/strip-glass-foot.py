@@ -30,7 +30,12 @@ IMG = os.path.join(HERE, '..', 'img')
 ORIG = os.path.join(IMG, '_orig')
 
 EXTRA = 80          # must match make-glass-assets.py
-FADE = 26           # px of soft fade so the stem does not end on a hard edge
+
+# add_foot() starts its drawn taper at h0-6, so the real photographed stem is
+# solid right up to there. FADE was 26 on the first pass, which dissolved 26
+# rows of REAL stem and left the glass visibly ending in mid-air above the
+# shelf line. Keep it short: just enough to avoid a guillotine edge.
+FADE = 4
 
 os.makedirs(ORIG, exist_ok=True)
 
@@ -69,12 +74,30 @@ def strip(name):
     out.save(src, optimize=True)
 
     alpha = np.asarray(out)[:, :, 3]
-    rows = np.nonzero(alpha.max(axis=1) > 8)[0]
-    print('%-18s %dx%d  canvas kept, opaque now ends y=%d (was %d)'
-          % (name, W, H, rows.max(), H - 1))
+    rowmax = alpha.max(axis=1)
+    solid = int(np.nonzero(rowmax > 250)[0].max())   # last fully-opaque row
+    print('%-18s %dx%d  solid stem now ends y=%d, faint tail to y=%d'
+          % (name, W, H, solid, int(np.nonzero(rowmax > 8)[0].max())))
+    return H, solid
 
 
-for n in ('glass-empty.png', 'glass-full.png'):
-    strip(n)
+heights = [strip(n) for n in ('glass-empty.png', 'glass-full.png')]
 
-print('done - canvas heights unchanged, so the CSS mask-position values still hold')
+# ---- the CSS number, derived rather than assumed --------------------------
+# The transparent tail below the stem is real layout space, and .pour-row is
+# flex-end aligned, so the glass hangs that far off the shelf line. The first
+# pass hard-coded 80px for this and under-corrected, because the stripped
+# image's solid edge is nowhere near h0-80. Measure it instead.
+H, solid = heights[0]
+tail_frac = (H - solid) / H
+IMG_W, IMG_H = 620, 1154                 # intrinsic size of the cut-out
+CSS_W = 200                              # .v-patio .pi-lg width, in --u units
+rendered_h = CSS_W * (IMG_H / IMG_W)     # height in --u units
+pull = rendered_h * tail_frac
+
+print()
+print('tail = %d px of %d  (%.3f%% of height)' % (H - solid, H, tail_frac * 100))
+print('CSS  -> .v-patio .rg.pi-lg      { margin-bottom: calc(-%.2fpx * var(--u)); }' % pull)
+print('CSS  -> .v-patio .pi-lg .rg-shadow { bottom: calc(%.2fpx * var(--u) + .2%%); }' % pull)
+print()
+print('canvas heights unchanged, so the sjFillA mask-position values still hold')

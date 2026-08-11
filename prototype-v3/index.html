@@ -352,7 +352,26 @@ button { font: inherit; }
    line. `nowrap` is deliberately NOT used: at 11px the string is far narrower
    than the column at every breakpoint, and nowrap would overflow rather than
    wrap if the copy is ever lengthened. */
-.v-patio .hero-copy .eyebrow { font-size: 11px; line-height: 1.5; color: var(--wine); margin: 0; max-width: none; }
+.v-patio .hero-copy .eyebrow {
+  /* Measured: this string runs ~27.9px wide per 1px of font-size, against a
+     506px column at 1440. So 18px (502px) technically fits and the original
+     two-line wrap was the 40ch clamp, not the size - but 4px of slack is not
+     shippable once fonts load differently or the window is between
+     breakpoints. Scales with the viewport and tops out at 16px, which leaves
+     ~60px of room. The floor is 10px, not 11: at 11px on a 390px phone the
+     string measured 307px inside a 307px box, ie. zero slack, one font-metric
+     difference away from wrapping again. */
+  font-size: clamp(10px, 1.15vw, 16px);
+  line-height: 1.5; color: var(--wine); margin: 0; max-width: none;
+}
+/* Below the clamp floor the type stops shrinking but the column does not, so
+   at 360px it wrapped again. The tracking is where the width actually is:
+   .24em over 34 characters is ~82px of the string. Easing it on small screens
+   buys ~41px, far more than another point of font-size would, and costs less
+   visually. */
+@media (max-width: 640px) {
+  .v-patio .hero-copy .eyebrow { letter-spacing: .12em; }
+}
 .v-patio .hero-actions { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
 .v-patio .btn-wine {
   background: var(--wine); color: #fff; padding: 15px 30px; border-radius: 999px;
@@ -420,17 +439,19 @@ button { font: inherit; }
    glass-empty/full.png because the sjFillA mask percentages are measured
    against that padded height (see tools/strip-glass-foot.py). The row is
    flex-end aligned, so that padding floated the glass off the shelf line and
-   left its shadow stranded below it. 80/1154 of the rendered height is
-   25.81px * --u, so the glass is pulled down by exactly that to stand on the
-   line, and the shadow is pushed back up by the same amount to meet its base.
+   left its shadow stranded below it. The pull is NOT the 80px of padding -
+   the stripped image's solid edge sits higher than that, so assuming 80
+   under-corrected and left a visible gap. tools/strip-glass-foot.py measures
+   the real tail (92px of 1154, 7.972%) and prints this number; re-run it if
+   the asset is ever regenerated rather than editing the value by hand.
    Percentages cannot be used for the pull: a percentage margin resolves
    against the container's WIDTH, not its height. The shadow is also narrowed,
    because this glass has no foot to cast the wide pool the other two do. */
 /* NB `pi-lg` is ON the .rg element (class="rg pi-lg"), so this must be a
    compound selector - `.pi-lg .rg` is a descendant selector and matches
    nothing, which reads exactly like "the margin had no effect". */
-.v-patio .rg.pi-lg { margin-bottom: calc(-25.81px * var(--u)); }
-.v-patio .pi-lg .rg-shadow { bottom: calc(25.81px * var(--u) + .2%); width: 30%; }
+.v-patio .rg.pi-lg { margin-bottom: calc(-29.68px * var(--u)); }
+.v-patio .pi-lg .rg-shadow { bottom: calc(29.68px * var(--u) + .2%); width: 30%; }
 .v-patio .rg-stream {
   position: absolute; left: 50%; bottom: 93.5%; width: calc(10px * var(--u));
   margin-left: calc(-5px * var(--u)); height: calc(50px * var(--u));
