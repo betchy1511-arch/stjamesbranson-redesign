@@ -366,6 +366,57 @@ button { font: inherit; }
 .v-patio .hero-media { position: relative; }
 .v-patio .hero-frame { border-radius: 260px 260px 8px 8px; overflow: hidden; }
 .v-patio .hero-frame[data-morph] { border-radius: 0; clip-path: url(#sjwArch); }
+
+/* ---- THE POUR --------------------------------------------------------------
+   One scene inside the arch: a real St. James bottle tips in and pours, the
+   drawn glass fills. No steps, no captions. */
+.v-patio .pour {
+  position: relative; height: 640px;
+  background: linear-gradient(165deg, #f6e4c4 0%, #e9c98f 46%, #d9ae63 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.v-patio .pour-glass { width: 232px; height: auto; display: block; margin-bottom: 84px; }
+/* Anchored by the CAP (transform-origin at the top of the image) so the mouth
+   stays over the glass rim while the body swings up and out of frame. */
+/* Origin sits on the CAP. To pour, the body must swing UP and to the RIGHT,
+   which is about -128deg; -48deg sends the body down-right instead. */
+/* Sized and placed so the CAP lands exactly on the top of the pour stream
+   (measured: stream top sits at x283 y208 inside a 566x640 frame) and the body
+   still fits inside the frame at the pour angle. */
+.v-patio .pour-bottle {
+  position: absolute; left: 42%; top: 31%; width: 84px; z-index: 3;
+  transform-origin: 50% 4%;
+  filter: drop-shadow(0 16px 24px rgba(60,30,10,.32));
+  animation: sjTip 9s var(--ease) infinite;
+}
+@keyframes sjTip {
+  0%, 5%    { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
+  17%, 52%  { transform: translate(0,0) rotate(-115deg); opacity: 1; }
+  64%, 100% { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
+}
+.v-patio .pour-fill { animation: sjFill 9s var(--ease) infinite; }
+@keyframes sjFill {
+  0%, 12%   { transform: translateY(128px); }
+  50%, 82%  { transform: translateY(26px); }
+  93%, 100% { transform: translateY(128px); }
+}
+.v-patio .pour-stream { transform-origin: 100px 6px; animation: sjStream 9s linear infinite; }
+@keyframes sjStream {
+  0%, 15%   { opacity: 0; transform: scaleY(0); }
+  19%, 48%  { opacity: 1; transform: scaleY(1); }
+  53%, 100% { opacity: 0; transform: scaleY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-patio .pour-bottle, .v-patio .pour-fill, .v-patio .pour-stream { animation: none !important; }
+  .v-patio .pour-bottle { transform: rotate(-115deg); opacity: 1; }
+  .v-patio .pour-fill { transform: translateY(26px); }
+  .v-patio .pour-stream { opacity: 0; }
+}
+@media (max-width: 900px) {
+  .v-patio .pour { height: 420px; }
+  .v-patio .pour-glass { width: 168px; margin-bottom: 52px; }
+  .v-patio .pour-bottle { width: 58px; left: 41%; top: 30%; }
+}
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
   position: absolute; left: -34px; bottom: 54px; background: var(--cream);
@@ -1239,6 +1290,34 @@ function morphAnim(shapes, dur, offset) {
     ' keyTimes="0;0.25;0.5;0.75;1"' +
     ' keySplines="' + splines.join(';') + '"' +
     ' values="' + loop.join(';') + '" />';
+}
+
+/* One continuous pour: real bottle photo, drawn glass, wine level rising. */
+function pourScene() {
+  return '<div class="pour">' +
+    '<svg class="pour-glass" viewBox="0 0 200 300" role="img"' +
+    ' aria-label="A wine glass filling as the bottle pours">' +
+      '<defs>' +
+        '<linearGradient id="sjPourWine" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0" stop-color="#b52f38" /><stop offset="1" stop-color="#5d1216" />' +
+        '</linearGradient>' +
+        '<clipPath id="sjPourBowl">' +
+          '<path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z" />' +
+        '</clipPath>' +
+      '</defs>' +
+      '<path class="pour-stream" d="M97,0 L103,0 L101.6,46 L98.4,46 Z" fill="url(#sjPourWine)" />' +
+      '<g clip-path="url(#sjPourBowl)"><g class="pour-fill">' +
+        '<rect x="50" y="40" width="100" height="132" fill="url(#sjPourWine)" />' +
+        '<ellipse cx="100" cy="41" rx="46" ry="5" fill="#c93d45" />' +
+      '</g></g>' +
+      '<path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z"' +
+        ' fill="none" stroke="#3d2410" stroke-width="3" />' +
+      '<rect x="97" y="160" width="6" height="76" fill="#3d2410" />' +
+      '<ellipse cx="100" cy="240" rx="40" ry="7" fill="none" stroke="#3d2410" stroke-width="3" />' +
+      '<path d="M62,52 C64,96 74,124 88,140" fill="none" stroke="rgba(255,255,255,.5)"' +
+        ' stroke-width="2" stroke-linecap="round" />' +
+    '</svg>' +
+  '</div>';
 }
 
 function patioMorphDefs() {
