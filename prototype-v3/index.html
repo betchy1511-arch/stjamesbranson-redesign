@@ -368,54 +368,94 @@ button { font: inherit; }
 .v-patio .hero-frame[data-morph] { border-radius: 0; clip-path: url(#sjwArch); }
 
 /* ---- THE POUR --------------------------------------------------------------
-   One scene inside the arch: a real St. James bottle tips in and pours, the
-   drawn glass fills. No steps, no captions. */
+   A round being poured inside the arch: the real St. James glass, cut out of
+   the winery photo, the same glass beside it, and the drawn glass. Each takes
+   its own stream and fills along a curved wine surface. No steps, no captions.
+   Assets are rebuilt by tools/make-glass-assets.py. */
 .v-patio .pour {
-  position: relative; height: 640px;
+  position: relative; height: 640px; --u: 1.08;
   background: linear-gradient(165deg, #f6e4c4 0%, #e9c98f 46%, #d9ae63 100%);
-  display: flex; align-items: flex-end; justify-content: center;
 }
-.v-patio .pour-glass { width: 232px; height: auto; display: block; margin-bottom: 84px; }
-/* Anchored by the CAP (transform-origin at the top of the image) so the mouth
-   stays over the glass rim while the body swings up and out of frame. */
-/* Origin sits on the CAP. To pour, the body must swing UP and to the RIGHT,
-   which is about -128deg; -48deg sends the body down-right instead. */
-/* Sized and placed so the CAP lands exactly on the top of the pour stream
-   (measured: stream top sits at x283 y208 inside a 566x640 frame) and the body
-   still fits inside the frame at the pour angle. */
-.v-patio .pour-bottle {
-  position: absolute; left: 42%; top: 31%; width: 84px; z-index: 3;
-  transform-origin: 50% 4%;
-  filter: drop-shadow(0 16px 24px rgba(60,30,10,.32));
-  animation: sjTip 9s var(--ease) infinite;
+.v-patio .pour-row {
+  position: absolute; left: 0; right: 0; bottom: calc(48px * var(--u));
+  display: flex; align-items: flex-end; justify-content: center; gap: calc(14px * var(--u));
 }
-@keyframes sjTip {
-  0%, 5%    { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
-  17%, 52%  { transform: translate(0,0) rotate(-115deg); opacity: 1; }
-  64%, 100% { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
+.v-patio .pour-shelf {
+  position: absolute; left: 9%; right: 9%; bottom: calc(46px * var(--u)); height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(61,36,16,.30) 20%, rgba(61,36,16,.30) 80%, transparent);
 }
-.v-patio .pour-fill { animation: sjFill 9s var(--ease) infinite; }
+.v-patio .rg { position: relative; flex: 0 0 auto; }
+.v-patio .rg-stack { display: block; position: relative; }
+/* These two out-specify `.v-patio .hero-media img`, which otherwise sizes them
+   to the full 566x640 hero frame. Measure the rendered box before nudging. */
+.v-patio .pour .rg-img { display: block; width: 100%; height: auto; object-fit: fill; }
+/* wine-mask.png is twice the image height: transparent above a curved surface,
+   opaque below it. Sliding it up raises the wine along a real elliptical
+   surface rather than a flat line. CSS masks are blocked over file://, so the
+   fill only renders when the page is served over http. */
+.v-patio .pour .rg-full {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
+  -webkit-mask-image: url(img/wine-mask.png); mask-image: url(img/wine-mask.png);
+  -webkit-mask-size: 100% 200%; mask-size: 100% 200%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+.v-patio .rg-shadow {
+  position: absolute; left: 48.5%; bottom: .6%; width: 58%; height: 5%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(74,44,20,.30), rgba(74,44,20,0) 70%);
+}
+.v-patio .rg-stream {
+  position: absolute; left: 50%; bottom: 93.5%; width: calc(11px * var(--u));
+  margin-left: calc(-5.5px * var(--u)); height: calc(150px * var(--u));
+  transform-origin: 50% 0; filter: blur(.4px);
+  clip-path: polygon(0 0, 100% 0, 68% 100%, 32% 100%);
+  background:
+    linear-gradient(to right, rgba(255,196,196,.42), rgba(255,196,196,0) 55%),
+    linear-gradient(to bottom, rgba(165,44,51,0), rgba(165,44,51,.55) 14%, #a52c33 46%, #831c22);
+}
+.v-patio .pi-sm .rg-stream {
+  width: calc(8px * var(--u)); margin-left: calc(-4px * var(--u)); height: calc(118px * var(--u));
+}
+.v-patio .tg { flex: 0 0 auto; display: block; overflow: visible; }
+.v-patio .pi-lg   { width: calc(206px * var(--u)); }
+.v-patio .pi-sm   { width: calc(112px * var(--u)); }
+.v-patio .pi-toon { width: calc(104px * var(--u)); }
+
+/* One 9s loop. Mask levels: 20.40% = empty, 94.28% = filled to the brim. */
 @keyframes sjFill {
-  0%, 12%   { transform: translateY(128px); }
-  50%, 82%  { transform: translateY(26px); }
-  93%, 100% { transform: translateY(128px); }
+  0%        { -webkit-mask-position: 0 20.4%;  mask-position: 0 20.4%;  opacity: 0; }
+  6%        { -webkit-mask-position: 0 20.4%;  mask-position: 0 20.4%;  opacity: 1; }
+  46%, 86%  { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 1; }
+  96%, 100% { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 0; }
 }
-.v-patio .pour-stream { transform-origin: 100px 6px; animation: sjStream 9s linear infinite; }
 @keyframes sjStream {
-  0%, 15%   { opacity: 0; transform: scaleY(0); }
-  19%, 48%  { opacity: 1; transform: scaleY(1); }
-  53%, 100% { opacity: 0; transform: scaleY(0); }
+  0%, 7%    { opacity: 0; transform: scaleY(0); }
+  12%, 40%  { opacity: 1; transform: scaleY(1); }
+  47%, 100% { opacity: 0; transform: scaleY(0); }
 }
+@keyframes sjToonFill {
+  0%, 6%    { transform: translateY(128px); }
+  46%, 86%  { transform: translateY(26px); }
+  96%, 100% { transform: translateY(128px); }
+}
+.v-patio .rg-full     { animation: sjFill 9s var(--ease) infinite; }
+.v-patio .rg-stream   { animation: sjStream 9s linear infinite; }
+.v-patio .toon-fill   { animation: sjToonFill 9s var(--ease) infinite; }
+.v-patio .toon-stream { transform-origin: 100px 40px; animation: sjStream 9s linear infinite; }
+.v-patio .d1 .rg-full, .v-patio .d1 .rg-stream,
+.v-patio .d1 .toon-fill, .v-patio .d1 .toon-stream { animation-delay: .5s; }
+.v-patio .d2 .rg-full, .v-patio .d2 .rg-stream,
+.v-patio .d2 .toon-fill, .v-patio .d2 .toon-stream { animation-delay: 1s; }
+
 @media (prefers-reduced-motion: reduce) {
-  .v-patio .pour-bottle, .v-patio .pour-fill, .v-patio .pour-stream { animation: none !important; }
-  .v-patio .pour-bottle { transform: rotate(-115deg); opacity: 1; }
-  .v-patio .pour-fill { transform: translateY(26px); }
-  .v-patio .pour-stream { opacity: 0; }
+  .v-patio .rg-full, .v-patio .rg-stream,
+  .v-patio .toon-fill, .v-patio .toon-stream { animation: none !important; }
+  .v-patio .rg-full { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 1; }
+  .v-patio .rg-stream, .v-patio .toon-stream { opacity: 0; }
+  .v-patio .toon-fill { transform: translateY(26px); }
 }
 @media (max-width: 900px) {
-  .v-patio .pour { height: 420px; }
-  .v-patio .pour-glass { width: 168px; margin-bottom: 52px; }
-  .v-patio .pour-bottle { width: 58px; left: 41%; top: 30%; }
+  .v-patio .pour { height: 420px; --u: .62; }
 }
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
@@ -1293,30 +1333,53 @@ function morphAnim(shapes, dur, offset) {
 }
 
 /* One continuous pour: real bottle photo, drawn glass, wine level rising. */
-function pourScene() {
-  return '<div class="pour">' +
-    '<svg class="pour-glass" viewBox="0 0 200 300" role="img"' +
-    ' aria-label="A wine glass filling as the bottle pours">' +
+var SJ_TOON = 0;
+
+/* The photographed St. James glass. Two stacked copies of the same cut-out:
+   the drained one underneath, the wine one on top revealed by a moving mask. */
+function pourGlass(cls) {
+  return '<div class="rg ' + cls + '">' +
+    '<span class="rg-shadow"></span>' +
+    '<span class="rg-stream"></span>' +
+    '<span class="rg-stack">' +
+      '<img class="rg-img" src="img/glass-empty.png" alt="A St. James Winery wine glass" />' +
+      '<img class="rg-full" src="img/glass-full.png" alt="" />' +
+    '</span>' +
+  '</div>';
+}
+
+/* The drawn glass. Its gradient and clip ids are numbered so more than one can
+   sit on the page without the first one capturing the others. */
+function pourToon(cls) {
+  var i = ++SJ_TOON, g = 'sjToonWine' + i, c = 'sjToonBowl' + i;
+  var bowl = 'M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z';
+  return '<svg class="tg ' + cls + '" viewBox="44 -164 112 420" role="img"' +
+    ' aria-label="A wine glass filling as the wine pours">' +
       '<defs>' +
-        '<linearGradient id="sjPourWine" x1="0" y1="0" x2="0" y2="1">' +
+        '<linearGradient id="' + g + '" x1="0" y1="0" x2="0" y2="1">' +
           '<stop offset="0" stop-color="#b52f38" /><stop offset="1" stop-color="#5d1216" />' +
         '</linearGradient>' +
-        '<clipPath id="sjPourBowl">' +
-          '<path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z" />' +
-        '</clipPath>' +
+        '<clipPath id="' + c + '"><path d="' + bowl + '" /></clipPath>' +
       '</defs>' +
-      '<path class="pour-stream" d="M97,0 L103,0 L101.6,46 L98.4,46 Z" fill="url(#sjPourWine)" />' +
-      '<g clip-path="url(#sjPourBowl)"><g class="pour-fill">' +
-        '<rect x="50" y="40" width="100" height="132" fill="url(#sjPourWine)" />' +
+      '<path class="toon-stream" d="M98.6,-164 L101.4,-164 L102,46 L98,46 Z" fill="url(#' + g + ')" />' +
+      '<g clip-path="url(#' + c + ')"><g class="toon-fill">' +
+        '<rect x="50" y="40" width="100" height="132" fill="url(#' + g + ')" />' +
         '<ellipse cx="100" cy="41" rx="46" ry="5" fill="#c93d45" />' +
       '</g></g>' +
-      '<path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z"' +
-        ' fill="none" stroke="#3d2410" stroke-width="3" />' +
-      '<rect x="97" y="160" width="6" height="76" fill="#3d2410" />' +
-      '<ellipse cx="100" cy="240" rx="40" ry="7" fill="none" stroke="#3d2410" stroke-width="3" />' +
+      '<path d="' + bowl + '" fill="none" stroke="#3d2410" stroke-width="4" />' +
+      '<rect x="96.5" y="160" width="7" height="76" fill="#3d2410" />' +
+      '<ellipse cx="100" cy="240" rx="40" ry="7" fill="none" stroke="#3d2410" stroke-width="4" />' +
       '<path d="M62,52 C64,96 74,124 88,140" fill="none" stroke="rgba(255,255,255,.5)"' +
         ' stroke-width="2" stroke-linecap="round" />' +
-    '</svg>' +
+  '</svg>';
+}
+
+function pourScene() {
+  return '<div class="pour">' +
+    '<span class="pour-shelf"></span>' +
+    '<div class="pour-row">' +
+      pourGlass('pi-sm d1') + pourGlass('pi-lg') + pourToon('pi-toon d2') +
+    '</div>' +
   '</div>';
 }
 
