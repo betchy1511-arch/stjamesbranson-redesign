@@ -529,13 +529,8 @@ button { font: inherit; }
   display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
   transition: background 170ms ease-out, transform 170ms var(--ease);
 }
-.v-marquee .hb-solid { background: var(--gold); border-color: var(--gold); color: #2a1706; }
-/* The gold marks the primary action at rest, but it follows the pointer: as soon
-   as the group is hovered the primary hands the gold over to whichever button
-   you are actually pointing at, so it never looks stuck on one button. */
-.v-marquee .hero-btns:hover .hb-solid {
-  background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.26); color: #fff;
-}
+/* No button carries the gold at rest. All four are identical until pointed at,
+   and the gold appears only under the pointer. */
 .v-marquee .hero-btns .hb:hover {
   background: var(--gold); border-color: var(--gold); color: #2a1706;
   transform: translateY(-3px);
