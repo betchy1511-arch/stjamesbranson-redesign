@@ -324,8 +324,23 @@ button { font: inherit; }
 }
 .v-patio .nav-cta:hover { background: var(--wine-mid); transform: translateY(-1px); }
 
-.v-patio .hero { padding: 40px 0 0; }
-.v-patio .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; }
+.v-patio .hero { padding: 40px 0 0; position: relative; overflow: hidden; }
+.v-patio .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: center; position: relative; z-index: 2; }
+
+/* MORPHING — the hero mask and the blob behind the type are real SVG path
+   interpolations, not fades. Shapes share an identical command sequence so the
+   browser can tween between them. */
+.v-patio .morph-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.v-patio .hero-blob {
+  position: absolute; z-index: 1; pointer-events: none;
+  left: -13%; top: -18%; width: 62%; max-width: 640px; aspect-ratio: 1;
+  opacity: .5;
+}
+.v-patio .hero-blob svg { width: 100%; height: 100%; display: block; }
+.v-patio .blob-2 {
+  left: auto; right: -16%; top: auto; bottom: -34%; width: 42%;
+  opacity: .34;
+}
 .v-patio .hero-copy { padding-right: 60px; }
 .v-patio .hero-copy h1 { font-size: clamp(42px, 5.2vw, 74px); line-height: 1.05; margin: 20px 0 0; }
 .v-patio .hero-copy h1 em { font-style: italic; color: var(--wine); }
@@ -346,9 +361,11 @@ button { font: inherit; }
 .v-patio .btn-line:hover { background: #45292a; border-color: #45292a; transform: translateY(-2px); }
 .v-patio .btn-wine:active, .v-patio .btn-line:active { transform: translateY(0); }
 
-/* Frame carries the arch clip so the badge can overhang without being cut off. */
+/* Frame carries the arch clip so the badge can overhang without being cut off.
+   The radius is the no-SVG fallback; the morphing clipPath overrides it. */
 .v-patio .hero-media { position: relative; }
 .v-patio .hero-frame { border-radius: 260px 260px 8px 8px; overflow: hidden; }
+.v-patio .hero-frame[data-morph] { border-radius: 0; clip-path: url(#sjwArch); }
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
   position: absolute; left: -34px; bottom: 54px; background: var(--cream);
@@ -1073,9 +1090,13 @@ function patio() {
     '<a class="nav-cta" href="' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + '</a>' +
   '</nav>' +
 
-  '<section class="hero"><div class="wrap"><div class="hero-grid">' +
+  patioMorphDefs() +
+  '<section class="hero">' +
+    morphBlob('blob-1', 'sjwBlobA', 26, 0) +
+    morphBlob('blob-2', 'sjwBlobB', 31, 7) +
+  '<div class="wrap"><div class="hero-grid">' +
     '<div class="hero-copy">' +
-      '<p class="eyebrow rise" style="--d:60ms">Open daily on Historic Highway 165</p>' +
+      '<p class="eyebrow rise" style="--d:60ms">Open daily on Historic&nbsp;Highway&nbsp;165</p>' +
       '<h1 class="rise" style="--d:150ms">Come for the wine, <em>stay for the patio</em></h1>' +
       '<p class="rise" style="--d:250ms">Wine tastings, brick oven pizza and shaded tables, from a family winery that has been making Missouri wine since 1970.</p>' +
       '<div class="hero-actions rise" style="--d:340ms">' +
@@ -1084,7 +1105,7 @@ function patio() {
       '</div>' +
     '</div>' +
     '<div class="hero-media rise" style="--d:120ms">' +
-      '<div class="hero-frame"><img class="kb" src="img/abh02397.jpg" alt="Two guests laughing over glasses of wine at a shaded patio table" /></div>' +
+      '<div class="hero-frame" data-morph><img class="kb" src="img/abh02397.jpg" alt="Two guests laughing over glasses of wine at a shaded patio table" /></div>' +
       '<span class="hero-badge">Tastings &nbsp;&middot;&nbsp; Pizza &nbsp;&middot;&nbsp; Patio</span>' +
     '</div>' +
   '</div></div></section>' +
@@ -1176,6 +1197,66 @@ function patioCard(img, alt, title, body, link) {
     '<div class="card-body"><h3>' + title + '</h3><p>' + body + '</p>' +
     '<span class="card-link">' + link + '</span></div></article>';
 }
+/* ---- Morphing hero (Patio) -------------------------------------------------
+   Every shape in a set uses the SAME command sequence and the same number of
+   points, which is what lets the browser tween `d` smoothly. Change that and the
+   morph snaps instead of flowing. Motion is suppressed under reduced-motion. */
+var PREFERS_REDUCED = window.matchMedia
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Arch mask, authored in objectBoundingBox units so it scales to any image box.
+   Sequence for all four: M, L, C, C, L, Z. */
+var ARCH_SHAPES = [
+  'M0,1 L0,0.42 C0,0.10 0.16,0 0.5,0 C0.84,0 1,0.10 1,0.42 L1,1 Z',
+  'M0,1 L0,0.30 C0,0.02 0.24,0 0.5,0 C0.76,0 1,0.02 1,0.30 L1,1 Z',
+  'M0,1 L0,0.52 C0,0.16 0.12,0.02 0.48,0.02 C0.86,0.02 1,0.14 1,0.36 L1,1 Z',
+  'M0,1 L0,0.36 C0,0.06 0.30,0.05 0.54,0.01 C0.80,-0.03 1,0.14 1,0.48 L1,1 Z'
+];
+/* Liquid blob, viewBox 0 0 200 200. Sequence for all four: M, C, C, C, C, Z. */
+var BLOB_SHAPES = [
+  'M100,14 C148,14 186,52 186,100 C186,148 148,186 100,186 C52,186 14,148 14,100 C14,52 52,14 100,14 Z',
+  'M104,10 C156,18 190,60 182,108 C174,156 140,190 92,184 C44,178 10,142 18,94 C26,46 52,2 104,10 Z',
+  'M96,16 C146,6 192,46 186,96 C180,146 152,192 100,186 C48,180 8,152 14,102 C20,52 46,26 96,16 Z',
+  'M100,8 C154,16 184,56 186,104 C188,152 148,192 96,186 C44,180 16,146 12,98 C8,50 46,0 100,8 Z'
+];
+
+/* Builds the <animate> that walks the shape list and returns to the start. */
+function morphAnim(shapes, dur, offset) {
+  if (PREFERS_REDUCED) return '';
+  var loop = shapes.concat([shapes[0]]);
+  var splines = [];
+  for (var i = 0; i < loop.length - 1; i++) splines.push('0.45 0 0.55 1');
+  return '<animate attributeName="d" dur="' + dur + 's" repeatCount="indefinite"' +
+    ' calcMode="spline" begin="-' + offset + 's"' +
+    ' keyTimes="0;0.25;0.5;0.75;1"' +
+    ' keySplines="' + splines.join(';') + '"' +
+    ' values="' + loop.join(';') + '" />';
+}
+
+function patioMorphDefs() {
+  return '<svg class="morph-defs" aria-hidden="true" focusable="false">' +
+    '<defs>' +
+      '<clipPath id="sjwArch" clipPathUnits="objectBoundingBox">' +
+        '<path d="' + ARCH_SHAPES[0] + '">' + morphAnim(ARCH_SHAPES, 22, 0) + '</path>' +
+      '</clipPath>' +
+      '<linearGradient id="sjwBlobA" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0" stop-color="#9c2426" stop-opacity=".22" />' +
+        '<stop offset="1" stop-color="#c9973a" stop-opacity=".30" />' +
+      '</linearGradient>' +
+      '<linearGradient id="sjwBlobB" x1="1" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="#c9973a" stop-opacity=".26" />' +
+        '<stop offset="1" stop-color="#9c2426" stop-opacity=".16" />' +
+      '</linearGradient>' +
+    '</defs></svg>';
+}
+
+function morphBlob(cls, fill, dur, offset) {
+  return '<div class="hero-blob ' + cls + '" aria-hidden="true">' +
+    '<svg viewBox="0 0 200 200"><path fill="url(#' + fill + ')" d="' + BLOB_SHAPES[0] + '">' +
+      morphAnim(BLOB_SHAPES, dur, offset) +
+    '</path></svg></div>';
+}
+
 /* Review design B — Patio: photo card, avatar overlapping the image edge. */
 function patioReview(x) {
   var face = x.avatar
