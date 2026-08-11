@@ -416,6 +416,21 @@ button { font: inherit; }
   transform: translateX(-50%);
   background: radial-gradient(ellipse at center, rgba(74,44,20,.44), rgba(74,44,20,0) 72%);
 }
+/* The middle glass alone sits on 80px of transparent padding, kept in
+   glass-empty/full.png because the sjFillA mask percentages are measured
+   against that padded height (see tools/strip-glass-foot.py). The row is
+   flex-end aligned, so that padding floated the glass off the shelf line and
+   left its shadow stranded below it. 80/1154 of the rendered height is
+   25.81px * --u, so the glass is pulled down by exactly that to stand on the
+   line, and the shadow is pushed back up by the same amount to meet its base.
+   Percentages cannot be used for the pull: a percentage margin resolves
+   against the container's WIDTH, not its height. The shadow is also narrowed,
+   because this glass has no foot to cast the wide pool the other two do. */
+/* NB `pi-lg` is ON the .rg element (class="rg pi-lg"), so this must be a
+   compound selector - `.pi-lg .rg` is a descendant selector and matches
+   nothing, which reads exactly like "the margin had no effect". */
+.v-patio .rg.pi-lg { margin-bottom: calc(-25.81px * var(--u)); }
+.v-patio .pi-lg .rg-shadow { bottom: calc(25.81px * var(--u) + .2%); width: 30%; }
 .v-patio .rg-stream {
   position: absolute; left: 50%; bottom: 93.5%; width: calc(10px * var(--u));
   margin-left: calc(-5px * var(--u)); height: calc(50px * var(--u));
