@@ -517,7 +517,9 @@ button { font: inherit; }
 .v-marquee .hero-media { position: relative; overflow: hidden; }
 .v-marquee .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .v-marquee .hero-panel { background: var(--wine); color: #fff; padding: 68px 60px; display: flex; flex-direction: column; justify-content: center; }
-.v-marquee .hero-panel .kicker { font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); }
+/* max-width: none, or the `.hero-panel > p` rule below clamps this to 42ch and
+   wraps "Gift Shop" onto a second line. */
+.v-marquee .hero-panel .kicker { font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); max-width: none; }
 .v-marquee .hero-panel h1 { font-size: clamp(36px, 4.1vw, 56px); line-height: 1.06; margin: 18px 0 0; }
 .v-marquee .hero-panel > p { font-size: 16.5px; line-height: 1.65; color: rgba(255,255,255,.85); margin: 20px 0 0; max-width: 42ch; }
 .v-marquee .hero-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 34px; max-width: 460px; }
@@ -527,17 +529,20 @@ button { font: inherit; }
   display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
   transition: background 170ms ease-out, transform 170ms var(--ease);
 }
-/* Every button hovers to the same solid cream with a ring, so the gold does not
-   look stuck on one button and the change is unmistakable on all four. */
-.v-marquee .hb:hover,
-.v-marquee .hb-solid:hover {
-  background: var(--cream); border-color: var(--cream); color: var(--wine-deep);
-  transform: translateY(-3px);
-  box-shadow: 0 0 0 3px rgba(255,255,255,.42), 0 12px 26px rgba(0,0,0,.3);
-}
-.v-marquee .hb:hover small { opacity: .78; }
-.v-marquee .hb:active, .v-marquee .hb-solid:active { transform: translateY(0); }
 .v-marquee .hb-solid { background: var(--gold); border-color: var(--gold); color: #2a1706; }
+/* The gold marks the primary action at rest, but it follows the pointer: as soon
+   as the group is hovered the primary hands the gold over to whichever button
+   you are actually pointing at, so it never looks stuck on one button. */
+.v-marquee .hero-btns:hover .hb-solid {
+  background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.26); color: #fff;
+}
+.v-marquee .hero-btns .hb:hover {
+  background: var(--gold); border-color: var(--gold); color: #2a1706;
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 3px rgba(255,255,255,.34), 0 12px 26px rgba(0,0,0,.3);
+}
+.v-marquee .hero-btns .hb:hover small { color: #2a1706; opacity: .75; }
+.v-marquee .hb:active, .v-marquee .hb-solid:active { transform: translateY(0); }
 .v-marquee .hb small { display: block; font-size: 11.5px; font-weight: 500; opacity: .72; margin-top: 3px; }
 
 .v-marquee .strip { background: var(--charcoal); color: #fff; }
@@ -926,7 +931,7 @@ function cellar() {
   '<section class="sec" id="wine"><div class="wrap"><div class="sec-head reveal">' +
     '<div><p class="eyebrow">The Pour List</p>' +
     '<h2>Sweet, sparkling and dry, all made in Missouri</h2></div>' +
-    '<p>Taste your way through the range at the bar, then take a bottle or a four pack home from the shop. Every label on this list is poured by the glass.</p>' +
+    '<p>Taste your way through the range at the bar, then take a bottle or a case home from the shop.</p>' +
   '</div></div>' +
   '<div class="rail">' +
     wineCard('img/abh01998.jpg', 'Raspberry', 'Sweet Wine') +
@@ -943,10 +948,10 @@ function cellar() {
       '<h2 style="font-size:clamp(30px,3.6vw,48px);line-height:1.12;margin-top:16px">Start at the bar, decide nothing in advance</h2>' +
       '<p style="color:rgba(255,255,255,.62);line-height:1.8;margin:20px 0 0;font-weight:300">A tasting flight is the fastest way through the range, and the staff will happily point you from the sweetest fruit wines to the drier reds. Racks of every label line the room, so whatever wins is already in reach.</p>' +
       '<ul class="mini">' +
-        '<li>Flights at the bar, no reservation needed</li>' +
+        '<li>Tastings at the bar, seven days a week</li>' +
         '<li>Sweet fruit wines through to drier reds</li>' +
-        '<li>Every label available by the bottle</li>' +
-        '<li>Four packs and gift sets to take home</li>' +
+        '<li>Bottles and cases to take home</li>' +
+        '<li>Gift shop and retail under the same roof</li>' +
       '</ul>' +
       '<div class="hero-actions" style="margin-top:30px"><a class="btn-gold" href="#visit">Book a tasting</a></div>' +
     '</div>' +
@@ -956,7 +961,7 @@ function cellar() {
   '<section class="sec" id="menu"><div class="wrap"><div class="sec-head reveal">' +
     '<div><p class="eyebrow">The Kitchen</p>' +
     '<h2>Brick oven pizza, boards and something sweet</h2></div>' +
-    '<p>The oven runs alongside charcuterie, salads and dessert, so a table can share one thing or order five. No reservation needed for the dining room or the patio.</p>' +
+    '<p>The oven runs alongside charcuterie, salads and dessert, so a table can share one thing or order five.</p>' +
   '</div><div class="edit-grid">' +
     '<div class="fig fig-tall reveal">' +
       '<img src="img/st-james-24.jpg" alt="Two brick oven pizzas on a dark surface surrounded by ferns and grapes" />' +
@@ -979,7 +984,7 @@ function cellar() {
     '<div class="band-body">' +
       '<p class="eyebrow reveal">The Patio</p>' +
       '<h2 class="reveal">Long tables, longer afternoons</h2>' +
-      '<p class="reveal">Shaded seating, full bar service and a kitchen that keeps going. Bring the group, no reservation needed.</p>' +
+      '<p class="reveal">Shaded seating, a bar on site and a kitchen that keeps going. Bring the group.</p>' +
       '<a class="btn-gold reveal" href="#visit">Plan your visit</a>' +
     '</div>' +
   '</section>' +
@@ -989,7 +994,7 @@ function cellar() {
     '<div class="ps-body reveal">' +
       '<p class="eyebrow">Paint n Sip</p>' +
       '<h2>An easel, a glass, two hours</h2>' +
-      '<p>Guided painting sessions run on a rotating calendar. No experience required, and every seat comes with a drink from the bar.</p>' +
+      '<p>Guided painting sessions run on a rotating calendar. Check the Paint n Sip page for upcoming dates.</p>' +
       '<div><a class="btn-gold" href="#paint">See the calendar</a></div>' +
     '</div>' +
   '</div></div></section>' +
@@ -1097,7 +1102,7 @@ function patio() {
       '<p class="eyebrow">Since 1970</p>' +
       '<h2>Fifty years of Missouri winemaking, poured in Branson</h2>' +
       '<p>St. James Winery has been making wine in Missouri since 1970. The Branson tasting room brings the full range to the Ozarks, alongside a scratch kitchen and a patio built for lingering.</p>' +
-      '<p>Walk in for a tasting flight, stay for a pizza, and leave with a bottle from the shop. No reservation, no dress code, no rush.</p>' +
+      '<p>Walk in for a tasting flight, stay for a pizza, and leave with a bottle from the shop.</p>' +
       '<div class="hero-actions" style="margin-top:28px"><a class="btn-line" href="#visit">Plan a visit</a></div>' +
     '</div>' +
   '</div></div></section>' +
@@ -1108,7 +1113,7 @@ function patio() {
   '</div><div class="cards">' +
     patioCard('abh02072.jpg', 'Hands raising glasses of white wine above a charcuterie board', 'Wine Tastings', 'Work through the range with someone who knows it, from the sweetest fruit wines to the drier reds.', 'Taste the range') +
     patioCard('abh02208.jpg', 'Friends toasting over a large brick oven pizza and a fresh salad', 'Brick Oven Pizza', 'Hand stretched dough fired to order, with salads, charcuterie boards and desserts alongside.', 'View the menu') +
-    patioCard('paint-and-sip.png', 'A painted pumpkin canvas from a Paint n Sip session beside a bottle of wine', 'Paint n Sip', 'Guided painting sessions on a rotating calendar. Bring friends, no experience needed.', 'See the calendar') +
+    patioCard('paint-and-sip.png', 'A painted pumpkin canvas from a Paint n Sip session beside a bottle of wine', 'Paint n Sip', 'Guided painting sessions on a rotating calendar. Check the dates before you travel.', 'See the calendar') +
   '</div></div></section>' +
 
   '<section class="sec" id="menu" style="padding-top:0"><div class="wrap"><div class="sec-head reveal">' +
@@ -1131,7 +1136,7 @@ function patio() {
         '<span class="chip">Cocktails</span>' +
         '<span class="chip">Craft beer</span>' +
         '<span class="chip">Sparkling cans</span>' +
-        '<span class="chip">Non alcoholic</span>' +
+        
       '</div>' +
     '</div>' +
   '</div></div></section>' +
@@ -1235,27 +1240,27 @@ function marquee() {
 
   '<div class="strip"><div class="strip-inner">' +
     '<div class="strip-cell"><b>Today, ' + HOURS[t][0] + '</b><span>' + HOURS[t][1] + '</span></div>' +
-    '<div class="strip-cell"><b>No reservation needed</b><span>Walk ins welcome, groups call ahead</span></div>' +
+    '<div class="strip-cell"><b>Daily wine tastings</b><span>At the tasting bar, seven days</span></div>' +
     '<div class="strip-cell"><b>Free parking</b><span>On site lot</span></div>' +
-    '<div class="strip-cell"><b>Family friendly</b><span>Kids welcome until close</span></div>' +
+    '<div class="strip-cell"><b>Wheelchair accessible</b><span>Entrance, seating and parking</span></div>' +
   '</div></div>' +
 
   '<section class="sec"><div class="wrap"><div class="sec-head reveal">' +
     '<div><h2>Plan your visit</h2></div>' +
-    '<p>Six things you can do here today. Pick one, or work through the whole list. Nothing needs booking ahead except a large group.</p>' +
+    '<p>Six things you can do here today. Pick one, or work through the whole list.</p>' +
     '<a class="see-all" href="#visit">Hours &amp; directions &#8594;</a>' +
   '</div><div class="acts">' +
     act('abh02072.jpg', 'Hands raising glasses of white wine above a charcuterie board', 'Wine Tasting', 'Flight through the range at the bar with staff who know every label.', 'Daily', 'Walk in') +
     act('abh02208.jpg', 'Friends toasting over a large brick oven pizza and a fresh salad', 'Brick Oven Pizza', 'Hand stretched dough fired to order, plus salads, boards and desserts.', 'Kitchen', 'View menu') +
-    act('paint-and-sip.png', 'A painted pumpkin canvas from a Paint n Sip session beside a bottle of wine', 'Paint n Sip', 'Guided painting sessions with a drink included. No experience needed.', 'Events', 'See calendar') +
+    act('paint-and-sip.png', 'A painted pumpkin canvas from a Paint n Sip session beside a bottle of wine', 'Paint n Sip', 'Guided painting sessions on a rotating calendar. Check the dates before you travel.', 'Events', 'See calendar') +
     act('dscf0059.jpg', 'A guest holding a red sparkling cocktail beside a row of colorful mixed drinks', 'Full Bar', 'Signature cocktails, craft beer and canned sparkling wines for the whole table.', 'Bar', 'See drinks') +
     act('abh07026.jpg', 'Gift shop shelves stocked with St. James Winery bottles and gift items', 'Gift Shop', 'Bottles by the case, glassware and gift sets on your way out.', 'Retail', 'Browse') +
-    act('crafts-beer.jpg', 'The St. James Winery retail and tasting room with wine racks lining the walls', 'Groups', 'Bus tours and private parties. Call ahead and we will set the room.', 'Booking', 'Call us') +
+    act('crafts-beer.jpg', 'The St. James Winery retail and tasting room with wine racks lining the walls', 'Groups', 'Travelling with a group? Call ahead so the team can plan for you.', 'Booking', 'Call us') +
   '</div></div></section>' +
 
   '<section class="sec-tight lineup" id="wine"><div class="wrap"><div class="sec-head reveal">' +
     '<div><h2 class="serif" style="font-weight:400">The lineup</h2></div>' +
-    '<p>Six of the labels poured at the tasting bar, from the sweet fruit wines through to a semi dry white and the canned sparklings. Every one is available by the bottle in the shop.</p>' +
+    '<p>Six of the labels poured at the tasting bar, from the sweet fruit wines through to a semi dry white and the canned sparklings. Bottles and cases to take home from the shop.</p>' +
     '<a class="see-all" href="#wine">Full wine &amp; beer list &#8594;</a>' +
   '</div><div class="wines">' +
     wine('abh01998.jpg', 'Raspberry', 'Sweet') +
@@ -1270,7 +1275,7 @@ function marquee() {
 
   '<section class="sec" id="visit"><div class="wrap"><div class="sec-head reveal">' +
     '<div><h2>Getting here</h2></div>' +
-    '<p>On State Highway 165 in Branson, with free parking on site and no reservation needed.</p>' +
+    '<p>On State Highway 165 in Branson, with a free parking lot on site.</p>' +
     '<a class="see-all see-all-solid" href="' + PHONE_TEL + '">Call ' + PHONE_DISPLAY + ' &#8594;</a>' +
   '</div><div class="plan">' +
     '<div class="reveal">' +
@@ -1305,12 +1310,12 @@ function marquee() {
     '<p>The questions the team gets asked most at the door and on the phone.</p>' +
     '<a class="see-all" href="' + PHONE_TEL + '">Ask us anything &#8594;</a>' +
   '</div><div class="faq reveal">' +
-    faq('Do I need a reservation?', 'No. Walk ins are welcome for the tasting bar, the restaurant and the patio. Larger groups and bus tours should call ahead on ' + PHONE_DISPLAY + ' so the room can be set.') +
+    faq('Coming with a group?', 'Call ahead on ' + PHONE_DISPLAY + ' so the team can plan for you. For anything else, ring the winery to check before you travel.') +
     faq('What are the hours?', 'Monday through Saturday 11:00 am to 8:00 pm, and Sunday 11:00 am to 6:00 pm. Hours shift with the season, so confirm by phone before a long drive.') +
     faq('Is there food, or only wine?', 'Both. The kitchen runs a brick oven for pizza, plus salads, charcuterie boards and desserts, and the full bar covers cocktails, craft beer and canned sparkling wines.') +
-    faq('Can I bring children?', 'Yes. The restaurant and patio are family friendly, and there are non alcoholic options at the bar.') +
-    faq('What is Paint n Sip?', 'A guided painting session run on a rotating calendar. A seat includes the canvas, the materials and a drink. No experience is needed.') +
-    faq('Where exactly are you?', ADDRESS + '. Parking is on site and free.') +
+    faq('Is there parking?', 'Yes. The Google listing shows a free parking lot on site, plus free street parking.') +
+    faq('What is Paint n Sip?', 'A guided painting session run on a rotating calendar. See the Paint n Sip page for upcoming dates and what a seat includes.') +
+    faq('Where exactly are you?', ADDRESS + '. Google lists the same address as 405 Historic Hwy 165. Parking on site is free.') +
   '</div></div></section>' +
 
   footer('logo-white.png') +
