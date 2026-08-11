@@ -410,7 +410,7 @@ button { font: inherit; }
 }
 .v-patio .rg-stream {
   position: absolute; left: 50%; bottom: 93.5%; width: calc(10px * var(--u));
-  margin-left: calc(-5px * var(--u)); height: calc(140px * var(--u));
+  margin-left: calc(-5px * var(--u)); height: calc(50px * var(--u));
   transform-origin: 50% 0; filter: blur(.4px);
   clip-path: polygon(0 0, 100% 0, 68% 100%, 32% 100%);
   background:
@@ -418,12 +418,12 @@ button { font: inherit; }
     linear-gradient(to bottom, rgba(165,44,51,0), rgba(165,44,51,.55) 14%, #a52c33 46%, #831c22);
 }
 .v-patio .pi-peach .rg-stream {
-  height: calc(110px * var(--u)); width: calc(7px * var(--u)); margin-left: calc(-3.5px * var(--u));
+  height: calc(40px * var(--u)); width: calc(7px * var(--u)); margin-left: calc(-3.5px * var(--u));
   background:
     linear-gradient(to right, rgba(255,236,214,.5), rgba(255,236,214,0) 55%),
     linear-gradient(to bottom, rgba(226,142,110,0), rgba(226,142,110,.6) 14%, #e0906b 46%, #c96f4c);
 }
-.v-patio .pi-wine .rg-stream { height: calc(120px * var(--u)); }
+.v-patio .pi-wine .rg-stream { height: calc(45px * var(--u)); }
 
 /* sizes are picked so the three glasses read at their real relative heights */
 .v-patio .pi-lg    { width: calc(200px * var(--u)); }
@@ -453,22 +453,39 @@ button { font: inherit; }
   47%, 100% { opacity: 0; transform: scaleY(0); }
 }
 /* The bottle is DRAWN, not photographed: it has to read at a pour angle, and
-   the only usable bottle photograph is cropped through its neck. Its origin is
-   the mouth, so the body swings up and to the right while the mouth stays put
-   over the glass. */
+   the only usable bottle photograph is cropped through its neck. It is drawn
+   mouth-down so the mouth IS the element's bottom edge -- that lets the mouth
+   be pinned to the top of the stream and be the rotation pivot at the same
+   time, instead of being positioned by hand and drifting off. */
 .v-patio .pour-bottle {
-  position: absolute; left: 50%; top: 0; z-index: 4;
-  width: calc(132px * var(--u)); margin-left: calc(-66px * var(--u));
-  margin-top: calc(-13px * var(--u));
-  transform-origin: 50% 3.4%;
-  filter: drop-shadow(0 14px 22px rgba(60,30,10,.28));
+  position: absolute; left: 50%; z-index: 4;
+  width: calc(84px * var(--u)); margin-left: calc(-42px * var(--u));
+  bottom: calc(93.5% + 50px * var(--u));
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 12px 20px rgba(60,30,10,.26));
   animation: sjTip 9s var(--ease) infinite;
 }
-@keyframes sjTip {
-  0%, 6%    { transform: translate(76px,-54px) rotate(-92deg); opacity: 0; }
-  15%, 40%  { transform: translate(0,0) rotate(-125deg); opacity: 1; }
-  49%, 100% { transform: translate(76px,-54px) rotate(-92deg); opacity: 0; }
+.v-patio .pi-peach .pour-bottle {
+  width: calc(58px * var(--u)); margin-left: calc(-29px * var(--u));
+  bottom: calc(93.5% + 40px * var(--u));
 }
+.v-patio .pi-wine .pour-bottle {
+  width: calc(64px * var(--u)); margin-left: calc(-32px * var(--u));
+  bottom: calc(93.5% + 45px * var(--u));
+}
+@keyframes sjTip {
+  0%, 6%    { transform: translate(30px,-26px) rotate(26deg); opacity: 0; }
+  15%, 40%  { transform: translate(0,0) rotate(62deg);        opacity: 1; }
+  49%, 100% { transform: translate(30px,-26px) rotate(26deg); opacity: 0; }
+}
+@keyframes sjTipL {
+  0%, 6%    { transform: translate(-30px,-26px) rotate(-26deg); opacity: 0; }
+  15%, 40%  { transform: translate(0,0) rotate(-58deg);         opacity: 1; }
+  49%, 100% { transform: translate(-30px,-26px) rotate(-26deg); opacity: 0; }
+}
+.v-patio .pi-wine .pour-bottle { animation-name: sjTipL; }
+.v-patio .d1 .pour-bottle { animation-delay: .5s; }
+.v-patio .d2 .pour-bottle { animation-delay: 1s; }
 .v-patio .rg-stream { animation: sjStream 9s linear infinite; }
 .v-patio .d1 .rg-full, .v-patio .d1 .rg-stream { animation-delay: .5s; }
 .v-patio .d2 .rg-full, .v-patio .d2 .rg-stream { animation-delay: 1s; }
@@ -479,7 +496,8 @@ button { font: inherit; }
   .v-patio .pi-peach .rg-full { -webkit-mask-position: 0 97.28%; mask-position: 0 97.28%; opacity: 1; }
   .v-patio .pi-wine  .rg-full { -webkit-mask-position: 0 75.79%; mask-position: 0 75.79%; opacity: 1; }
   .v-patio .rg-stream { opacity: 0; }
-  .v-patio .pour-bottle { transform: rotate(-125deg); opacity: 1; }
+  .v-patio .pour-bottle { transform: rotate(62deg); opacity: 1; }
+  .v-patio .pi-wine .pour-bottle { transform: rotate(-58deg); }
 }
 @media (max-width: 900px) {
   .v-patio .pour { height: 420px; --u: .60; }
@@ -1370,38 +1388,41 @@ function pourGlass(cls, base, alt) {
       '<img class="rg-img" src="img/' + base + '-empty.png" alt="' + alt + '" />' +
       '<img class="rg-full" src="img/' + base + '-full.png" alt="" />' +
     '</span>' +
+    pourBottle() +
   '</div>';
 }
 
-/* The drawn bottle. Kept deliberately simple: at the size it renders, detail
-   reads as noise, and it has to survive being rotated 125 degrees. */
+/* The drawn bottle, mouth-down so the mouth sits on the element's bottom edge.
+   Kept simple: at this size detail reads as noise, and it has to survive being
+   rotated. */
 function pourBottle() {
   return '<svg class="pour-bottle" viewBox="0 0 120 360" role="img"' +
     ' aria-label="A bottle of St. James wine tipping to pour">' +
     '<defs>' +
       '<linearGradient id="sjBtlGlass" x1="0" y1="0" x2="1" y2="0">' +
-        '<stop offset="0" stop-color="#4a2226" /><stop offset=".34" stop-color="#2a1216" />' +
-        '<stop offset=".72" stop-color="#1c0c10" /><stop offset="1" stop-color="#3a1a1e" />' +
+        '<stop offset="0" stop-color="#5a2a2f" /><stop offset=".32" stop-color="#331619" />' +
+        '<stop offset=".70" stop-color="#240f13" /><stop offset="1" stop-color="#452025" />' +
       '</linearGradient>' +
       '<linearGradient id="sjBtlCap" x1="0" y1="0" x2="1" y2="0">' +
-        '<stop offset="0" stop-color="#7b4285" /><stop offset=".45" stop-color="#552a60" />' +
-        '<stop offset="1" stop-color="#3d1c46" />' +
+        '<stop offset="0" stop-color="#8a4c94" /><stop offset=".45" stop-color="#5d2f68" />' +
+        '<stop offset="1" stop-color="#421f4c" />' +
       '</linearGradient>' +
     '</defs>' +
-    '<path fill="url(#sjBtlGlass)" d="M50,26 L70,26 L70,104' +
-      ' C70,132 98,150 98,196 L98,330 C98,344 92,350 78,350' +
-      ' L42,350 C28,350 22,344 22,330 L22,196 C22,150 50,132 50,104 Z" />' +
-    '<path fill="url(#sjBtlCap)" d="M49,12 L71,12 L71,58 L49,58 Z" />' +
-    '<rect x="49" y="30" width="22" height="9" fill="#c8762e" />' +
-    '<rect x="30" y="238" width="60" height="86" rx="3" fill="#f2e8d6" />' +
-    '<text x="60" y="266" text-anchor="middle" font-family="Playfair Display, Georgia, serif"' +
+    '<path fill="url(#sjBtlGlass)" d="M42,8 L78,8 C92,8 98,14 98,28' +
+      ' L98,162 C98,208 70,226 70,254 L70,352 L50,352 L50,254' +
+      ' C50,226 22,208 22,162 L22,28 C22,14 28,8 42,8 Z" />' +
+    '<path fill="url(#sjBtlCap)" d="M49,300 L71,300 L71,356 L49,356 Z" />' +
+    '<rect x="49" y="322" width="22" height="9" fill="#c8762e" />' +
+    '<rect x="30" y="40" width="60" height="84" rx="3" fill="#f2e8d6" />' +
+    '<text x="60" y="68" text-anchor="middle" font-family="Playfair Display, Georgia, serif"' +
       ' font-size="15" fill="#5b2a2c">St.James</text>' +
-    '<rect x="42" y="276" width="36" height="1.6" fill="#9c7a55" />' +
-    '<rect x="46" y="286" width="28" height="4" fill="#7b3f84" />' +
-    '<rect x="40" y="298" width="40" height="3" fill="#b09a7e" />' +
-    '<rect x="46" y="307" width="28" height="3" fill="#b09a7e" />' +
-    '<path fill="rgba(255,255,255,.20)" d="M56,34 L60,34 L60,104' +
-      ' C60,136 34,152 34,198 L34,330 L28,330 L28,196 C28,150 56,132 56,104 Z" />' +
+    '<rect x="42" y="78" width="36" height="1.6" fill="#9c7a55" />' +
+    '<rect x="46" y="88" width="28" height="4" fill="#7b3f84" />' +
+    '<rect x="40" y="100" width="40" height="3" fill="#b09a7e" />' +
+    '<rect x="46" y="109" width="28" height="3" fill="#b09a7e" />' +
+    '<path fill="rgba(255,255,255,.18)" d="M34,28 C34,16 38,14 46,14 L40,14' +
+      ' C34,14 34,20 34,30 L34,162 C34,204 62,222 62,254 L62,352 L56,352' +
+      ' L56,254 C56,222 28,204 28,162 Z" />' +
   '</svg>';
 }
 
@@ -1410,15 +1431,7 @@ function pourScene() {
     '<span class="pour-shelf"></span>' +
     '<div class="pour-row">' +
       pourGlass('pi-peach d1', 'glass-peach', 'A peach cocktail in a tall glass') +
-      '<div class="rg pi-lg">' +
-        '<span class="rg-shadow"></span>' +
-        '<span class="rg-stream"></span>' +
-        '<span class="rg-stack">' +
-          '<img class="rg-img" src="img/glass-empty.png" alt="A St. James Winery wine glass" />' +
-          '<img class="rg-full" src="img/glass-full.png" alt="" />' +
-        '</span>' +
-        pourBottle() +
-      '</div>' +
+      pourGlass('pi-lg', 'glass', 'A St. James Winery wine glass') +
       pourGlass('pi-wine d2', 'glass-wine', 'A glass of St. James red wine') +
     '</div>' +
   '</div>';
