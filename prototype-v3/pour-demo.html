@@ -1,0 +1,257 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>St. James Branson — Pour Animation, Option A vs Option B</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239c2426'/%3E%3Ctext x='16' y='23' font-size='19' font-family='Georgia,serif' fill='%23c9973a' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+*,*::before,*::after { box-sizing: border-box; }
+body { margin: 0; background: #140c0c; color: #efe3dd; font-family: 'Inter', sans-serif; }
+h1,h2,h3 { font-family: 'Playfair Display', serif; font-weight: 400; margin: 0; }
+:root {
+  --wine: #9c2426; --wine-deep: #6e1517; --gold: #c9973a; --gold-light: #e8c97a;
+  --cream: #faf6f2; --ease: cubic-bezier(.16,1,.3,1);
+}
+.page { max-width: 1180px; margin: 0 auto; padding: 46px 30px 90px; }
+.lede { max-width: 62ch; }
+.lede h1 { font-size: clamp(28px,3.4vw,42px); line-height: 1.14; }
+.lede p { color: rgba(255,255,255,.62); line-height: 1.75; font-weight: 300; margin: 16px 0 0; }
+.tag { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+.opt { margin-top: 58px; border-top: 1px solid rgba(201,151,58,.24); padding-top: 30px; }
+.opt-head { display: flex; align-items: baseline; justify-content: space-between; gap: 22px; flex-wrap: wrap; margin-bottom: 22px; }
+.opt-head h2 { font-size: 27px; }
+.opt-head .verdict { font-size: 13px; color: rgba(255,255,255,.55); max-width: 52ch; line-height: 1.6; }
+
+/* The stage mimics the reference: dark studio, bold brand circle, captions right */
+.stage {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  background: #0d0808; border: 1px solid rgba(201,151,58,.18); border-radius: 6px;
+  min-height: 460px; overflow: hidden;
+}
+/* Gold, not wine. A red disc behind a red wine hides the fill level entirely,
+   which is the whole point of the animation. The reference used a bright circle
+   against a pale drink for exactly this reason. */
+.disc {
+  position: absolute; left: 25%; top: 50%; width: 360px; height: 360px; margin: -180px 0 0 -180px;
+  border-radius: 50%; background: var(--gold); z-index: 0;
+}
+.art { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 30px 0; }
+.art svg { width: 260px; height: auto; display: block; }
+.caption { position: relative; z-index: 1; padding: 0 46px; }
+.caption .step { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.caption .line { font-family: 'Playfair Display', serif; font-size: clamp(24px,2.6vw,34px); line-height: 1.2; margin-top: 10px; }
+
+/* Captions cross-fade in step with the artwork */
+.cap { position: absolute; opacity: 0; }
+.cap.on { position: relative; opacity: 1; transition: opacity 420ms var(--ease); }
+
+/* ---------- OPTION A: drawn glass, real liquid fill ---------- */
+.wine-body { fill: url(#wineGrad); }
+.fill-group { animation: fillRise 11s var(--ease) infinite; }
+@keyframes fillRise {
+  0%, 8%    { transform: translateY(126px); }
+  38%, 62%  { transform: translateY(24px); }
+  86%       { transform: translateY(24px); }
+  96%, 100% { transform: translateY(126px); }
+}
+.stream { transform-origin: 100px 4px; animation: pourStream 11s linear infinite; }
+@keyframes pourStream {
+  0%, 9%    { opacity: 0; transform: scaleY(0); }
+  12%, 34%  { opacity: 1; transform: scaleY(1); }
+  38%, 100% { opacity: 0; transform: scaleY(0); }
+}
+.bottle { transform-origin: 168px 10px; animation: bottleTip 11s var(--ease) infinite; }
+@keyframes bottleTip {
+  0%, 6%    { transform: translate(40px,-70px) rotate(0deg); opacity: 0; }
+  14%, 34%  { transform: translate(0,0) rotate(-38deg); opacity: 1; }
+  44%, 100% { transform: translate(40px,-70px) rotate(0deg); opacity: 0; }
+}
+.ripple { animation: rippleGo 11s var(--ease) infinite; transform-origin: center; }
+@keyframes rippleGo {
+  0%, 36%   { opacity: 0; }
+  42%       { opacity: .55; }
+  58%, 100% { opacity: 0; }
+}
+.garnish { animation: garnishIn 11s var(--ease) infinite; transform-origin: 138px 66px; }
+@keyframes garnishIn {
+  0%, 62%   { opacity: 0; transform: translateY(-16px) scale(.8); }
+  70%, 92%  { opacity: 1; transform: translateY(0) scale(1); }
+  97%, 100% { opacity: 0; transform: translateY(-16px) scale(.8); }
+}
+
+/* ---------- OPTION B: photo sequence ---------- */
+.photos { position: relative; width: 300px; height: 340px; }
+.photos img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  border-radius: 4px; opacity: 0; animation: photoCycle 12s linear infinite;
+}
+.photos img:nth-child(1) { animation-delay: 0s; }
+.photos img:nth-child(2) { animation-delay: 3s; }
+.photos img:nth-child(3) { animation-delay: 6s; }
+.photos img:nth-child(4) { animation-delay: 9s; }
+@keyframes photoCycle {
+  0%      { opacity: 0; }
+  3%, 23% { opacity: 1; }
+  26%,100%{ opacity: 0; }
+}
+
+.note { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 70ch; }
+.note b { color: var(--gold-light); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fill-group, .stream, .bottle, .ripple, .garnish, .photos img { animation: none !important; }
+  .fill-group { transform: translateY(24px); }
+  .photos img:nth-child(1) { opacity: 1; }
+  .cap { position: relative; opacity: 1; }
+}
+@media (max-width: 860px) {
+  .stage { grid-template-columns: 1fr; min-height: 0; padding-bottom: 34px; }
+  .disc { left: 50%; top: 210px; width: 220px; height: 220px; margin: -110px 0 0 -110px; }
+  .caption { padding: 0 26px 10px; }
+  .photos { width: 100%; max-width: 300px; margin: 0 auto; }
+}
+</style>
+
+<div class="page">
+  <div class="lede">
+    <p class="tag">St. James Winery Branson</p>
+    <h1>The pour effect, built two ways</h1>
+    <p>You liked the stop-motion drink build from the SVGator page, the one where a bottle tips
+    and the glass fills. We have no photograph of anyone pouring, so here are the two ways to get
+    that moment. Both loop on their own. Watch each for about ten seconds.</p>
+  </div>
+
+  <section class="opt">
+    <div class="opt-head">
+      <h2>Option A &nbsp;&middot;&nbsp; Drawn glass, real liquid</h2>
+      <p class="verdict">Nothing is photographed. The glass, the bottle, the stream and the wine
+      level are all drawn, so the liquid genuinely rises as it is poured.</p>
+    </div>
+    <div class="stage">
+      <span class="disc" aria-hidden="true"></span>
+      <div class="art">
+        <svg viewBox="0 0 200 300" role="img" aria-label="A wine glass filling as a bottle pours into it">
+          <defs>
+            <linearGradient id="wineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c0333a" />
+              <stop offset="1" stop-color="#6e1517" />
+            </linearGradient>
+            <clipPath id="bowlClip">
+              <path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z" />
+            </clipPath>
+          </defs>
+
+          <!-- bottle tipping in from the top right -->
+          <g class="bottle">
+            <rect x="158" y="-52" width="22" height="58" rx="4" fill="#2f1a1a" stroke="rgba(201,151,58,.5)" stroke-width="1.5" />
+            <rect x="165" y="-70" width="8" height="20" rx="2" fill="#2f1a1a" stroke="rgba(201,151,58,.5)" stroke-width="1.5" />
+            <rect x="161" y="-34" width="16" height="20" rx="2" fill="var(--gold)" opacity=".85" />
+          </g>
+
+          <!-- the pouring stream -->
+          <path class="stream" d="M97,0 L103,0 L101.5,46 L98.5,46 Z" fill="url(#wineGrad)" opacity=".95" />
+
+          <!-- wine inside the bowl -->
+          <g clip-path="url(#bowlClip)">
+            <g class="fill-group">
+              <rect class="wine-body" x="50" y="40" width="100" height="130" />
+              <ellipse cx="100" cy="41" rx="46" ry="5" fill="#d1454b" opacity=".9" />
+              <ellipse class="ripple" cx="100" cy="41" rx="30" ry="4" fill="#fff" opacity="0" />
+            </g>
+          </g>
+
+          <!-- glass outline over the wine -->
+          <path d="M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z"
+                fill="none" stroke="#2a1608" stroke-width="3" />
+          <rect x="97" y="160" width="6" height="76" fill="#2a1608" />
+          <ellipse cx="100" cy="240" rx="40" ry="7" fill="none" stroke="#2a1608" stroke-width="3" />
+          <path d="M62,52 C64,96 74,124 88,140" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" />
+
+          <!-- garnish drops in at the end -->
+          <g class="garnish">
+            <circle cx="138" cy="52" r="11" fill="#e8c97a" />
+            <path d="M138,41 L138,63" stroke="#b8892c" stroke-width="1.4" />
+          </g>
+        </svg>
+      </div>
+      <div class="caption" id="capA"></div>
+    </div>
+    <p class="note"><b>What this gets you:</b> the exact moment you liked, with the wine level
+    actually rising. Scales to any screen, weighs almost nothing, and needs no new photography.
+    It is illustrated rather than photographic, so it reads as a brand device rather than a
+    picture of the winery.</p>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head">
+      <h2>Option B &nbsp;&middot;&nbsp; Stop-motion from our real photos</h2>
+      <p class="verdict">The same step-by-step structure, built from the winery's own photography.
+      Four shots, four captions.</p>
+    </div>
+    <div class="stage">
+      <span class="disc" aria-hidden="true"></span>
+      <div class="art">
+        <div class="photos">
+          <img src="img/reviews/ph-nicholas-neil.jpg" alt="A branded St. James Winery Branson glass on a table" />
+          <img src="img/abh02156.jpg" alt="A bottle of Friendship School White beside a filled glass" />
+          <img src="img/abh02072.jpg" alt="Hands raising glasses of white wine above a charcuterie board" />
+          <img src="img/abh02153.jpg" alt="A group toasting with glasses of white wine on the patio" />
+        </div>
+      </div>
+      <div class="caption" id="capB"></div>
+    </div>
+    <p class="note"><b>The honest limitation:</b> these are four different scenes, so it cuts
+    between them rather than flowing. The mojito example works because it is one fixed camera on
+    one glass. This reads as a smart slideshow, not as a single continuous moment.</p>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><h2>Option C &nbsp;&middot;&nbsp; A five second clip from the winery</h2></div>
+    <p class="note" style="margin-top:0">If someone at the winery films one pour into a branded
+    glass on a phone, Option A's structure can be rebuilt with the real thing in place of the
+    drawing, and it would look exactly like the reference. That is the only route to a genuine
+    photographic pour, because <b>none of the 47 images we hold shows one</b>.</p>
+  </section>
+</div>
+
+<script>
+/* Captions advance in step with each artwork loop. */
+var STEPS_A = [
+  ['Do it yourself', 'A tasting flight, poured'],
+  ['Step one',       'Seven wines, one glass at a time'],
+  ['Step two',       'Swirl, breathe, taste'],
+  ['Final step',     'Find your favourite, take it home']
+];
+var STEPS_B = [
+  ['Step one',   'Your glass at the tasting bar'],
+  ['Step two',   'Seven pours, sweet through to dry'],
+  ['Step three', 'Taste it against the board'],
+  ['Final step', 'Raise it on the patio']
+];
+
+function render(el, steps, i) {
+  el.innerHTML = steps.map(function (s, n) {
+    return '<div class="cap' + (n === i ? ' on' : '') + '">' +
+      '<p class="step">' + s[0] + '</p>' +
+      '<p class="line">' + s[1] + '</p></div>';
+  }).join('');
+}
+
+function cycle(elId, steps, period) {
+  var el = document.getElementById(elId);
+  var i = 0;
+  render(el, steps, 0);
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () {
+    i = (i + 1) % steps.length;
+    render(el, steps, i);
+  }, period);
+}
+
+/* Option A loops in 11s over 4 captions; Option B in 12s over 4. */
+cycle('capA', STEPS_A, 11000 / 4);
+cycle('capB', STEPS_B, 12000 / 4);
+</script>
