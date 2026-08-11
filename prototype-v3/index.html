@@ -1380,7 +1380,9 @@ function morphAnim(shapes, dur, offset) {
 /* One continuous pour: real bottle photo, drawn glass, wine level rising. */
 /* One photographed glass: the drained copy underneath, the filled copy on top
    revealed by a mask that slides up. */
-function pourGlass(cls, base, alt) {
+/* tilt = the hold angle this glass's bottle is rotated to by its keyframes
+   (sjTip 62deg, sjTipL -58deg). The label print is counter-rotated by it. */
+function pourGlass(cls, base, alt, tilt) {
   return '<div class="rg ' + cls + '">' +
     '<span class="rg-shadow"></span>' +
     '<span class="rg-stream"></span>' +
@@ -1388,14 +1390,14 @@ function pourGlass(cls, base, alt) {
       '<img class="rg-img" src="img/' + base + '-empty.png" alt="' + alt + '" />' +
       '<img class="rg-full" src="img/' + base + '-full.png" alt="" />' +
     '</span>' +
-    pourBottle() +
+    pourBottle(tilt) +
   '</div>';
 }
 
 /* The drawn bottle, mouth-down so the mouth sits on the element's bottom edge.
    Kept simple: at this size detail reads as noise, and it has to survive being
    rotated. */
-function pourBottle() {
+function pourBottle(tilt) {
   return '<svg class="pour-bottle" viewBox="0 0 120 360" role="img"' +
     ' aria-label="A bottle of St. James wine tipping to pour">' +
     '<defs>' +
@@ -1413,13 +1415,22 @@ function pourBottle() {
       ' C50,226 22,208 22,162 L22,28 C22,14 28,8 42,8 Z" />' +
     '<path fill="url(#sjBtlCap)" d="M49,300 L71,300 L71,356 L49,356 Z" />' +
     '<rect x="49" y="322" width="22" height="9" fill="#c8762e" />' +
+    /* The paper panel stays glued to the bottle, but everything PRINTED on it
+       is counter-rotated by the bottle's own tilt so the name sits level and
+       reads normally. Leaving the print un-rotated makes it climb bottom-to-top
+       up the tipped bottle, and rotating it a physically-correct 180 makes it
+       run top-to-bottom - both read as "upside down". Counter-rotating the
+       whole panel instead levels the name but visibly unsticks the paper from
+       the glass. Rotated about the panel centre (60,82); the print's rotated
+       bounding box is ~42x62 against an 60x84 panel, so it cannot overflow. */
     '<rect x="30" y="40" width="60" height="84" rx="3" fill="#f2e8d6" />' +
-    '<text x="60" y="68" text-anchor="middle" font-family="Playfair Display, Georgia, serif"' +
-      ' font-size="15" fill="#5b2a2c">St.James</text>' +
-    '<rect x="42" y="78" width="36" height="1.6" fill="#9c7a55" />' +
-    '<rect x="46" y="88" width="28" height="4" fill="#7b3f84" />' +
-    '<rect x="40" y="100" width="40" height="3" fill="#b09a7e" />' +
-    '<rect x="46" y="109" width="28" height="3" fill="#b09a7e" />' +
+    '<g transform="rotate(' + (-tilt) + ' 60 82)">' +
+      '<text x="60" y="72" text-anchor="middle" font-family="Playfair Display, Georgia, serif"' +
+        ' font-size="15" fill="#5b2a2c">St.James</text>' +
+      '<rect x="42" y="82" width="36" height="1.6" fill="#9c7a55" />' +
+      '<rect x="46" y="90" width="28" height="4" fill="#7b3f84" />' +
+      '<rect x="47" y="100" width="26" height="2.6" fill="#b09a7e" />' +
+    '</g>' +
     '<path fill="rgba(255,255,255,.18)" d="M34,28 C34,16 38,14 46,14 L40,14' +
       ' C34,14 34,20 34,30 L34,162 C34,204 62,222 62,254 L62,352 L56,352' +
       ' L56,254 C56,222 28,204 28,162 Z" />' +
@@ -1430,9 +1441,9 @@ function pourScene() {
   return '<div class="pour">' +
     '<span class="pour-shelf"></span>' +
     '<div class="pour-row">' +
-      pourGlass('pi-peach d1', 'glass-peach', 'A peach cocktail in a tall glass') +
-      pourGlass('pi-lg', 'glass', 'A St. James Winery wine glass') +
-      pourGlass('pi-wine d2', 'glass-wine', 'A glass of St. James red wine') +
+      pourGlass('pi-peach d1', 'glass-peach', 'A peach cocktail in a tall glass', 62) +
+      pourGlass('pi-lg', 'glass', 'A St. James Winery wine glass', 62) +
+      pourGlass('pi-wine d2', 'glass-wine', 'A glass of St. James red wine', -58) +
     '</div>' +
   '</div>';
 }
