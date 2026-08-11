@@ -368,94 +368,121 @@ button { font: inherit; }
 .v-patio .hero-frame[data-morph] { border-radius: 0; clip-path: url(#sjwArch); }
 
 /* ---- THE POUR --------------------------------------------------------------
-   A round being poured inside the arch: the real St. James glass, cut out of
-   the winery photo, the same glass beside it, and the drawn glass. Each takes
-   its own stream and fills along a curved wine surface. No steps, no captions.
-   Assets are rebuilt by tools/make-glass-assets.py. */
+   A round being poured inside the arch. Three real glasses cut out of the
+   winery photography (peach cocktail, the branded glass, a wine glass) and one
+   DRAWN bottle that tips in and pours. Each glass fills along a curved surface
+   taken from its own photograph, so the wine glass stops where a wine glass
+   really stops rather than at the brim.
+   Cut-outs are rebuilt by tools/make-glass-assets.py. */
 .v-patio .pour {
   position: relative; height: 640px; --u: 1.08;
   background: linear-gradient(165deg, #f6e4c4 0%, #e9c98f 46%, #d9ae63 100%);
 }
 .v-patio .pour-row {
-  position: absolute; left: 0; right: 0; bottom: calc(48px * var(--u));
-  display: flex; align-items: flex-end; justify-content: center; gap: calc(14px * var(--u));
+  position: absolute; left: 0; right: 0; bottom: calc(62px * var(--u));
+  display: flex; align-items: flex-end; justify-content: center; gap: calc(16px * var(--u));
 }
 .v-patio .pour-shelf {
-  position: absolute; left: 9%; right: 9%; bottom: calc(46px * var(--u)); height: 1px;
+  position: absolute; left: 9%; right: 9%; bottom: calc(60px * var(--u)); height: 1px;
   background: linear-gradient(90deg, transparent, rgba(61,36,16,.30) 20%, rgba(61,36,16,.30) 80%, transparent);
 }
+/* the badge used to sit straight across the left glass */
+.v-patio .hero-badge { bottom: 6px; }
+
 .v-patio .rg { position: relative; flex: 0 0 auto; }
 .v-patio .rg-stack { display: block; position: relative; }
 /* These two out-specify `.v-patio .hero-media img`, which otherwise sizes them
    to the full 566x640 hero frame. Measure the rendered box before nudging. */
 .v-patio .pour .rg-img { display: block; width: 100%; height: auto; object-fit: fill; }
-/* wine-mask.png is twice the image height: transparent above a curved surface,
-   opaque below it. Sliding it up raises the wine along a real elliptical
+/* Each glass has its own 2x-tall mask: transparent above a curved surface,
+   opaque below it. Sliding it up raises the liquid along a real elliptical
    surface rather than a flat line. CSS masks are blocked over file://, so the
    fill only renders when the page is served over http. */
 .v-patio .pour .rg-full {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill;
-  -webkit-mask-image: url(img/wine-mask.png); mask-image: url(img/wine-mask.png);
   -webkit-mask-size: 100% 200%; mask-size: 100% 200%;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
 .v-patio .rg-shadow {
-  position: absolute; left: 48.5%; bottom: .6%; width: 58%; height: 5%;
+  position: absolute; left: 50%; bottom: .2%; width: 62%; height: 5%;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(74,44,20,.30), rgba(74,44,20,0) 70%);
+  background: radial-gradient(ellipse at center, rgba(74,44,20,.44), rgba(74,44,20,0) 72%);
 }
 .v-patio .rg-stream {
-  position: absolute; left: 50%; bottom: 93.5%; width: calc(11px * var(--u));
-  margin-left: calc(-5.5px * var(--u)); height: calc(150px * var(--u));
+  position: absolute; left: 50%; bottom: 93.5%; width: calc(10px * var(--u));
+  margin-left: calc(-5px * var(--u)); height: calc(140px * var(--u));
   transform-origin: 50% 0; filter: blur(.4px);
   clip-path: polygon(0 0, 100% 0, 68% 100%, 32% 100%);
   background:
     linear-gradient(to right, rgba(255,196,196,.42), rgba(255,196,196,0) 55%),
     linear-gradient(to bottom, rgba(165,44,51,0), rgba(165,44,51,.55) 14%, #a52c33 46%, #831c22);
 }
-.v-patio .pi-sm .rg-stream {
-  width: calc(8px * var(--u)); margin-left: calc(-4px * var(--u)); height: calc(118px * var(--u));
+.v-patio .pi-peach .rg-stream {
+  height: calc(110px * var(--u)); width: calc(7px * var(--u)); margin-left: calc(-3.5px * var(--u));
+  background:
+    linear-gradient(to right, rgba(255,236,214,.5), rgba(255,236,214,0) 55%),
+    linear-gradient(to bottom, rgba(226,142,110,0), rgba(226,142,110,.6) 14%, #e0906b 46%, #c96f4c);
 }
-.v-patio .tg { flex: 0 0 auto; display: block; overflow: visible; }
-.v-patio .pi-lg   { width: calc(206px * var(--u)); }
-.v-patio .pi-sm   { width: calc(112px * var(--u)); }
-.v-patio .pi-toon { width: calc(104px * var(--u)); }
+.v-patio .pi-wine .rg-stream { height: calc(120px * var(--u)); }
 
-/* One 9s loop. Mask levels: 20.40% = empty, 94.28% = filled to the brim. */
-@keyframes sjFill {
-  0%        { -webkit-mask-position: 0 20.4%;  mask-position: 0 20.4%;  opacity: 0; }
-  6%        { -webkit-mask-position: 0 20.4%;  mask-position: 0 20.4%;  opacity: 1; }
-  46%, 86%  { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 1; }
-  96%, 100% { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 0; }
+/* sizes are picked so the three glasses read at their real relative heights */
+.v-patio .pi-lg    { width: calc(200px * var(--u)); }
+.v-patio .pi-peach { width: calc(112px * var(--u)); }
+.v-patio .pi-wine  { width: calc(126px * var(--u)); }
+
+.v-patio .pi-lg    .rg-full { -webkit-mask-image: url(img/wine-mask.png);        mask-image: url(img/wine-mask.png);        animation: sjFillA 9s var(--ease) infinite; }
+.v-patio .pi-peach .rg-full { -webkit-mask-image: url(img/glass-peach-mask.png); mask-image: url(img/glass-peach-mask.png); animation: sjFillB 9s var(--ease) infinite; }
+.v-patio .pi-wine  .rg-full { -webkit-mask-image: url(img/glass-wine-mask.png);  mask-image: url(img/glass-wine-mask.png);  animation: sjFillC 9s var(--ease) infinite; }
+
+/* levels are measured off each photograph by the asset script */
+@keyframes sjFillA {
+  0%{-webkit-mask-position:0 20.40%;mask-position:0 20.40%;opacity:0} 6%{-webkit-mask-position:0 20.40%;mask-position:0 20.40%;opacity:1}
+  46%,86%{-webkit-mask-position:0 94.28%;mask-position:0 94.28%;opacity:1} 96%,100%{-webkit-mask-position:0 94.28%;mask-position:0 94.28%;opacity:0}
+}
+@keyframes sjFillB {
+  0%{-webkit-mask-position:0 24.44%;mask-position:0 24.44%;opacity:0} 6%{-webkit-mask-position:0 24.44%;mask-position:0 24.44%;opacity:1}
+  46%,86%{-webkit-mask-position:0 97.28%;mask-position:0 97.28%;opacity:1} 96%,100%{-webkit-mask-position:0 97.28%;mask-position:0 97.28%;opacity:0}
+}
+@keyframes sjFillC {
+  0%{-webkit-mask-position:0 41.57%;mask-position:0 41.57%;opacity:0} 6%{-webkit-mask-position:0 41.57%;mask-position:0 41.57%;opacity:1}
+  46%,86%{-webkit-mask-position:0 75.79%;mask-position:0 75.79%;opacity:1} 96%,100%{-webkit-mask-position:0 75.79%;mask-position:0 75.79%;opacity:0}
 }
 @keyframes sjStream {
-  0%, 7%    { opacity: 0; transform: scaleY(0); }
-  12%, 40%  { opacity: 1; transform: scaleY(1); }
+  0%, 9%    { opacity: 0; transform: scaleY(0); }
+  15%, 40%  { opacity: 1; transform: scaleY(1); }
   47%, 100% { opacity: 0; transform: scaleY(0); }
 }
-@keyframes sjToonFill {
-  0%, 6%    { transform: translateY(128px); }
-  46%, 86%  { transform: translateY(26px); }
-  96%, 100% { transform: translateY(128px); }
+/* The bottle is DRAWN, not photographed: it has to read at a pour angle, and
+   the only usable bottle photograph is cropped through its neck. Its origin is
+   the mouth, so the body swings up and to the right while the mouth stays put
+   over the glass. */
+.v-patio .pour-bottle {
+  position: absolute; left: 50%; top: 0; z-index: 4;
+  width: calc(132px * var(--u)); margin-left: calc(-66px * var(--u));
+  margin-top: calc(-13px * var(--u));
+  transform-origin: 50% 3.4%;
+  filter: drop-shadow(0 14px 22px rgba(60,30,10,.28));
+  animation: sjTip 9s var(--ease) infinite;
 }
-.v-patio .rg-full     { animation: sjFill 9s var(--ease) infinite; }
-.v-patio .rg-stream   { animation: sjStream 9s linear infinite; }
-.v-patio .toon-fill   { animation: sjToonFill 9s var(--ease) infinite; }
-.v-patio .toon-stream { transform-origin: 100px 40px; animation: sjStream 9s linear infinite; }
-.v-patio .d1 .rg-full, .v-patio .d1 .rg-stream,
-.v-patio .d1 .toon-fill, .v-patio .d1 .toon-stream { animation-delay: .5s; }
-.v-patio .d2 .rg-full, .v-patio .d2 .rg-stream,
-.v-patio .d2 .toon-fill, .v-patio .d2 .toon-stream { animation-delay: 1s; }
+@keyframes sjTip {
+  0%, 6%    { transform: translate(76px,-54px) rotate(-92deg); opacity: 0; }
+  15%, 40%  { transform: translate(0,0) rotate(-125deg); opacity: 1; }
+  49%, 100% { transform: translate(76px,-54px) rotate(-92deg); opacity: 0; }
+}
+.v-patio .rg-stream { animation: sjStream 9s linear infinite; }
+.v-patio .d1 .rg-full, .v-patio .d1 .rg-stream { animation-delay: .5s; }
+.v-patio .d2 .rg-full, .v-patio .d2 .rg-stream { animation-delay: 1s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .v-patio .rg-full, .v-patio .rg-stream,
-  .v-patio .toon-fill, .v-patio .toon-stream { animation: none !important; }
-  .v-patio .rg-full { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 1; }
-  .v-patio .rg-stream, .v-patio .toon-stream { opacity: 0; }
-  .v-patio .toon-fill { transform: translateY(26px); }
+  .v-patio .rg-full, .v-patio .rg-stream, .v-patio .pour-bottle { animation: none !important; }
+  .v-patio .pi-lg    .rg-full { -webkit-mask-position: 0 94.28%; mask-position: 0 94.28%; opacity: 1; }
+  .v-patio .pi-peach .rg-full { -webkit-mask-position: 0 97.28%; mask-position: 0 97.28%; opacity: 1; }
+  .v-patio .pi-wine  .rg-full { -webkit-mask-position: 0 75.79%; mask-position: 0 75.79%; opacity: 1; }
+  .v-patio .rg-stream { opacity: 0; }
+  .v-patio .pour-bottle { transform: rotate(-125deg); opacity: 1; }
 }
 @media (max-width: 900px) {
-  .v-patio .pour { height: 420px; --u: .62; }
+  .v-patio .pour { height: 420px; --u: .60; }
 }
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
@@ -1333,44 +1360,48 @@ function morphAnim(shapes, dur, offset) {
 }
 
 /* One continuous pour: real bottle photo, drawn glass, wine level rising. */
-var SJ_TOON = 0;
-
-/* The photographed St. James glass. Two stacked copies of the same cut-out:
-   the drained one underneath, the wine one on top revealed by a moving mask. */
-function pourGlass(cls) {
+/* One photographed glass: the drained copy underneath, the filled copy on top
+   revealed by a mask that slides up. */
+function pourGlass(cls, base, alt) {
   return '<div class="rg ' + cls + '">' +
     '<span class="rg-shadow"></span>' +
     '<span class="rg-stream"></span>' +
     '<span class="rg-stack">' +
-      '<img class="rg-img" src="img/glass-empty.png" alt="A St. James Winery wine glass" />' +
-      '<img class="rg-full" src="img/glass-full.png" alt="" />' +
+      '<img class="rg-img" src="img/' + base + '-empty.png" alt="' + alt + '" />' +
+      '<img class="rg-full" src="img/' + base + '-full.png" alt="" />' +
     '</span>' +
   '</div>';
 }
 
-/* The drawn glass. Its gradient and clip ids are numbered so more than one can
-   sit on the page without the first one capturing the others. */
-function pourToon(cls) {
-  var i = ++SJ_TOON, g = 'sjToonWine' + i, c = 'sjToonBowl' + i;
-  var bowl = 'M56,42 L144,42 C144,112 128,152 100,160 C72,152 56,112 56,42 Z';
-  return '<svg class="tg ' + cls + '" viewBox="44 -164 112 420" role="img"' +
-    ' aria-label="A wine glass filling as the wine pours">' +
-      '<defs>' +
-        '<linearGradient id="' + g + '" x1="0" y1="0" x2="0" y2="1">' +
-          '<stop offset="0" stop-color="#b52f38" /><stop offset="1" stop-color="#5d1216" />' +
-        '</linearGradient>' +
-        '<clipPath id="' + c + '"><path d="' + bowl + '" /></clipPath>' +
-      '</defs>' +
-      '<path class="toon-stream" d="M98.6,-164 L101.4,-164 L102,46 L98,46 Z" fill="url(#' + g + ')" />' +
-      '<g clip-path="url(#' + c + ')"><g class="toon-fill">' +
-        '<rect x="50" y="40" width="100" height="132" fill="url(#' + g + ')" />' +
-        '<ellipse cx="100" cy="41" rx="46" ry="5" fill="#c93d45" />' +
-      '</g></g>' +
-      '<path d="' + bowl + '" fill="none" stroke="#3d2410" stroke-width="4" />' +
-      '<rect x="96.5" y="160" width="7" height="76" fill="#3d2410" />' +
-      '<ellipse cx="100" cy="240" rx="40" ry="7" fill="none" stroke="#3d2410" stroke-width="4" />' +
-      '<path d="M62,52 C64,96 74,124 88,140" fill="none" stroke="rgba(255,255,255,.5)"' +
-        ' stroke-width="2" stroke-linecap="round" />' +
+/* The drawn bottle. Kept deliberately simple: at the size it renders, detail
+   reads as noise, and it has to survive being rotated 125 degrees. */
+function pourBottle() {
+  return '<svg class="pour-bottle" viewBox="0 0 120 360" role="img"' +
+    ' aria-label="A bottle of St. James wine tipping to pour">' +
+    '<defs>' +
+      '<linearGradient id="sjBtlGlass" x1="0" y1="0" x2="1" y2="0">' +
+        '<stop offset="0" stop-color="#4a2226" /><stop offset=".34" stop-color="#2a1216" />' +
+        '<stop offset=".72" stop-color="#1c0c10" /><stop offset="1" stop-color="#3a1a1e" />' +
+      '</linearGradient>' +
+      '<linearGradient id="sjBtlCap" x1="0" y1="0" x2="1" y2="0">' +
+        '<stop offset="0" stop-color="#7b4285" /><stop offset=".45" stop-color="#552a60" />' +
+        '<stop offset="1" stop-color="#3d1c46" />' +
+      '</linearGradient>' +
+    '</defs>' +
+    '<path fill="url(#sjBtlGlass)" d="M50,26 L70,26 L70,104' +
+      ' C70,132 98,150 98,196 L98,330 C98,344 92,350 78,350' +
+      ' L42,350 C28,350 22,344 22,330 L22,196 C22,150 50,132 50,104 Z" />' +
+    '<path fill="url(#sjBtlCap)" d="M49,12 L71,12 L71,58 L49,58 Z" />' +
+    '<rect x="49" y="30" width="22" height="9" fill="#c8762e" />' +
+    '<rect x="30" y="238" width="60" height="86" rx="3" fill="#f2e8d6" />' +
+    '<text x="60" y="266" text-anchor="middle" font-family="Playfair Display, Georgia, serif"' +
+      ' font-size="15" fill="#5b2a2c">St.James</text>' +
+    '<rect x="42" y="276" width="36" height="1.6" fill="#9c7a55" />' +
+    '<rect x="46" y="286" width="28" height="4" fill="#7b3f84" />' +
+    '<rect x="40" y="298" width="40" height="3" fill="#b09a7e" />' +
+    '<rect x="46" y="307" width="28" height="3" fill="#b09a7e" />' +
+    '<path fill="rgba(255,255,255,.20)" d="M56,34 L60,34 L60,104' +
+      ' C60,136 34,152 34,198 L34,330 L28,330 L28,196 C28,150 56,132 56,104 Z" />' +
   '</svg>';
 }
 
@@ -1378,7 +1409,17 @@ function pourScene() {
   return '<div class="pour">' +
     '<span class="pour-shelf"></span>' +
     '<div class="pour-row">' +
-      pourGlass('pi-sm d1') + pourGlass('pi-lg') + pourToon('pi-toon d2') +
+      pourGlass('pi-peach d1', 'glass-peach', 'A peach cocktail in a tall glass') +
+      '<div class="rg pi-lg">' +
+        '<span class="rg-shadow"></span>' +
+        '<span class="rg-stream"></span>' +
+        '<span class="rg-stack">' +
+          '<img class="rg-img" src="img/glass-empty.png" alt="A St. James Winery wine glass" />' +
+          '<img class="rg-full" src="img/glass-full.png" alt="" />' +
+        '</span>' +
+        pourBottle() +
+      '</div>' +
+      pourGlass('pi-wine d2', 'glass-wine', 'A glass of St. James red wine') +
     '</div>' +
   '</div>';
 }
