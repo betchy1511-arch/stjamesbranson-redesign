@@ -345,6 +345,14 @@ button { font: inherit; }
 .v-patio .hero-copy h1 { font-size: clamp(42px, 5.2vw, 74px); line-height: 1.05; margin: 20px 0 0; }
 .v-patio .hero-copy h1 em { font-style: italic; color: var(--wine); }
 .v-patio .hero-copy p { font-size: 18px; line-height: 1.7; color: var(--mid); margin: 24px 0 0; max-width: 40ch; }
+/* The eyebrow is a <p>, so the rule above out-specifies `.v-patio .eyebrow`
+   (0,2,1 beats 0,2,0) and was rendering it at 18px inside a 40ch box, which
+   wrapped "Historic Highway 165" onto a second line. Restated at matching
+   specificity so it is the 11px eyebrow the rest of the page uses, on one
+   line. `nowrap` is deliberately NOT used: at 11px the string is far narrower
+   than the column at every breakpoint, and nowrap would overflow rather than
+   wrap if the copy is ever lengthened. */
+.v-patio .hero-copy .eyebrow { font-size: 11px; line-height: 1.5; color: var(--wine); margin: 0; max-width: none; }
 .v-patio .hero-actions { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
 .v-patio .btn-wine {
   background: var(--wine); color: #fff; padding: 15px 30px; border-radius: 999px;
