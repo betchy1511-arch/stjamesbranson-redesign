@@ -433,10 +433,13 @@ button { font: inherit; }
 .v-patio .btn-cream:hover { transform: translateY(-2px); }
 
 /* REVIEWS — design B: photo cards with the guest's own shot and an overlapping avatar */
-.v-patio .revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: start; }
+/* stretch + flex + a line clamp, so all three cards are one height regardless of
+   how long the review is. */
+.v-patio .revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: stretch; }
 .v-patio .rev {
   background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(46,26,26,.07);
   overflow: hidden; transition: transform 240ms var(--ease), box-shadow 240ms ease-out;
+  display: flex; flex-direction: column;
 }
 .v-patio .rev:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(46,26,26,.13); }
 .v-patio .rev-photo { height: 190px; overflow: hidden; background: var(--taupe); }
@@ -450,7 +453,7 @@ button { font: inherit; }
   font-family: 'Playfair Display', serif; font-size: 92px; line-height: 1;
   color: rgba(255,255,255,.28); margin-top: 26px;
 }
-.v-patio .rev-inner { padding: 0 28px 30px; position: relative; }
+.v-patio .rev-inner { padding: 0 28px 30px; position: relative; flex: 1; display: flex; flex-direction: column; }
 .v-patio .rev-face {
   width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
   border: 3px solid #fff; margin-top: -28px; position: relative; z-index: 2;
@@ -461,8 +464,13 @@ button { font: inherit; }
 .v-patio .rev-name { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
 .v-patio .rev-name b { font-size: 15.5px; font-weight: 600; }
 .v-patio .rev .stars { color: var(--gold); letter-spacing: 2px; font-size: 14px; display: block; margin-top: 10px; }
-.v-patio .rev q { display: block; quotes: none; font-family: 'Playfair Display', serif; font-size: 17.5px; line-height: 1.58; margin: 14px 0 0; color: var(--ink); }
-.v-patio .rev cite { display: block; font-style: normal; font-size: 12.5px; color: var(--mid); margin-top: 16px; }
+.v-patio .rev q {
+  quotes: none; font-family: 'Playfair Display', serif; font-size: 17.5px;
+  line-height: 1.58; margin: 14px 0 0; color: var(--ink);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden;
+}
+/* margin-top:auto pins the date to the bottom edge of every card */
+.v-patio .rev cite { display: block; font-style: normal; font-size: 12.5px; color: var(--mid); margin-top: auto; padding-top: 18px; }
 .v-patio .g-badge { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; color: var(--mid); margin-top: 14px; }
 .v-patio .g-badge b { color: var(--ink); font-weight: 700; }
 
