@@ -380,22 +380,19 @@ button { font: inherit; }
    stays over the glass rim while the body swings up and out of frame. */
 /* Origin sits on the CAP. To pour, the body must swing UP and to the RIGHT,
    which is about -128deg; -48deg sends the body down-right instead. */
-/* Measured placement. Stream top sits at x283 y208 inside a 566x640 frame.
-   The cap is the transform-origin, so it stays on the stream while the body
-   swings up-right. Cropped to cap+neck+shoulder so the whole bottle fits. */
-/* `.v-patio .hero-media img` sizes the hero photo to 100%/640px and out-specifies
-   a plain `.pour-bottle` rule, which was stretching this bottle to the full
-   566x640 frame. Hence the selector below. */
-.v-patio .hero-media img.pour-bottle {
-  position: absolute; left: 39%; top: 30%; width: 122px; height: auto; z-index: 3;
-  transform-origin: 50% 6%;
+/* Sized and placed so the CAP lands exactly on the top of the pour stream
+   (measured: stream top sits at x283 y208 inside a 566x640 frame) and the body
+   still fits inside the frame at the pour angle. */
+.v-patio .pour-bottle {
+  position: absolute; left: 42%; top: 31%; width: 84px; z-index: 3;
+  transform-origin: 50% 4%;
   filter: drop-shadow(0 16px 24px rgba(60,30,10,.32));
   animation: sjTip 9s var(--ease) infinite;
 }
 @keyframes sjTip {
-  0%, 6%    { transform: translate(54px,-64px) rotate(-92deg); opacity: 0; }
-  18%, 52%  { transform: translate(0,0) rotate(-120deg); opacity: 1; }
-  64%, 100% { transform: translate(54px,-64px) rotate(-92deg); opacity: 0; }
+  0%, 5%    { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
+  17%, 52%  { transform: translate(0,0) rotate(-115deg); opacity: 1; }
+  64%, 100% { transform: translate(56px,-70px) rotate(-88deg); opacity: 0; }
 }
 .v-patio .pour-fill { animation: sjFill 9s var(--ease) infinite; }
 @keyframes sjFill {
@@ -411,14 +408,14 @@ button { font: inherit; }
 }
 @media (prefers-reduced-motion: reduce) {
   .v-patio .pour-bottle, .v-patio .pour-fill, .v-patio .pour-stream { animation: none !important; }
-  .v-patio .hero-media img.pour-bottle { transform: rotate(-120deg); opacity: 1; }
+  .v-patio .pour-bottle { transform: rotate(-115deg); opacity: 1; }
   .v-patio .pour-fill { transform: translateY(26px); }
   .v-patio .pour-stream { opacity: 0; }
 }
 @media (max-width: 900px) {
   .v-patio .pour { height: 420px; }
   .v-patio .pour-glass { width: 168px; margin-bottom: 52px; }
-  .v-patio .hero-media img.pour-bottle { width: 84px; left: 37%; top: 29%; }
+  .v-patio .pour-bottle { width: 58px; left: 41%; top: 30%; }
 }
 .v-patio .hero-media img { width: 100%; height: 640px; object-fit: cover; object-position: center 40%; }
 .v-patio .hero-badge {
@@ -1168,7 +1165,6 @@ function patio() {
     '</div>' +
     '<div class="hero-media rise" style="--d:120ms">' +
       '<div class="hero-frame" data-morph>' + pourScene() + '</div>' +
-      '<img class="pour-bottle" src="img/bottle-pour.png"' + ' alt="A bottle of St. James Winery Blueberry sweet wine tipped to pour" />' +
       '<span class="hero-badge">Tastings &nbsp;&middot;&nbsp; Pizza &nbsp;&middot;&nbsp; Patio</span>' +
     '</div>' +
   '</div></div></section>' +
